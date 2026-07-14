@@ -37,6 +37,8 @@ body {
   padding-left: 5.25rem;
 }
 
+img, svg, video, canvas { max-width: 100%; }
+
 ::selection { background: var(--acid); color: var(--black); }
 
 /* ── CURSOR ── */
@@ -926,45 +928,329 @@ footer p {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  body { padding-left: 3.4rem; }
+  body {
+    padding-left: 0;
+    padding-bottom: 4.6rem;
+  }
+
+  .cursor { display: none; }
+
   .side-nav {
-    left: 0.45rem;
-    width: 2.45rem;
-    padding: 0.4rem;
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: 0.85rem;
+    width: min(calc(100vw - 1.5rem), 25rem);
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.45rem;
+    transform: translateX(-50%);
+    border-radius: 999px;
   }
+
   .side-nav a {
-    width: 1.65rem;
-    height: 1.65rem;
-    font-size: 0.62rem;
+    width: 2.35rem;
+    height: 2.35rem;
+    font-size: 0.72rem;
   }
+
   .side-nav a::after { display: none; }
-  #s-hero { padding: 5rem 5vw 4rem; }
-  .hero-name { font-size: clamp(72px, 22vw, 120px); }
-  .hero-name .line2 {
-    margin-top: 1rem;
-    padding-left: 0.2rem;
-    font-size: clamp(15px, 4.5vw, 22px);
+
+  .side-nav a:hover,
+  .side-nav a:focus-visible {
+    transform: none;
   }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
-  .hero-cta { align-items: flex-start; }
-  #s-work { padding: 5rem 5vw; }
-  .work-item { grid-template-columns: 2rem 1fr; }
-  .work-stack { display: none; }
-  #s-skills { grid-template-columns: 1fr; padding: 5rem 5vw; }
-  #s-writing { padding: 5rem 5vw; }
-  .post-item { grid-template-columns: 60px 1fr; gap: 1.5rem; }
-  #s-contact {
-    padding: 5rem 5vw 10rem;
+
+  #s-hero {
+    min-height: auto;
+    padding: 3.5rem 5vw 4rem;
     display: block;
   }
+
+  .hero-top {
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .hero-status {
+    width: 100%;
+    text-align: left;
+  }
+
+  .hero-status b {
+    justify-content: flex-start;
+  }
+
+  .online-pill {
+    padding: 0.55rem 1rem;
+    font-size: 11px;
+  }
+
+  .hero-name {
+    display: block;
+    font-size: clamp(74px, 24vw, 132px);
+    line-height: 0.88;
+  }
+
+  .hero-name .line2 {
+    margin-top: 1rem;
+    padding-left: 0;
+    font-size: clamp(15px, 4.5vw, 22px);
+    max-width: 100%;
+  }
+
+  .hero-name .rotated-label {
+    position: static;
+    writing-mode: horizontal-tb;
+    transform: none;
+    margin-top: 1.5rem;
+  }
+
+  .hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-top: 2rem;
+    margin-top: 2.5rem;
+  }
+
+  .hero-desc {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .hero-cta {
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .cta-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.85rem 1rem;
+  }
+
+  .cta-link { align-self: flex-start; }
+
+  #s-work,
+  #s-writing {
+    padding: 4.5rem 5vw;
+  }
+
+  .work-header,
+  .writing-header {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .work-title,
+  .writing-title {
+    font-size: clamp(52px, 18vw, 92px);
+  }
+
+  .work-count,
+  .writing-note {
+    margin-top: 0.75rem;
+    text-align: left;
+  }
+
+  .work-item {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1.75rem 0;
+  }
+
+  .work-label,
+  .post-tag {
+    letter-spacing: 0.16em;
+    line-height: 1.7;
+  }
+
+  .work-name,
+  .post-title {
+    overflow-wrap: anywhere;
+  }
+
+  .work-desc,
+  .post-excerpt {
+    font-size: 12px;
+    max-width: 100%;
+  }
+
+  .work-stack { display: none; }
+
+  #s-skills {
+    grid-template-columns: 1fr;
+    padding: 4.5rem 5vw;
+    gap: 2rem;
+  }
+
+  .skills-title {
+    font-size: clamp(54px, 18vw, 92px);
+  }
+
+  .skills-note {
+    max-width: 100%;
+    margin-top: 1.25rem;
+  }
+
+  .skill-row {
+    display: block;
+    padding: 1.25rem 0;
+  }
+
+  .skill-row-label {
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .tag {
+    font-size: 10px;
+    padding: 0.32rem 0.55rem;
+  }
+
+  .post-item {
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 2rem 0;
+  }
+
+  .post-item::after { display: none; }
+
+  .post-num {
+    font-size: 2.35rem;
+  }
+
+  #s-contact {
+    padding: 4.5rem 5vw 8rem;
+    display: block;
+  }
+
   .contact-bg-text {
     position: absolute;
     right: 0;
-    bottom: -2vw;
-    font-size: 30vw;
+    bottom: 0.5rem;
+    font-size: clamp(92px, 31vw, 170px);
+    opacity: 0.7;
   }
-  footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 5vw; }
-  .blog-takeover { padding: 5rem 5vw; }
+
+  .contact-headline {
+    font-size: clamp(64px, 19vw, 110px);
+    margin-bottom: 3rem;
+  }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.8rem;
+    padding: 1rem 0;
+  }
+
+  .contact-row-label {
+    grid-column: 1 / -1;
+  }
+
+  .contact-row-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 1.5rem 5vw calc(1.5rem + 4.6rem);
+  }
+
+  footer p {
+    line-height: 1.6;
+  }
+
+  .blog-takeover {
+    padding: 5rem 5vw 4rem;
+  }
+
+  .takeover-close {
+    top: 1rem;
+    right: 5vw;
+    padding: 0.6rem 0;
+    background: rgba(255, 255, 255, 0.82);
+  }
+
+  .takeover-title {
+    font-size: clamp(44px, 15vw, 72px);
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+  .chapter,
+  .hero-tag,
+  .hero-status,
+  .work-label,
+  .post-tag,
+  footer p {
+    letter-spacing: 0.14em;
+  }
+
+  .side-nav {
+    width: calc(100vw - 1rem);
+    bottom: 0.5rem;
+  }
+
+  .side-nav a {
+    width: 2.05rem;
+    height: 2.05rem;
+  }
+
+  #s-hero {
+    padding-top: 2.25rem;
+  }
+
+  .hero-name {
+    font-size: clamp(68px, 26vw, 108px);
+  }
+
+  .hero-name .line2 {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .work-item,
+  .post-item {
+    grid-template-columns: 1fr;
+  }
+
+  .work-num,
+  .post-num-col {
+    padding-top: 0;
+  }
+
+  .post-num-col {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .post-date {
+    margin-top: 0;
+  }
+
+  .contact-bg-text {
+    right: -0.25rem;
+    font-size: clamp(82px, 34vw, 132px);
+  }
+
+  .contact-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .takeover-body {
+    font-size: 13px;
+    line-height: 1.8;
+  }
 }
 </style>
 </head>
