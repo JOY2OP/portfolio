@@ -214,11 +214,16 @@ body {
   text-align: right;
 }
 
+.hero-status .chapter {
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
 .hero-status b {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 0.55rem;
+  gap: 0.85rem;
   color: var(--acid);
   font-weight: normal;
 }
@@ -226,21 +231,22 @@ body {
 .online-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.15rem 0.5rem;
-  border: 1px solid rgba(17, 103, 255, 0.28);
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid rgba(17, 103, 255, 0.34);
   border-radius: 999px;
-  background: rgba(17, 103, 255, 0.08);
+  background: rgba(17, 103, 255, 0.1);
   color: var(--white);
-  font-size: 9px;
-  letter-spacing: 0.16em;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.14em;
   text-decoration: none;
 }
 
 .online-pill::before {
   content: "";
-  width: 0.42rem;
-  height: 0.42rem;
+  width: 0.5rem;
+  height: 0.5rem;
   border-radius: 50%;
   background: #1edb8f;
   box-shadow: 0 0 0 4px rgba(30, 219, 143, 0.14);
@@ -662,15 +668,21 @@ body {
   padding: 6vw;
   position: relative;
   overflow: hidden;
+  display: grid;
+  grid-template-columns: minmax(320px, 560px) minmax(280px, 1fr);
+  gap: 4vw;
+  align-items: end;
 }
 
 /* giant background text */
 .contact-bg-text {
-  position: absolute;
-  bottom: -4vw;
-  left: -2vw;
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  align-self: end;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 20vw;
+  font-size: clamp(120px, 21vw, 360px);
   line-height: 1;
   color: transparent;
   -webkit-text-stroke: 1px var(--grey);
@@ -681,8 +693,11 @@ body {
 }
 
 .contact-inner {
+  grid-column: 1;
+  grid-row: 1;
   position: relative;
   z-index: 1;
+  min-width: 0;
 }
 
 .contact-label {
@@ -707,7 +722,7 @@ body {
   display: flex;
   gap: 0;
   flex-direction: column;
-  max-width: 500px;
+  max-width: 100%;
 }
 
 .contact-row {
@@ -938,8 +953,16 @@ footer p {
   #s-skills { grid-template-columns: 1fr; padding: 5rem 5vw; }
   #s-writing { padding: 5rem 5vw; }
   .post-item { grid-template-columns: 60px 1fr; gap: 1.5rem; }
-  #s-contact { padding: 5rem 5vw 10rem; }
-  .contact-bg-text { font-size: 30vw; }
+  #s-contact {
+    padding: 5rem 5vw 10rem;
+    display: block;
+  }
+  .contact-bg-text {
+    position: absolute;
+    right: 0;
+    bottom: -2vw;
+    font-size: 30vw;
+  }
   footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 5vw; }
   .blog-takeover { padding: 5rem 5vw; }
 }
@@ -1182,18 +1205,12 @@ footer p {
         <span class="contact-row-value">linkedin.com/in/joy-masih</span>
         <span class="contact-row-arrow">↗</span>
       </a>
-      <a class="contact-row" href="tel:+919315151857">
-        <span class="contact-row-label">Phone</span>
-        <span class="contact-row-value">+91 93151 51857</span>
-        <span class="contact-row-arrow">↗</span>
-      </a>
     </div>
   </div>
 </section>
 
 <footer>
   <p>Joy · 2026</p>
-  <p>Building Finesse</p>
   <p>Useful things, shipped clean</p>
 </footer>
 
