@@ -10,27 +10,31 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --black: #10130f;
-  --white: #f4efe5;
-  --acid: #9ab482;
-  --red: #b98a76;
-  --grey: #2a3129;
-  --mid: #8c907f;
-  --soft: #d7c8ad;
-  --wash: rgba(154, 180, 130, 0.08);
+  --black: #f8fbff;
+  --white: #071a3d;
+  --acid: #1167ff;
+  --red: #00b8ff;
+  --grey: #c9dcff;
+  --mid: #6c7fa6;
+  --soft: #28477f;
+  --wash: rgba(17, 103, 255, 0.08);
+  --panel: rgba(255, 255, 255, 0.74);
+  --nav: #ffffff;
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   background:
-    radial-gradient(circle at 20% 0%, rgba(154, 180, 130, 0.1), transparent 32vw),
-    radial-gradient(circle at 92% 18%, rgba(185, 138, 118, 0.08), transparent 30vw),
+    radial-gradient(circle at 16% 0%, rgba(0, 184, 255, 0.18), transparent 34vw),
+    radial-gradient(circle at 88% 14%, rgba(17, 103, 255, 0.16), transparent 32vw),
+    linear-gradient(180deg, #ffffff 0%, #eef6ff 48%, #f8fbff 100%),
     var(--black);
   color: var(--white);
   font-family: 'Courier New', Courier, monospace;
   cursor: default;
   overflow-x: hidden;
+  padding-left: 5.25rem;
 }
 
 ::selection { background: var(--acid); color: var(--black); }
@@ -45,14 +49,16 @@ body {
   z-index: 9999;
   transform: translate(-50%, -50%);
   transition: transform 0.05s linear;
-  mix-blend-mode: difference;
+  mix-blend-mode: multiply;
 }
 .cursor.big { width: 60px; height: 60px; border-color: var(--white); }
 
 /* ── LOADING SCREEN ── */
 #loader {
   position: fixed; inset: 0;
-  background: var(--black);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(0, 184, 255, 0.18), transparent 36vw),
+    #ffffff;
   z-index: 9000;
   display: flex;
   align-items: center;
@@ -82,6 +88,82 @@ body {
 
 /* ── LAYOUT ── */
 .page { max-width: 1200px; margin: 0 auto; }
+
+/* ── LEFT NAV ── */
+.side-nav {
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  z-index: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 3.25rem;
+  padding: 0.65rem;
+  border: 1px solid rgba(17, 103, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 18px 45px rgba(17, 103, 255, 0.14);
+  transform: translateY(-50%);
+  backdrop-filter: blur(18px);
+}
+
+.side-nav a {
+  position: relative;
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  color: var(--mid);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.side-nav a::after {
+  content: attr(aria-label);
+  position: absolute;
+  left: calc(100% + 0.8rem);
+  top: 50%;
+  padding: 0.35rem 0.55rem;
+  border: 1px solid rgba(17, 103, 255, 0.16);
+  border-radius: 999px;
+  background: var(--nav);
+  box-shadow: 0 12px 30px rgba(17, 103, 255, 0.12);
+  color: var(--white);
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  opacity: 0;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translate(-8px, -50%);
+  transition: opacity 0.16s ease, transform 0.16s ease;
+  white-space: nowrap;
+}
+
+.side-nav a:hover,
+.side-nav a:focus-visible {
+  background: var(--acid);
+  border-color: var(--acid);
+  color: #ffffff;
+  outline: none;
+  transform: translateX(2px);
+}
+
+.side-nav a:hover::after,
+.side-nav a:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
 
 /* ── SECTION MARKERS ── */
 .chapter {
@@ -134,7 +216,7 @@ body {
 
 .hero-status b {
   display: block;
-  color: var(--white);
+  color: var(--acid);
   font-weight: normal;
 }
 
@@ -211,7 +293,7 @@ body {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 1.1rem;
   letter-spacing: 0.15em;
-  color: var(--black);
+  color: #ffffff;
   background: var(--acid);
   padding: 0.7rem 1.8rem;
   text-decoration: none;
@@ -221,9 +303,9 @@ body {
 }
 
 .cta-btn:hover {
-  background: transparent;
+  background: var(--red);
   border-color: var(--acid);
-  color: var(--white);
+  color: #ffffff;
 }
 
 .cta-link {
@@ -346,7 +428,7 @@ body {
   transition: color 0.15s;
 }
 
-.work-item:hover .work-stack span { color: var(--white); }
+.work-item:hover .work-stack span { color: var(--acid); }
 
 /* ══════════════════════════════
    SECTION 03 — SKILLS
@@ -420,13 +502,18 @@ body {
   font-size: 11px;
   letter-spacing: 0.05em;
   padding: 0.2rem 0.6rem;
-  border: 1px solid var(--grey);
+  border: 1px solid rgba(17, 103, 255, 0.22);
   color: var(--soft);
+  background: rgba(255, 255, 255, 0.48);
   transition: border-color 0.15s, color 0.15s;
   cursor: default;
 }
 
-.tag:hover { border-color: var(--acid); color: var(--acid); }
+.tag:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+  background: rgba(17, 103, 255, 0.08);
+}
 
 /* ══════════════════════════════
    SECTION 04 — WRITING
@@ -658,7 +745,8 @@ footer p {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 88% 4%, rgba(154, 180, 130, 0.1), transparent 28vw),
+    radial-gradient(circle at 88% 4%, rgba(0, 184, 255, 0.16), transparent 28vw),
+    linear-gradient(180deg, #ffffff 0%, #edf6ff 100%),
     var(--black);
   z-index: 800;
   overflow-y: auto;
@@ -744,7 +832,7 @@ footer p {
   font-family: 'Courier New', monospace;
   font-size: 12px;
   color: var(--acid);
-  background: var(--grey);
+  background: rgba(17, 103, 255, 0.1);
   padding: 0.1em 0.4em;
 }
 
@@ -797,6 +885,18 @@ footer p {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
+  body { padding-left: 3.4rem; }
+  .side-nav {
+    left: 0.45rem;
+    width: 2.45rem;
+    padding: 0.4rem;
+  }
+  .side-nav a {
+    width: 1.65rem;
+    height: 1.65rem;
+    font-size: 0.62rem;
+  }
+  .side-nav a::after { display: none; }
   #s-hero { padding: 5rem 5vw 4rem; }
   .hero-name { font-size: clamp(72px, 22vw, 120px); }
   .hero-name .line2 {
@@ -829,6 +929,14 @@ footer p {
   <div id="loader-text">JOY</div>
   <div id="loader-line"></div>
 </div>
+
+<nav class="side-nav" aria-label="Section navigation">
+  <a href="#s-hero" aria-label="Home">01</a>
+  <a href="#s-work" aria-label="Work">02</a>
+  <a href="#s-skills" aria-label="Skills">03</a>
+  <a href="#s-writing" aria-label="Blog">04</a>
+  <a href="#s-contact" aria-label="Contact">05</a>
+</nav>
 
 <!-- ══ SECTION 01 · HERO ══ -->
 <section id="s-hero">
