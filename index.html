@@ -267,6 +267,7 @@ img, svg, video, canvas { max-width: 100%; }
 
 .hero-name .line1 { color: var(--white); }
 .hero-name .line2 {
+  display: block;
   max-width: 680px;
   margin-top: 1.4rem;
   padding-left: 0.45rem;
@@ -963,14 +964,21 @@ footer p {
 
   #s-hero {
     min-height: auto;
-    padding: 3.5rem 5vw 4rem;
+    padding: 2.75rem 5vw 4rem;
     display: block;
   }
 
   .hero-top {
-    flex-direction: column;
-    gap: 1.75rem;
-    margin-bottom: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-tag {
+    max-width: 18rem;
+    font-size: 10px;
+    line-height: 1.75;
   }
 
   .hero-status {
@@ -993,10 +1001,18 @@ footer p {
     line-height: 0.88;
   }
 
+  .hero-name .line1 {
+    display: block;
+    width: max-content;
+    max-width: 100%;
+  }
+
   .hero-name .line2 {
-    margin-top: 1rem;
+    display: block;
+    margin-top: 1.35rem;
     padding-left: 0;
-    font-size: clamp(15px, 4.5vw, 22px);
+    font-size: clamp(16px, 4.6vw, 21px);
+    line-height: 1.7;
     max-width: 100%;
   }
 
@@ -1004,15 +1020,16 @@ footer p {
     position: static;
     writing-mode: horizontal-tb;
     transform: none;
-    margin-top: 1.5rem;
+    display: block;
+    margin-top: 2rem;
   }
 
   .hero-bottom {
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
-    padding-top: 2rem;
-    margin-top: 2.5rem;
+    gap: 1.5rem;
+    padding-top: 1.75rem;
+    margin-top: 2rem;
   }
 
   .hero-desc {
@@ -1206,16 +1223,26 @@ footer p {
   }
 
   #s-hero {
-    padding-top: 2.25rem;
+    padding-top: 1.75rem;
   }
 
   .hero-name {
-    font-size: clamp(68px, 26vw, 108px);
+    font-size: clamp(82px, 30vw, 116px);
+    line-height: 0.82;
   }
 
   .hero-name .line2 {
+    margin-top: 1.15rem;
     font-size: 15px;
     line-height: 1.65;
+  }
+
+  .hero-status .chapter {
+    margin-bottom: 0.55rem;
+  }
+
+  .hero-bottom {
+    margin-top: 1.75rem;
   }
 
   .work-item,
@@ -1291,7 +1318,7 @@ footer p {
   <div class="hero-name">
     <span class="line1 glitch" data-text="JOY">JOY</span>
     <span class="line2">Joy builds practical web products, AI workflows, and learning platforms that feel simple to use.</span>
-    <span class="rotated-label">Engineer / Builder / Delhi</span>
+    <span class="rotated-label">Taste / Systems / Shipping</span>
   </div>
 
   <div class="hero-bottom">
