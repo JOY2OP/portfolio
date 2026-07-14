@@ -1,228 +1,1182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Portfolio of Joy Masih, a full-stack engineer building university platforms, AI tools, LMS products, and thoughtful web experiences."
-    >
-    <title>Joy Masih - Full-Stack Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="Joy Masih home">
-        <span class="brand-mark">JM</span>
-        <span>Joy Masih</span>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOY - Full-Stack Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@200;300;400;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #10130f;
+  --white: #f4efe5;
+  --acid: #9ab482;
+  --red: #b98a76;
+  --grey: #2a3129;
+  --mid: #8c907f;
+  --soft: #d7c8ad;
+  --wash: rgba(154, 180, 130, 0.08);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(154, 180, 130, 0.1), transparent 32vw),
+    radial-gradient(circle at 92% 18%, rgba(185, 138, 118, 0.08), transparent 30vw),
+    var(--black);
+  color: var(--white);
+  font-family: 'Courier New', Courier, monospace;
+  cursor: default;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--acid); color: var(--black); }
+
+/* ── CURSOR ── */
+.cursor {
+  width: 16px; height: 16px;
+  border: 1px solid var(--acid);
+  border-radius: 999px;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s linear;
+  mix-blend-mode: difference;
+}
+.cursor.big { width: 60px; height: 60px; border-color: var(--white); }
+
+/* ── LOADING SCREEN ── */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--black);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+}
+#loader-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(60px, 15vw, 140px);
+  letter-spacing: -0.02em;
+  line-height: 0.85;
+  color: var(--white);
+  overflow: hidden;
+}
+#loader-line {
+  width: 0%;
+  height: 2px;
+  background: var(--acid);
+  margin-top: 2rem;
+  transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
+}
+#loader.done { animation: loaderOut 0.5s ease 0.2s forwards; }
+@keyframes loaderOut {
+  to { opacity: 0; pointer-events: none; }
+}
+
+/* ── LAYOUT ── */
+.page { max-width: 1200px; margin: 0 auto; }
+
+/* ── SECTION MARKERS ── */
+.chapter {
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--mid);
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════
+   SECTION 01 — HERO
+══════════════════════════════ */
+#s-hero {
+  min-height: 100vh;
+  padding: 6vw 6vw 4vw;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border-bottom: 1px solid var(--grey);
+  position: relative;
+}
+
+.hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4vw;
+}
+
+.hero-tag {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mid);
+  line-height: 1.8;
+}
+
+.hero-tag span {
+  display: block;
+  color: var(--acid);
+}
+
+.hero-status {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-align: right;
+}
+
+.hero-status b {
+  display: block;
+  color: var(--white);
+  font-weight: normal;
+}
+
+/* Big Name */
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 22vw, 280px);
+  line-height: 0.82;
+  letter-spacing: -0.02em;
+  display: grid;
+  align-content: center;
+  position: relative;
+}
+
+.hero-name .line1 { color: var(--white); }
+.hero-name .line2 {
+  max-width: 680px;
+  margin-top: 1.4rem;
+  padding-left: 0.45rem;
+  color: var(--soft);
+  font-family: 'Courier New', monospace;
+  font-size: clamp(16px, 2.2vw, 28px);
+  font-weight: normal;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  -webkit-text-stroke: 0;
+}
+.hero-name .line2:hover {
+  color: var(--white);
+  -webkit-text-stroke: 0;
+}
+
+/* rotated label */
+.hero-name .rotated-label {
+  position: absolute;
+  right: 0;
+  top: 40%;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 4vw;
+  border-top: 1px solid var(--grey);
+  margin-top: 4vw;
+}
+
+.hero-desc {
+  font-size: clamp(13px, 1.5vw, 16px);
+  line-height: 1.7;
+  color: var(--soft);
+  max-width: 380px;
+}
+
+.hero-desc strong { color: var(--white); font-weight: normal; }
+
+.hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.cta-btn {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  color: var(--black);
+  background: var(--acid);
+  padding: 0.7rem 1.8rem;
+  text-decoration: none;
+  display: inline-block;
+  border: 1px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.cta-btn:hover {
+  background: transparent;
+  border-color: var(--acid);
+  color: var(--white);
+}
+
+.cta-link {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  text-decoration: none;
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 2px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.cta-link:hover { color: var(--acid); border-color: var(--acid); }
+
+/* ══════════════════════════════
+   SECTION 02 — WORK
+══════════════════════════════ */
+#s-work {
+  padding: 6vw;
+  border-bottom: 1px solid var(--grey);
+}
+
+.work-header {
+  display: flex;
+  align-items: baseline;
+  gap: 2rem;
+  margin-bottom: 5vw;
+}
+
+.work-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 100px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.work-count {
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.2em;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* Work items: stacked, full-bleed rows */
+.work-item {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem 0;
+  border-top: 1px solid var(--grey);
+  transition: background 0.15s;
+  position: relative;
+  cursor: default;
+}
+
+.work-item:last-child { border-bottom: 1px solid var(--grey); }
+
+.work-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--wash);
+  opacity: 0;
+  z-index: 0;
+  margin: 0 -6vw;
+  transition: opacity 0.15s;
+}
+
+.work-item:hover::before { opacity: 1; }
+.work-item > * { position: relative; z-index: 1; }
+
+.work-num {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.1em;
+  align-self: flex-start;
+  padding-top: 0.3rem;
+}
+
+.work-body {}
+
+.work-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 0.4rem;
+}
+
+.work-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4vw, 52px);
+  line-height: 1;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.5rem;
+}
+
+.work-desc {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+.work-stack {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--mid);
+  text-align: right;
+  line-height: 2;
+  text-transform: uppercase;
+  min-width: 140px;
+}
+
+.work-stack span {
+  display: block;
+  transition: color 0.15s;
+}
+
+.work-item:hover .work-stack span { color: var(--white); }
+
+/* ══════════════════════════════
+   SECTION 03 — SKILLS
+══════════════════════════════ */
+#s-skills {
+  padding: 6vw;
+  border-bottom: 1px solid var(--grey);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6vw;
+  align-items: start;
+}
+
+.skills-left {}
+
+.skills-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  margin-top: 1rem;
+}
+
+.skills-title .outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--white);
+  display: block;
+}
+
+.skills-note {
+  font-size: 11px;
+  color: var(--mid);
+  line-height: 1.8;
+  margin-top: 2rem;
+  letter-spacing: 0.05em;
+  max-width: 200px;
+}
+
+.skills-right {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--grey);
+}
+
+.skill-row:first-child { border-top: 1px solid var(--grey); }
+
+.skill-row-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+  min-width: 90px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--grey);
+  color: var(--soft);
+  transition: border-color 0.15s, color 0.15s;
+  cursor: default;
+}
+
+.tag:hover { border-color: var(--acid); color: var(--acid); }
+
+/* ══════════════════════════════
+   SECTION 04 — WRITING
+══════════════════════════════ */
+#s-writing {
+  padding: 6vw;
+  border-bottom: 1px solid var(--grey);
+}
+
+.writing-header {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  margin-bottom: 5vw;
+  gap: 2rem;
+}
+
+.writing-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 100px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.writing-note {
+  font-size: 11px;
+  color: var(--mid);
+  letter-spacing: 0.1em;
+  text-align: right;
+  line-height: 2;
+  padding-bottom: 0.5rem;
+}
+
+.post-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 3rem;
+  padding: 3rem 0;
+  border-top: 1px solid var(--grey);
+  cursor: pointer;
+  position: relative;
+  transition: none;
+  overflow: hidden;
+}
+
+.post-item:last-child { border-bottom: 1px solid var(--grey); }
+
+.post-item::after {
+  content: 'READ →';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(120%);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+  color: var(--acid);
+  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
+}
+
+.post-item:hover::after { transform: translateY(-50%) translateX(0); }
+
+.post-num-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 0.3rem;
+}
+
+.post-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: var(--grey);
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.post-item:hover .post-num { color: var(--acid); }
+
+.post-date {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-top: 0.5rem;
+}
+
+.post-body {}
+
+.post-tag {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 0.6rem;
+}
+
+.post-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(26px, 3.5vw, 44px);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+  transition: color 0.2s;
+}
+
+.post-item:hover .post-title { color: var(--acid); }
+
+.post-excerpt {
+  font-size: 12px;
+  color: var(--mid);
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+/* ══════════════════════════════
+   SECTION 05 — CONTACT
+══════════════════════════════ */
+#s-contact {
+  padding: 6vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* giant background text */
+.contact-bg-text {
+  position: absolute;
+  bottom: -4vw;
+  left: -2vw;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20vw;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--grey);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+}
+
+.contact-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.contact-label {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 2rem;
+}
+
+.contact-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 10vw, 130px);
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  margin-bottom: 5vw;
+}
+
+.contact-headline .hl { color: var(--acid); }
+
+.contact-links {
+  display: flex;
+  gap: 0;
+  flex-direction: column;
+  max-width: 500px;
+}
+
+.contact-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--grey);
+  text-decoration: none;
+  color: var(--white);
+  transition: color 0.15s;
+}
+
+.contact-row:last-child { border-bottom: 1px solid var(--grey); }
+
+.contact-row:hover { color: var(--acid); }
+
+.contact-row-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+.contact-row-value {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+
+.contact-row-arrow {
+  font-size: 1.2rem;
+  transition: transform 0.15s;
+}
+
+.contact-row:hover .contact-row-arrow { transform: translate(4px, -4px); }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  border-top: 1px solid var(--grey);
+  padding: 1.5rem 6vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer p {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid);
+}
+
+/* ══════════════════════════════
+   BLOG FULL-SCREEN TAKEOVER
+══════════════════════════════ */
+.blog-takeover {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 88% 4%, rgba(154, 180, 130, 0.1), transparent 28vw),
+    var(--black);
+  z-index: 800;
+  overflow-y: auto;
+  padding: 6vw;
+  animation: takeoverIn 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+.blog-takeover.open { display: block; }
+
+@keyframes takeoverIn {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.takeover-close {
+  position: fixed;
+  top: 2rem;
+  right: 6vw;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.2em;
+  color: var(--mid);
+  background: none;
+  border: none;
+  cursor: crosshair;
+  z-index: 801;
+  transition: color 0.15s;
+}
+
+.takeover-close:hover { color: var(--acid); }
+
+.takeover-header {
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 3vw;
+  margin-bottom: 4vw;
+  max-width: 800px;
+}
+
+.takeover-tag {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--acid);
+  margin-bottom: 1.5rem;
+}
+
+.takeover-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(42px, 7vw, 90px);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.takeover-meta {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--mid);
+  text-transform: uppercase;
+}
+
+.takeover-body {
+  max-width: 660px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--soft);
+}
+
+.takeover-body p { margin-bottom: 1.5rem; }
+.takeover-body p:last-child { margin-bottom: 0; }
+
+.takeover-body h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  margin: 3rem 0 1rem;
+}
+
+.takeover-body em { color: var(--white); font-style: normal; font-weight: normal; }
+
+.takeover-body code {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  color: var(--acid);
+  background: var(--grey);
+  padding: 0.1em 0.4em;
+}
+
+/* ── GLITCH EFFECT ── */
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
+.glitch::before {
+  color: var(--acid);
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-top 3s infinite linear alternate-reverse;
+}
+.glitch::after {
+  color: var(--red);
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-bot 2s infinite linear alternate-reverse;
+}
+@keyframes glitch-top {
+  0% { clip: rect(4px, 9999px, 6px, 0); transform: skew(0.4deg); opacity: 0; }
+  5% { clip: rect(28px, 9999px, 32px, 0); transform: skew(-0.2deg); opacity: 1; }
+  10% { clip: rect(0, 9999px, 0, 0); opacity: 0; }
+  90% { opacity: 0; }
+  95% { clip: rect(60px, 9999px, 65px, 0); transform: skew(0.8deg); opacity: 1; }
+  100% { opacity: 0; }
+}
+@keyframes glitch-bot {
+  0% { clip: rect(0, 9999px, 0, 0); opacity: 0; }
+  15% { clip: rect(80px, 9999px, 86px, 0); transform: skew(-0.6deg); opacity: 1; }
+  20% { opacity: 0; }
+  80% { opacity: 0; }
+  88% { clip: rect(10px, 9999px, 15px, 0); transform: skew(0.3deg); opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* ── SCRAMBLE UNDERLINE ── */
+.scramble-hover {
+  position: relative;
+  display: inline-block;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  #s-hero { padding: 5rem 5vw 4rem; }
+  .hero-name { font-size: clamp(72px, 22vw, 120px); }
+  .hero-name .line2 {
+    margin-top: 1rem;
+    padding-left: 0.2rem;
+    font-size: clamp(15px, 4.5vw, 22px);
+  }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 2rem; }
+  .hero-cta { align-items: flex-start; }
+  #s-work { padding: 5rem 5vw; }
+  .work-item { grid-template-columns: 2rem 1fr; }
+  .work-stack { display: none; }
+  #s-skills { grid-template-columns: 1fr; padding: 5rem 5vw; }
+  #s-writing { padding: 5rem 5vw; }
+  .post-item { grid-template-columns: 60px 1fr; gap: 1.5rem; }
+  #s-contact { padding: 5rem 5vw 10rem; }
+  .contact-bg-text { font-size: 30vw; }
+  footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 5vw; }
+  .blog-takeover { padding: 5rem 5vw; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div id="loader-text">JOY</div>
+  <div id="loader-line"></div>
+</div>
+
+<!-- ══ SECTION 01 · HERO ══ -->
+<section id="s-hero">
+  <div class="hero-top">
+    <div class="hero-tag">
+      <span class="chapter">[001]</span>
+      Full-Stack Engineer<br>
+      New Delhi, IN<br>
+      <span>Open to thoughtful work</span>
+    </div>
+    <div class="hero-status">
+      <span class="chapter">Current</span>
+      <b>Building Finesse</b>
+      <b>+ Therapy Council</b>
+    </div>
+  </div>
+
+  <div class="hero-name">
+    <span class="line1 glitch" data-text="JOY">JOY</span>
+    <span class="line2">Joy builds practical web products, AI workflows, and learning platforms that feel simple to use.</span>
+    <span class="rotated-label">Engineer / Builder / Delhi</span>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Two years. <strong>Four products shipped.</strong> I write code that works and
+      ships fast - from AI finance tools to university platforms serving 100K+ monthly.
+      No senior oversight required.
+    </p>
+    <div class="hero-cta">
+      <a href="#s-work" class="cta-btn">VIEW WORK</a>
+      <a href="#s-contact" class="cta-link">get in touch -></a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 02 · WORK ══ -->
+<section id="s-work">
+  <div class="work-header">
+    <h2 class="work-title">SELECTED<br>WORK</h2>
+    <span class="work-count chapter">[002] — 04 PROJECTS</span>
+  </div>
+
+  <div class="work-item">
+    <span class="work-num">01</span>
+    <div class="work-body">
+      <div class="work-label">Startup · Solo Founder · Live on Play Store</div>
+      <div class="work-name">FINESSE</div>
+      <p class="work-desc">AI personal finance app for young Indian professionals. Parses bank SMS automatically. Categorises into Needs / Wants / Investing. Monthly AI coaching via Gemini. 13 active users and growing.</p>
+    </div>
+    <div class="work-stack">
+      <span>React Native</span>
+      <span>Expo EAS</span>
+      <span>Supabase</span>
+      <span>Node.js</span>
+      <span>Gemini API</span>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <span class="work-num">02</span>
+    <div class="work-body">
+      <div class="work-label">Startup · Co-Founder & Dev Lead</div>
+      <div class="work-name">THERAPY COUNCIL</div>
+      <p class="work-desc">Co-building therapycouncil.org — an LMS delivering psychology-focused courses online. Responsible for the entire technical stack: architecture, course content pipeline, and user-facing experience.</p>
+    </div>
+    <div class="work-stack">
+      <span>Next.js</span>
+      <span>Supabase</span>
+      <span>TypeScript</span>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <span class="work-num">03</span>
+    <div class="work-body">
+      <div class="work-label">Edvanta · Full-Stack Engineer · Mar 2024 – Apr 2026</div>
+      <div class="work-name">UNIVERSITY PLATFORM NETWORK</div>
+      <p class="work-desc">Maintained and scaled 20+ university websites — USC, King's College London, GWU — serving 100K+ monthly visitors. Integrated Shopify storefronts without touching core CMS infrastructure.</p>
+    </div>
+    <div class="work-stack">
+      <span>Next.js</span>
+      <span>Directus</span>
+      <span>Supabase</span>
+      <span>Shopify</span>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <span class="work-num">04</span>
+    <div class="work-body">
+      <div class="work-label">Edvanta · AI Engineering</div>
+      <div class="work-name">LXP + AI RECOMMENDATION ENGINE</div>
+      <p class="work-desc">Multi-tenant Learning Experience Platform dashboard and an AI engine that processes multi-step learner inputs to generate personalised, ranked course suggestions in real-time.</p>
+    </div>
+    <div class="work-stack">
+      <span>Next.js</span>
+      <span>LLM Prompting</span>
+      <span>Supabase Edge</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 03 · SKILLS ══ -->
+<section id="s-skills">
+  <div class="skills-left">
+    <div class="chapter">[003]</div>
+    <h2 class="skills-title">
+      CRAFT<br>
+      <span class="outline">&amp;</span><br>
+      TOOLS
+    </h2>
+    <p class="skills-note">Two years. Many stacks. One rule — ship working software.</p>
+  </div>
+
+  <div class="skills-right">
+    <div class="skill-row">
+      <span class="skill-row-label">Frontend</span>
+      <div class="skill-tags">
+        <span class="tag">Next.js</span>
+        <span class="tag">React</span>
+        <span class="tag">React Native</span>
+        <span class="tag">Vue.js</span>
+        <span class="tag">Sveltekit</span>
+        <span class="tag">Tailwind</span>
+        <span class="tag">TypeScript</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-row-label">Backend</span>
+      <div class="skill-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">Supabase</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">SQL</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Directus</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-row-label">AI / LLM</span>
+      <div class="skill-tags">
+        <span class="tag">Prompt Engineering</span>
+        <span class="tag">Gemini API</span>
+        <span class="tag">Groq / Llama</span>
+        <span class="tag">LLM Integration</span>
+        <span class="tag">Rapid MVP</span>
+      </div>
+    </div>
+    <div class="skill-row">
+      <span class="skill-row-label">Tools</span>
+      <div class="skill-tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Postman</span>
+        <span class="tag">Jira</span>
+        <span class="tag">Figma</span>
+        <span class="tag">Photoshop</span>
+        <span class="tag">Illustrator</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 04 · WRITING ══ -->
+<section id="s-writing">
+  <div class="writing-header">
+    <h2 class="writing-title">WRITING</h2>
+    <div class="writing-note">
+      <div class="chapter">[004]</div>
+      02 posts<br>thoughts on<br>code &amp; product
+    </div>
+  </div>
+
+  <div class="post-item" onclick="openPost('p1')">
+    <div class="post-num-col">
+      <div class="post-num">01</div>
+      <div class="post-date">Jun 2025</div>
+    </div>
+    <div class="post-body">
+      <div class="post-tag">Engineering · Deployment</div>
+      <h3 class="post-title">WHY I STOPPED MOCKING APIs AND STARTED SHIPPING TO PROD SOONER</h3>
+      <p class="post-excerpt">The seductive trap of local development — and what building Finesse taught me about the real cost of deferred production testing.</p>
+    </div>
+  </div>
+
+  <div class="post-item" onclick="openPost('p2')">
+    <div class="post-num-col">
+      <div class="post-num">02</div>
+      <div class="post-date">Apr 2025</div>
+    </div>
+    <div class="post-body">
+      <div class="post-tag">Product · Distribution</div>
+      <h3 class="post-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h3>
+      <p class="post-excerpt">Awareness isn't the problem. Timing is. How trigger-based distribution changes the acquisition equation entirely.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SECTION 05 · CONTACT ══ -->
+<section id="s-contact">
+  <div class="contact-bg-text">CONTACT</div>
+  <div class="contact-inner">
+    <div class="contact-label chapter">[005] — LET'S TALK</div>
+    <h2 class="contact-headline">
+      BUILD<br>
+      SOMETHING<br>
+      <span class="hl">REAL.</span>
+    </h2>
+    <div class="contact-links">
+      <a class="contact-row" href="mailto:joymasih43@gmail.com">
+        <span class="contact-row-label">Email</span>
+        <span class="contact-row-value">joymasih43@gmail.com</span>
+        <span class="contact-row-arrow">↗</span>
       </a>
-      <nav class="site-nav" aria-label="Primary navigation">
-        <a href="#work">Work</a>
-        <a href="#startups">Startups</a>
-        <a href="#blog">Blog</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+      <a class="contact-row" href="https://linkedin.com/in/joy-masih/" target="_blank">
+        <span class="contact-row-label">LinkedIn</span>
+        <span class="contact-row-value">linkedin.com/in/joy-masih</span>
+        <span class="contact-row-arrow">↗</span>
+      </a>
+      <a class="contact-row" href="tel:+919315151857">
+        <span class="contact-row-label">Phone</span>
+        <span class="contact-row-value">+91 93151 51857</span>
+        <span class="contact-row-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-    <main id="top">
-      <section class="hero">
-        <img
-          class="hero-image"
-          src="assets/hero-workspace.png"
-          alt="Minimal workspace with laptop, notebook, notes, plant, and a subtle map texture."
-        >
-        <div class="hero-copy">
-          <p class="eyebrow">New Delhi - Full-stack engineering - AI products</p>
-          <h1>Building calm, useful software for learning, commerce, and decision-making.</h1>
-          <p class="lede">
-            I am Joy Masih, a full-stack engineer working across Next.js, React,
-            Node.js, Supabase, Shopify, and LLM-powered product workflows.
-          </p>
-          <div class="hero-actions" aria-label="Primary links">
-            <a class="text-link" href="Joy_Masih_NEW.pdf" target="_blank" rel="noreferrer">Resume PDF</a>
-            <a class="text-link" href="mailto:joymasih43@gmail.com">joymasih43@gmail.com</a>
-          </div>
-        </div>
-      </section>
+<footer>
+  <p>Joy Masih · 2025</p>
+  <p>New Delhi, India</p>
+  <p>Full-Stack Engineer</p>
+</footer>
 
-      <section class="intro-grid" aria-label="Profile highlights">
-        <div>
-          <span class="section-number">01</span>
-          <h2>Engineer</h2>
-          <p>
-            Delivered enhancements and bug fixes across 20+ university websites,
-            including USC, King's College London, GWU, and more.
-          </p>
-        </div>
-        <div>
-          <span class="section-number">02</span>
-          <h2>Founder</h2>
-          <p>
-            Built Finness, an AI personal finance coaching app for Indian users,
-            from SMS parsing to GPT-backed recommendations.
-          </p>
-        </div>
-        <div>
-          <span class="section-number">03</span>
-          <h2>Builder</h2>
-          <p>
-            Shipped podcast, LMS, Shopify, admin dashboard, and recommendation
-            products with a bias for simple, working systems.
-          </p>
-        </div>
-      </section>
+<!-- ══ BLOG TAKEOVERS ══ -->
+<div class="blog-takeover" id="post-p1">
+  <button class="takeover-close" onclick="closePost('p1')">[ CLOSE ✕ ]</button>
+  <div class="takeover-header">
+    <div class="takeover-tag">Engineering · Deployment · June 2025 · 5 min</div>
+    <h1 class="takeover-title">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h1>
+    <div class="takeover-meta">Joy Masih</div>
+  </div>
+  <div class="takeover-body">
+    <p>There's a comfortable lie every developer tells themselves early in a project: <em>"I'll sort out production once the feature is working locally."</em> I told it to myself for weeks while building Finesse.</p>
+    <p>Local development is warm. Everything works. Environment variables load cleanly, the API responds in 40ms, and the mock SMS parser catches every transaction perfectly. Then you push to production and a React Native APK quietly swallows your <code>.env</code> file and serves undefined to the Supabase client for three days before you notice.</p>
+    <h3>THE REAL COST ISN'T BUGS — IT'S LAG</h3>
+    <p>Production failures found late aren't just bugs. They're architectural rethinks wearing bug costumes. When I finally shipped Finesse to closed testing on the Play Store, I discovered that the SMS BroadcastReceiver service behaved differently across Android OEMs. A Samsung device running One UI silently killed background services within 90 seconds of the app losing focus. Zero crashes. Zero errors. Just no data.</p>
+    <p>That's not a bug you catch locally. That's a production-only system behaviour — and finding it late meant rearchitecting the foreground service notification strategy, resubmitting the APK, waiting out Google's review cycle, and re-recruiting testers. Probably two weeks of drag for something a one-week earlier production push would have surfaced.</p>
+    <h3>THE FIX</h3>
+    <p>The mental shift that helped most was treating the production environment as a parallel development lane rather than a final destination. Feature flag the incomplete pieces. Deploy to staging daily. Accept that you will see failures earlier — because earlier failures are dramatically cheaper than later ones.</p>
+    <p>For Finesse, this meant setting up Railway for the Node.js backend from day one, even when it was just a <code>hello world</code> endpoint. It meant pointing the app at real Supabase edge functions from the first week, even before the SMS parser was finished. Every week of production exposure before the feature was done saved a compounded week of debugging after.</p>
+    <p>The lesson isn't new. But the confidence to actually do it — to deliberately ship incomplete code to a real environment — that took building something from scratch, breaking it, and rebuilding it in public.</p>
+  </div>
+</div>
 
-      <section class="section-block" id="work">
-        <div class="section-heading">
-          <span class="section-number">04</span>
-          <h2>Selected Work</h2>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <div class="timeline-meta">
-              <p>Eldanta</p>
-              <span>Mar 2024 - Apr 2026</span>
-            </div>
-            <div class="timeline-body">
-              <h3>Full-Stack Engineer</h3>
-              <p>
-                Built and maintained university web products, Shopify storefront
-                integrations, a multi-tenant LXP admin dashboard, and AI-powered
-                recommendation workflows.
-              </p>
-              <ul class="plain-list">
-                <li>Next.js dashboard for courses, tenants, and course-page configuration.</li>
-                <li>CMS/API layer and Supabase edge functions for real-time data sync.</li>
-                <li>LLM prompt engineering for personalized course recommendations.</li>
-              </ul>
-            </div>
-          </article>
+<div class="blog-takeover" id="post-p2">
+  <button class="takeover-close" onclick="closePost('p2')">[ CLOSE ✕ ]</button>
+  <div class="takeover-header">
+    <div class="takeover-tag">Product · Distribution · April 2025 · 6 min</div>
+    <h1 class="takeover-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h1>
+    <div class="takeover-meta">Joy Masih</div>
+  </div>
+  <div class="takeover-body">
+    <p>If you ask a 24-year-old in Delhi whether they should track their spending, they'll say yes. If you ask them whether they do, they'll pause. That pause is the entire problem. It is not an awareness gap. It is an urgency gap.</p>
+    <p>Most fintech marketing assumes the problem is knowledge. Build a beautiful budgeting UI, explain the 50/30/20 rule, show a chart of someone else's savings trajectory, and the user will be motivated to change. They won't. Not because the information is wrong, but because <em>information without a trigger is just content</em> — and content without urgency sits unopened.</p>
+    <h3>WHAT A TRIGGER LOOKS LIKE</h3>
+    <p>Young urban Indians have highly predictable financial trigger moments: the first salary credit, moving to a new city for a job, the first time rent takes more than 40% of income, getting married, taking a first loan. These are moments of genuine financial anxiety — and anxiety is the only reliable motivator for financial behaviour change.</p>
+    <p>The implication for distribution is straightforward but underutilised. A fintech app that shows up in someone's feed as a generic ad gets ignored. The same app that appears in a thread titled <em>"I just got my first Bangalore salary and have no idea what to do with it"</em> — that gets installed. Not because the app is different, but because the moment is different.</p>
+    <h3>TRIGGER-BASED ACQUISITION, PRACTICALLY</h3>
+    <p>Concretely, this looks like monitoring Reddit threads on r/india and r/personalfinanceindia for life-event signals. It looks like partnering with HR onboarding flows at companies hiring freshers at scale. It looks like writing content that ranks for "what to do with first salary India" rather than "best budgeting app India" — because the first query is triggered by a life event, the second is abstract comparison-shopping.</p>
+    <p>The hardest part of this strategy isn't identifying the triggers. It's accepting that you are not building a product for the 10% of people already tracking their finances. You are building for the 90% who aren't — and you have to meet them at the exact moment they realise they should be. Miss that window and they do nothing. Hit it and you get a user who is genuinely motivated to change. That's the only user worth having.</p>
+    <p>Finesse was built for that second user. Whether it reaches them at the right moment is, honestly, still a work in progress.</p>
+  </div>
+</div>
 
-          <article class="timeline-item">
-            <div class="timeline-meta">
-              <p>Freelance</p>
-              <span>Selected project</span>
-            </div>
-            <div class="timeline-body">
-              <h3>Dynamic Podcast Website</h3>
-              <p>
-                Built an Astro and Spotify API site with static generation,
-                improving page speed and multi-page browsing for listeners.
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
+<script>
+// ── LOADER ──
+window.addEventListener('load', () => {
+  const line = document.getElementById('loader-line');
+  const loader = document.getElementById('loader');
+  setTimeout(() => { line.style.width = '100%'; }, 100);
+  setTimeout(() => {
+    loader.classList.add('done');
+    setTimeout(() => loader.style.display = 'none', 600);
+  }, 1100);
+});
 
-      <section class="section-block split-section" id="startups">
-        <div class="section-heading">
-          <span class="section-number">05</span>
-          <h2>Startups</h2>
-        </div>
-        <div class="startup-list">
-          <article>
-            <p class="role-label">Finness - Solo Founder</p>
-            <h3>AI finance coaching for Indian users</h3>
-            <p>
-              Designed, built, and launched a React Native app that parses bank
-              SMS messages into financial categories, then turns that context
-              into helpful recommendations using the Gemini API.
-            </p>
-          </article>
-          <article>
-            <p class="role-label">Therapy Council - Co-Founder and Full-Stack Developer</p>
-            <h3>Learning platform for psychology-focused courses</h3>
-            <p>
-              Led full-stack LMS development, course content architecture, and
-              the user-facing learning experience.
-            </p>
-          </article>
-        </div>
-      </section>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+let mx = 0, my = 0, cx = 0, cy = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+(function tick() {
+  cx += (mx - cx) * 0.18;
+  cy += (my - cy) * 0.18;
+  cursor.style.left = cx + 'px';
+  cursor.style.top = cy + 'px';
+  requestAnimationFrame(tick);
+})();
 
-      <section class="section-block skills-band" aria-label="Skills">
-        <div class="section-heading">
-          <span class="section-number">06</span>
-          <h2>Skills</h2>
-        </div>
-        <div class="skill-rows">
-          <p><span>Technologies</span> Next.js, React.js, React Native, Vue.js, SvelteKit, Tailwind, TypeScript, Node.js, MongoDB, Supabase, SQL, REST APIs</p>
-          <p><span>Tools</span> Git, GitHub, Directus, Postman, Jira</p>
-          <p><span>Product</span> Prompt engineering, AI-assisted development, LLM integration, rapid MVP development</p>
-          <p><span>Design</span> Photoshop, Illustrator, Figma</p>
-        </div>
-      </section>
+document.querySelectorAll('a, button, .post-item, .work-item, .tag').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
+  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
+});
 
-      <section class="section-block" id="blog">
-        <div class="section-heading">
-          <span class="section-number">07</span>
-          <h2>Blog</h2>
-        </div>
-        <div class="blog-grid">
-          <article class="blog-card">
-            <div class="blog-meta">
-              <span>Sample Essay</span>
-              <time datetime="2026-07-14">Jul 14, 2026</time>
-            </div>
-            <h3>Building AI Products That Stay Legible</h3>
-            <p>
-              The most useful AI features I have worked on are not the loudest
-              ones. They expose what the model considered, what changed, and
-              where the user can intervene.
-            </p>
-            <details>
-              <summary>Read note</summary>
-              <p>
-                Recommendation engines, finance assistants, and learning tools
-                all share the same hidden problem: trust. A model can create
-                surprisingly good output, but the interface still has to show
-                enough structure for a person to understand the path. I like
-                building AI features with visible inputs, small review points,
-                and crisp fallbacks, so the software feels capable without
-                becoming mysterious.
-              </p>
-            </details>
-          </article>
+// ── BLOG TAKEOVERS ──
+function openPost(id) {
+  const el = document.getElementById('post-' + id);
+  el.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePost(id) {
+  const el = document.getElementById('post-' + id);
+  el.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.blog-takeover.open').forEach(el => el.classList.remove('open'));
+    document.body.style.overflow = '';
+  }
+});
 
-          <article class="blog-card">
-            <div class="blog-meta">
-              <span>Sample Essay</span>
-              <time datetime="2026-07-14">Jul 14, 2026</time>
-            </div>
-            <h3>Why Static Sites Still Matter</h3>
-            <p>
-              Static generation is not old-fashioned. It is a useful constraint
-              when the job is speed, stability, and content that should feel
-              instantly available.
-            </p>
-            <details>
-              <summary>Read note</summary>
-              <p>
-                A podcast site, a course catalog, or a small portfolio often
-                benefits more from predictable HTML than from a heavy runtime.
-                The trick is choosing where dynamism actually improves the
-                product. I tend to keep the public surface simple, then put the
-                complexity into build-time data fetching, CMS workflows, or
-                focused admin tools where it earns its keep.
-              </p>
-            </details>
-          </article>
-        </div>
-      </section>
-    </main>
+// ── TEXT SCRAMBLE on hero name ──
+const glitchEl = document.querySelector('.hero-name .line1');
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#%&*';
+const original = 'JOY';
+let scrambleTimer = null;
 
-    <footer class="site-footer" id="contact">
-      <div>
-        <p class="footer-name">Joy Masih</p>
-        <p>New Delhi, India</p>
-      </div>
-      <div class="footer-links">
-        <a href="mailto:joymasih43@gmail.com">Email</a>
-        <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href="Joy_Masih_NEW.pdf" target="_blank" rel="noreferrer">Resume</a>
-      </div>
-    </footer>
+function scramble(el, orig, duration = 600) {
+  clearInterval(scrambleTimer);
+  let elapsed = 0;
+  const interval = 40;
+  scrambleTimer = setInterval(() => {
+    elapsed += interval;
+    const progress = Math.min(elapsed / duration, 1);
+    const revealedCount = Math.floor(progress * orig.length);
+    let result = '';
+    for (let i = 0; i < orig.length; i++) {
+      if (i < revealedCount) result += orig[i];
+      else result += chars[Math.floor(Math.random() * chars.length)];
+    }
+    el.childNodes[0].nodeValue = result;
+    if (progress >= 1) clearInterval(scrambleTimer);
+  }, interval);
+}
 
-    <script type="module" src="script.js"></script>
-  </body>
+glitchEl.addEventListener('mouseenter', () => scramble(glitchEl, original));
+</script>
+</body>
 </html>
