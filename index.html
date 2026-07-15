@@ -1343,6 +1343,7 @@ const joyWord = document.querySelector('.hero-name.glitch');
 if (joyWord) {
   joyWord.addEventListener('mouseenter', scrambleJoy);
   joyWord.addEventListener('focus', scrambleJoy);
+  setInterval(scrambleJoy, 4000);
 }
 
 // ── CURSOR ──
