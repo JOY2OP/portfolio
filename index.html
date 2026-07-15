@@ -227,6 +227,7 @@ img, svg, video, canvas { max-width: 100%; }
   letter-spacing: -0.02em;
   color: var(--white);
   display: block;
+  pointer-events: auto;
   user-select: none;
 }
 
@@ -1023,7 +1024,7 @@ footer p {
   <div class="hero-name-wrap" aria-label="Joy Masih">
     <span class="hero-name glitch" data-text="JOY">JOY</span>
     <div class="hero-name-role">
-      <span>Full-stack · AI · Product — 2 yrs</span>
+      <span>Full-stack · AI · Product</span>
     </div>
   </div>
 
@@ -1089,7 +1090,7 @@ footer p {
     <span class="work-status">Active</span>
   </div>
 
-  <div class="work-item">
+  <!-- <div class="work-item">
     <span class="work-num">L_004</span>
     <div class="work-body">
       <div class="work-name">UNIVERSITY NETWORK</div>
@@ -1111,7 +1112,7 @@ footer p {
       <p class="work-desc">Multi-tenant LXP dashboard and recommendation engine that ranks course suggestions from multi-step learner inputs.</p>
     </div>
     <span class="work-status">Shipped</span>
-  </div>
+  </div> -->
 </section>
 
 <!-- ══ SECTION 03 · SKILLS ══ -->
@@ -1303,6 +1304,8 @@ window.addEventListener('load', () => {
   });
 });
 
+let joyScrambleTimer;
+
 function scrambleJoy() {
   const el = document.querySelector('.hero-name.glitch');
   if (!el) return;
@@ -1312,7 +1315,9 @@ function scrambleJoy() {
   let frame = 0;
   const totalFrames = 18;
 
-  const interval = setInterval(() => {
+  clearInterval(joyScrambleTimer);
+
+  joyScrambleTimer = setInterval(() => {
     const settled = Math.floor((frame / totalFrames) * finalText.length);
     const next = finalText
       .split('')
@@ -1329,9 +1334,15 @@ function scrambleJoy() {
     if (frame > totalFrames) {
       el.textContent = finalText;
       el.dataset.text = finalText;
-      clearInterval(interval);
+      clearInterval(joyScrambleTimer);
     }
   }, 55);
+}
+
+const joyWord = document.querySelector('.hero-name.glitch');
+if (joyWord) {
+  joyWord.addEventListener('mouseenter', scrambleJoy);
+  joyWord.addEventListener('focus', scrambleJoy);
 }
 
 // ── CURSOR ──
@@ -1346,7 +1357,7 @@ document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; })
   requestAnimationFrame(tick);
 })();
 
-document.querySelectorAll('a, button, .post-item, .work-item, .tag, .contact-pill').forEach(el => {
+document.querySelectorAll('a, button, .post-item, .work-item, .tag, .contact-pill, .hero-name').forEach(el => {
   el.addEventListener('mouseenter', () => cursor.classList.add('big'));
   el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
 });
