@@ -385,20 +385,32 @@ img, svg, video, canvas { max-width: 100%; }
   margin-top: 0.5rem;
 }
 
-/* Work items: stacked, full-bleed rows */
+.work-table-head {
+  display: grid;
+  grid-template-columns: 5rem minmax(260px, 1.35fr) minmax(130px, 0.55fr) minmax(110px, 0.45fr) minmax(130px, 0.55fr);
+  gap: 1.5rem;
+  align-items: center;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--grey);
+  border-bottom: 1px solid var(--grey);
+  color: var(--mid);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Work items: dependency-table rows with original portfolio styling */
 .work-item {
   display: grid;
-  grid-template-columns: 3rem 1fr auto;
-  gap: 2rem;
+  grid-template-columns: 5rem minmax(260px, 1.35fr) minmax(130px, 0.55fr) minmax(110px, 0.45fr) minmax(130px, 0.55fr);
+  gap: 1.5rem;
   align-items: center;
-  padding: 2rem 0;
-  border-top: 1px solid var(--grey);
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--grey);
   transition: background 0.15s;
   position: relative;
   cursor: default;
 }
-
-.work-item:last-child { border-bottom: 1px solid var(--grey); }
 
 .work-item::before {
   content: '';
@@ -418,12 +430,12 @@ img, svg, video, canvas { max-width: 100%; }
   font-family: 'Courier New', monospace;
   font-size: 11px;
   color: var(--mid);
-  letter-spacing: 0.1em;
-  align-self: flex-start;
-  padding-top: 0.3rem;
+  letter-spacing: 0.16em;
+  align-self: center;
+  padding-top: 0;
 }
 
-.work-body {}
+.work-body { min-width: 0; }
 
 .work-label {
   font-size: 10px;
@@ -446,6 +458,23 @@ img, svg, video, canvas { max-width: 100%; }
   color: var(--mid);
   line-height: 1.7;
   max-width: 520px;
+}
+
+.work-version,
+.work-status {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+.work-status {
+  justify-self: start;
+  padding: 0.28rem 0.55rem;
+  border: 1px solid rgba(17, 103, 255, 0.24);
+  background: rgba(17, 103, 255, 0.08);
+  color: var(--acid);
+  font-weight: 700;
 }
 
 .work-stack {
@@ -1079,6 +1108,20 @@ footer p {
     padding: 1.75rem 0;
   }
 
+  .work-table-head { display: none; }
+
+  .work-version {
+    grid-column: 2;
+    font-size: 10px;
+  }
+
+  .work-status {
+    grid-column: 2;
+    width: max-content;
+    margin-top: -0.25rem;
+    font-size: 10px;
+  }
+
   .work-label,
   .post-tag {
     letter-spacing: 0.16em;
@@ -1250,6 +1293,11 @@ footer p {
     grid-template-columns: 1fr;
   }
 
+  .work-version,
+  .work-status {
+    grid-column: auto;
+  }
+
   .work-num,
   .post-num-col {
     padding-top: 0;
@@ -1338,32 +1386,58 @@ footer p {
 <section id="s-work">
   <div class="work-header">
     <h2 class="work-title">SELECTED<br>WORK</h2>
-    <span class="work-count chapter">[002] — 04 PROJECTS</span>
+    <span class="work-count chapter">[002] - 05 PROJECTS</span>
+  </div>
+
+  <div class="work-table-head" aria-hidden="true">
+    <span>Layer_ID</span>
+    <span>Dependency</span>
+    <span>Version</span>
+    <span>Status</span>
+    <span>Signal</span>
   </div>
 
   <div class="work-item">
-    <span class="work-num">01</span>
+    <span class="work-num">L_001</span>
     <div class="work-body">
       <div class="work-label">Startup · Solo Founder · Live on Play Store</div>
       <div class="work-name">FINESSE</div>
       <p class="work-desc">AI personal finance app for young Indian professionals. Parses bank SMS automatically. Categorises into Needs / Wants / Investing. Monthly AI coaching via Gemini. 13 active users and growing.</p>
     </div>
+    <span class="work-version">Android v1</span>
+    <span class="work-status">Active</span>
     <div class="work-stack">
       <span>React Native</span>
-      <span>Expo EAS</span>
       <span>Supabase</span>
-      <span>Node.js</span>
       <span>Gemini API</span>
     </div>
   </div>
 
   <div class="work-item">
-    <span class="work-num">02</span>
+    <span class="work-num">L_002</span>
+    <div class="work-body">
+      <div class="work-label">Game · Android · 2.5D</div>
+      <div class="work-name">SPLITS</div>
+      <p class="work-desc">A 2.5D Android game built around fast reflexes, clean visual feedback, and mobile-first controls. Focused on short-session play and satisfying movement.</p>
+    </div>
+    <span class="work-version">Prototype</span>
+    <span class="work-status">In Build</span>
+    <div class="work-stack">
+      <span>Android</span>
+      <span>2.5D Game</span>
+      <span>Mobile UX</span>
+    </div>
+  </div>
+
+  <div class="work-item">
+    <span class="work-num">L_003</span>
     <div class="work-body">
       <div class="work-label">Startup · Co-Founder & Dev Lead</div>
       <div class="work-name">THERAPY COUNCIL</div>
       <p class="work-desc">Co-building therapycouncil.org — an LMS delivering psychology-focused courses online. Responsible for the entire technical stack: architecture, course content pipeline, and user-facing experience.</p>
     </div>
+    <span class="work-version">Web LMS</span>
+    <span class="work-status">Active</span>
     <div class="work-stack">
       <span>Next.js</span>
       <span>Supabase</span>
@@ -1372,12 +1446,14 @@ footer p {
   </div>
 
   <div class="work-item">
-    <span class="work-num">03</span>
+    <span class="work-num">L_004</span>
     <div class="work-body">
       <div class="work-label">Edvanta · Full-Stack Engineer · Mar 2024 – Apr 2026</div>
       <div class="work-name">UNIVERSITY PLATFORM NETWORK</div>
       <p class="work-desc">Maintained and scaled 20+ university websites — USC, King's College London, GWU — serving 100K+ monthly visitors. Integrated Shopify storefronts without touching core CMS infrastructure.</p>
     </div>
+    <span class="work-version">20+ sites</span>
+    <span class="work-status">Stable</span>
     <div class="work-stack">
       <span>Next.js</span>
       <span>Directus</span>
@@ -1387,12 +1463,14 @@ footer p {
   </div>
 
   <div class="work-item">
-    <span class="work-num">04</span>
+    <span class="work-num">L_005</span>
     <div class="work-body">
       <div class="work-label">Edvanta · AI Engineering</div>
       <div class="work-name">LXP + AI RECOMMENDATION ENGINE</div>
       <p class="work-desc">Multi-tenant Learning Experience Platform dashboard and an AI engine that processes multi-step learner inputs to generate personalised, ranked course suggestions in real-time.</p>
     </div>
+    <span class="work-version">AI module</span>
+    <span class="work-status">Shipped</span>
     <div class="work-stack">
       <span>Next.js</span>
       <span>LLM Prompting</span>
