@@ -6,7 +6,7 @@
 <title>JOY - builds shtuff</title>
 <link rel="icon" href="./public/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -175,7 +175,7 @@ img, svg, video, canvas { max-width: 100%; }
   min-height: 560px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: auto auto;
   column-gap: 8vw;
   align-content: center;
   border-bottom: 1px solid var(--grey);
@@ -187,7 +187,7 @@ img, svg, video, canvas { max-width: 100%; }
 /* ── coords top-right ── */
 .hero-coords {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1;
   align-self: center;
   font-family: 'Space Mono', monospace;
   font-size: 9px;
@@ -202,39 +202,48 @@ img, svg, video, canvas { max-width: 100%; }
 .hero-index {
   grid-column: 1;
   grid-row: 1;
+  align-self: start;
   font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.3em;
+  font-size: 10px;
+  letter-spacing: 0.18em;
   color: var(--acid);
   text-transform: uppercase;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0;
+  transform: translateY(0.4rem);
+  position: relative;
+  z-index: 0;
 }
 
 /* ── giant name — dead center, nearly full width ── */
 .hero-name-wrap {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 1;
   display: flex;
   align-items: flex-end;
-  gap: 0.5rem;
+  gap: 0.85rem;
+  margin-top: 1.1rem;
   pointer-events: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .hero-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(150px, 19vw, 270px);
-  line-height: 0.68;
-  letter-spacing: -0.02em;
+  font-family: 'Anton', Impact, 'Arial Black', sans-serif;
+  font-size: clamp(150px, 18.8vw, 280px);
+  font-weight: 900;
+  line-height: 0.76;
+  letter-spacing: -0.075em;
   color: #111820;
   display: block;
   pointer-events: auto;
   user-select: none;
   transform-origin: left bottom;
   transition: transform 0.16s ease;
-  -webkit-text-stroke: 1px #111820;
+  -webkit-text-stroke: 1.6px #111820;
   text-shadow:
-    1px 0 0 #111820,
-    -1px 0 0 #111820;
+    1.6px 0 0 #111820,
+    -1.6px 0 0 #111820,
+    0 1.6px 0 #111820;
 }
 
 .hero-name:hover,
@@ -243,10 +252,10 @@ img, svg, video, canvas { max-width: 100%; }
 }
 
 .hero-dot {
-  width: clamp(20px, 3vw, 34px);
+  width: clamp(30px, 4vw, 52px);
   aspect-ratio: 1;
   background: var(--acid);
-  margin-bottom: 0.04em;
+  margin-bottom: 0.08em;
 }
 
 /* one-word role sits on same baseline, right-aligned, tiny */
@@ -267,12 +276,12 @@ img, svg, video, canvas { max-width: 100%; }
 /* ── bottom bar ── */
 .hero-foot {
   grid-column: 1;
-  grid-row: 3;
+  grid-row: 2;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 2rem;
-  margin-top: 2.25rem;
+  margin-top: 1.8rem;
 }
 
 .hero-foot-left {
@@ -295,14 +304,17 @@ img, svg, video, canvas { max-width: 100%; }
 }
 
 .cta-btn {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.22em;
+  font-family: 'Anton', Impact, 'Arial Black', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
   color: #ffffff;
   background: var(--acid);
-  padding: 0.6rem 1.6rem;
+  min-width: 174px;
+  padding: 1rem 2.1rem;
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid transparent;
   transition: background 0.15s;
 }
@@ -937,6 +949,11 @@ footer p {
   }
 
   .hero-dot { width: clamp(18px, 7vw, 28px); }
+
+  .hero-foot {
+    grid-column: 1;
+    grid-row: 3;
+  }
 
   .hero-foot { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
   .hero-foot-left { max-width: 100%; font-size: 10px; }
