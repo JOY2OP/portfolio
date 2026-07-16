@@ -1,0 +1,462 @@
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#bc4800",
+                        "secondary": "#565e74",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#2563eb",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed": "#dae2fd",
+                        "inverse-surface": "#2d3133",
+                        "inverse-on-surface": "#eff1f3",
+                        "tertiary": "#943700",
+                        "on-surface-variant": "#434655",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-tertiary-fixed": "#360f00",
+                        "outline-variant": "#c3c6d7",
+                        "primary": "#004ac6",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed": "#00174b",
+                        "surface-bright": "#f7f9fb",
+                        "background": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "surface-container-highest": "#e0e3e5",
+                        "secondary-container": "#dae2fd",
+                        "surface": "#f7f9fb",
+                        "surface-container": "#eceef0",
+                        "outline": "#737686",
+                        "on-secondary-fixed": "#131b2e",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-dim": "#d8dadc",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "surface-tint": "#0053db",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary-container": "#5c647a",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-container": "#eeefff",
+                        "on-surface": "#191c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "element-gap": "1.5rem",
+                        "stack-sm": "0.5rem",
+                        "section-gap": "8rem",
+                        "container-max": "1280px",
+                        "gutter": "2rem",
+                        "stack-md": "1rem"
+                    },
+                    "fontFamily": {
+                        "display": ["Anton"],
+                        "headline-lg": ["Anton"],
+                        "headline-md": ["Anton"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "label-mono": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    }catch(_e){}</script><style>
+        body { cursor: none; }
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: #004ac6;
+            border-radius: 0;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.1s, height 0.1s, background 0.1s, border-radius 0.1s, border-color 0.1s;
+            mix-blend-mode: multiply;
+        }
+        .cursor.big {
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 1.5px solid #191c1e;
+            border-radius: 50%;
+        }
+        .joy-tilt {
+            display: inline-block;
+            transform-origin: left bottom;
+            transition: transform 0.16s ease;
+        }
+        .joy-tilt:hover,
+        .joy-tilt:focus-visible {
+            transform: skewX(-8deg);
+        }
+        @media (max-width: 768px) {
+            body { cursor: auto; }
+            .cursor { display: none; }
+        }
+    </style></head><body class="font-body-md overflow-x-hidden">
+
+    <div class="cursor" id="cursor"></div>
+
+    <!-- Global Top Bar -->
+    <!-- <header class="bg-transparent dark:bg-transparent text-primary dark:text-primary-fixed full-width top-0 sticky z-50 border-b border-outline-variant/30 backdrop-blur-xl flat no shadows">
+        <div class="flex justify-between items-center w-full px-gutter py-stack-md max-w-container-max mx-auto">
+            <a href="#" class="text-headline-md font-headline-md text-on-surface dark:text-on-surface">JOY</a>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="#work" class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary transition-colors duration-200">Work</a>
+                <a href="#tools" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200">Tools</a>
+                <a href="#writing" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200">Writing</a>
+                <a href="#contact" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200">Contact</a>
+            </nav>
+            <button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-mono text-label-mono transition-transform hover:scale-105 active:opacity-80">
+                Get In Touch
+            </button>
+        </div>
+    </header> -->
+
+    <!-- Side Navigation Indicators -->
+    <aside class="bg-surface-container-lowest/60 dark:bg-inverse-surface/60 text-primary dark:text-primary-fixed fixed left-8 top-1/2 -translate-y-1/2 rounded-full py-4 border border-outline-variant/20 backdrop-blur-md flat no shadows hidden md:flex flex-col gap-stack-sm items-center px-2 z-40">
+        <a href="#hero" class="bg-primary text-on-primary rounded-full w-8 h-8 flex items-center justify-center text-label-mono font-label-mono scale-90 transition-transform">01</a>
+        <a href="#work" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">02</a>
+        <a href="#tools" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">03</a>
+        <a href="#writing" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">04</a>
+        <a href="#contact" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">05</a>
+    </aside>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="relative min-h-[90vh] flex flex-col items-center justify-center px-gutter overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+            
+            <div class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-12 gap-gutter items-center pt-24">
+                <div class="md:col-span-8 relative z-10">
+                    <span class="font-label-mono text-label-mono text-primary mb-4 block tracking-widest">[001] — PORTFOLIO</span>
+                    <h1 class="font-display text-[120px] md:text-[220px] leading-[0.8] kinetic-text joy-tilt text-on-surface mb-8 select-none">
+                        JOY<span class="text-primary">.</span>
+                    </h1>
+                    <div class="flex flex-col md:flex-row md:items-end gap-8 mt-12">
+                        <div class="max-w-xs">
+                            <p class="font-label-mono text-label-mono text-secondary mb-2">TAGLINE</p>
+                            <p class="font-headline-md text-headline-md leading-tight text-on-surface">SHIPPING PRODUCTS. WITH TASTE.</p>
+                        </div>
+                        <div class="flex-1">
+                            <button class="bg-primary text-on-primary px-12 py-6 rounded-none text-headline-md font-headline-md transition-all hover:translate-x-2 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.1)] active:scale-95 group">
+                                VIEW WORK <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 3D Asset Injection -->
+                <div class="md:col-span-4 relative mt-12 md:mt-0 flex justify-center">
+                    
+                    <div class="absolute -bottom-12 -right-8 text-right">
+                        <p class="font-label-mono text-label-mono text-secondary">AVAILABILITY</p>
+                        <div class="flex items-center gap-2 justify-end">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <span class="font-label-mono text-label-mono text-on-surface">AVAILABLE FOR PROJECTS</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Global Stats -->
+            <div class="w-full max-w-container-max flex justify-between items-center py-12 mt-auto border-t border-outline-variant/30">
+                <span class="font-label-mono text-label-mono text-secondary">28.6139° N, 77.2090° E</span>
+                <span class="font-label-mono text-label-mono text-secondary">FULL-STACK · AI · PRODUCT</span>
+            </div>
+        </section>
+
+        <!-- Selected Work Section -->
+        <section id="work" class="py-section-gap px-gutter max-w-container-max mx-auto">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="font-label-mono text-label-mono text-primary">[002]</span>
+                    <h2 class="font-headline-lg text-headline-lg mt-2">SELECTED WORK</h2>
+                </div>
+                <span class="font-label-mono text-label-mono text-secondary">— 05 PROJECTS</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="text-left border-b border-outline-variant">
+                            <th class="py-6 font-label-mono text-label-mono text-secondary">ID</th>
+                            <th class="py-6 font-label-mono text-label-mono text-secondary">PROJECT</th>
+                            <th class="py-6 font-label-mono text-label-mono text-secondary">CONTEXT</th>
+                            <th class="py-6 font-label-mono text-label-mono text-secondary text-right">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-body-md text-on-surface">
+                        <!-- Project 1 -->
+                        <tr class="group hover:bg-white transition-colors border-b border-outline-variant/30">
+                            <td class="py-8 font-label-mono text-label-mono text-secondary">L_001</td>
+                            <td class="py-8">
+                                <h3 class="font-headline-md text-headline-md">FINESSE</h3>
+                            </td>
+                            <td class="py-8 pr-12 max-w-md">
+                                <span class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">SOLO FOUNDER · PLAY STORE</span>
+                                <p class="text-on-surface-variant">AI personal finance app for young Indian professionals, with SMS parsing, automatic categorisation, and Gemini-powered monthly coaching.</p>
+                            </td>
+                            <td class="py-8 text-right">
+                                <span class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
+                            </td>
+                        </tr>
+                        <!-- Project-->
+                        <tr class="group hover:bg-white transition-colors border-b border-outline-variant/30">
+                            <td class="py-8 font-label-mono text-label-mono text-secondary">L_002</td>
+                            <td class="py-8">
+                                <h3 class="font-headline-md text-headline-md">SPLITS</h3>
+                            </td>
+                            <td class="py-8 pr-12 max-w-md">
+                                <span class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">GAME · ANDROID · 2.5D</span>
+                                <p class="text-on-surface-variant">A fast-reflex 2.5D Android game focused on short-session play, clean visual feedback, and mobile-first movement.</p>
+                            </td>
+                            <td class="py-8 text-right">
+                                <span class="bg-secondary-container/30 text-secondary px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-outline-variant">IN BUILD</span>
+                            </td>
+                        </tr>
+                        <!-- Project 3 -->
+                        <tr class="group hover:bg-white transition-colors border-b border-outline-variant/30">
+                            <td class="py-8 font-label-mono text-label-mono text-secondary">L_003</td>
+                            <td class="py-8">
+                                <h3 class="font-headline-md text-headline-md">THERAPY COUNCIL</h3>
+                            </td>
+                            <td class="py-8 pr-12 max-w-md">
+                                <span class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">CO-FOUNDER · DEV LEAD</span>
+                                <p class="text-on-surface-variant">Online LMS for psychology-focused courses, covering architecture, course pipeline, and the user-facing learning experience.</p>
+                            </td>
+                            <td class="py-8 text-right">
+                                <span class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Craft & Tools Section -->
+        <section id="tools" class="py-section-gap bg-surface-container-low px-gutter overflow-hidden">
+            <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                <div class="md:col-span-5">
+                    <span class="font-label-mono text-label-mono text-primary">[003]</span>
+                    <h2 class="font-headline-lg text-[80px] leading-[0.9] mt-2 mb-4">CRAFT<br>&amp; TOOLS</h2>
+                    <p class="max-w-xs font-body-md text-on-surface-variant mt-8">
+                        Two years. Many stacks. One rule — ship working software.
+                    </p>
+                </div>
+                <div class="md:col-span-7 flex flex-col gap-10">
+                    <!-- Tool Row: Frontend -->
+                    <div class="border-b border-outline-variant pb-8">
+                        <span class="font-label-mono text-label-mono text-secondary mb-4 block">FRONTEND</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Next.js</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React Native</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Vue.js</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Sveltekit</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Tailwind</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">TypeScript</span>
+                        </div>
+                    </div>
+                    <!-- Tool Row: Backend -->
+                    <div class="border-b border-outline-variant pb-8">
+                        <span class="font-label-mono text-label-mono text-secondary mb-4 block">BACKEND</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Node.js</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Supabase</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">MongoDB</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">SQL</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">REST APIs</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Directus</span>
+                        </div>
+                    </div>
+                    <!-- Tool Row: AI / LLM -->
+                    <div class="border-b border-outline-variant pb-8">
+                        <span class="font-label-mono text-label-mono text-secondary mb-4 block">AI / LLM</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Prompt Engineering</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Gemini API</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Groq / Llama</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">LLM Integration</span>
+                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Rapid MVP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Writing Section -->
+        <section id="writing" class="py-section-gap px-gutter max-w-container-max mx-auto">
+            <div class="flex justify-between items-start mb-24">
+                <div>
+                    <span class="font-label-mono text-label-mono text-primary">[004]</span>
+                    <h2 class="font-headline-lg text-headline-lg mt-2">WRITING</h2>
+                </div>
+                <div class="text-right">
+                    <span class="font-label-mono text-label-mono text-secondary block">02 POSTS</span>
+                    <span class="font-label-mono text-label-mono text-secondary">thoughts on code &amp; product</span>
+                </div>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Article 1 -->
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer">
+                    <div class="md:col-span-2">
+                        <span class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">01</span>
+                        <span class="font-label-mono text-label-mono text-secondary mt-2 block">JUN 2025</span>
+                    </div>
+                    <div class="md:col-span-10">
+                        <span class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">ENGINEERING · DEPLOYMENT</span>
+                        <h3 class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h3>
+                        <p class="font-body-md text-on-surface-variant mt-4 max-w-2xl">
+                            The seductive trap of local development — and what building Finesse taught me about the real cost of deferred production testing.
+                        </p>
+                    </div>
+                </article>
+
+                <div class="hairline-divider opacity-50"></div>
+
+                <!-- Article 2 -->
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer">
+                    <div class="md:col-span-2">
+                        <span class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">02</span>
+                        <span class="font-label-mono text-label-mono text-secondary mt-2 block">APR 2025</span>
+                    </div>
+                    <div class="md:col-span-10">
+                        <span class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">PRODUCT · DISTRIBUTION</span>
+                        <h3 class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h3>
+                        <p class="font-body-md text-on-surface-variant mt-4 max-w-2xl">
+                            Awareness isn't the problem. Timing is. How trigger-based distribution changes the acquisition equation entirely.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="contact" class="py-section-gap px-gutter max-w-container-max mx-auto relative overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-12 items-end">
+                <div class="md:col-span-8">
+                    <span class="font-label-mono text-label-mono text-primary">[005] — LET'S TALK</span>
+                    <h2 class="font-headline-lg text-[80px] md:text-[140px] leading-[0.85] mt-8 mb-12">
+                        BUILD<br>SOMETHING<br><span class="text-primary underline decoration-primary/20">REAL.</span>
+                    </h2>
+                    
+                    <div class="flex flex-col gap-4">
+                        <a href="mailto:joymasih43@gmail.com" class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                            <span class="material-symbols-outlined text-secondary group-hover:text-primary">mail</span>
+                            <span class="font-label-mono text-label-mono text-secondary flex-1">EMAIL · joymasih43@gmail.com</span>
+                            <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
+                        </a>
+                        <a href="#" class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                            <span class="material-symbols-outlined text-secondary group-hover:text-primary">link</span>
+                            <span class="font-label-mono text-label-mono text-secondary flex-1">LINKEDIN · joy-masih</span>
+                            <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-4 hidden md:block">
+                    <!-- Stylized HI Background Text -->
+                    <div class="text-[280px] font-display text-outline-variant/10 leading-none select-none -mb-8 -mr-12">
+                        HI.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface dark:bg-surface text-secondary dark:text-secondary-fixed-dim full-width bottom-0 border-t border-outline-variant flat no shadows">
+        <div class="flex justify-between items-center w-full px-gutter py-12 max-w-container-max mx-auto">
+            <div class="flex items-center gap-4">
+                <span class="text-body-lg font-headline-md text-on-surface">JOY</span>
+                <span class="text-label-mono font-label-mono">· 2026</span>
+            </div>
+            
+            <nav class="flex gap-8">
+                <a href="#" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">Twitter</a>
+                <a href="#" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">GitHub</a>
+                <a href="#" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">LinkedIn</a>
+            </nav>
+            
+            <div class="hidden md:block">
+                <span class="font-label-mono text-label-mono uppercase tracking-widest text-outline">Useful things, shipped clean</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom cursor + gentle pointer tracking
+        const cursor = document.getElementById('cursor');
+        let mx = 0, my = 0, cx = 0, cy = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            const floatingAsset = document.querySelector('.animate-float');
+
+            if (floatingAsset) {
+                floatingAsset.style.transform = `translate(${moveX * 2}px, ${moveY * 2}px)`;
+            }
+        });
+
+        (function tick() {
+            if (cursor) {
+                cx += (mx - cx) * 0.22;
+                cy += (my - cy) * 0.22;
+                cursor.style.left = cx + 'px';
+                cursor.style.top = cy + 'px';
+            }
+            requestAnimationFrame(tick);
+        })();
+
+        document.querySelectorAll('a, button, tr, article, .joy-tilt, .cursor-default').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor && cursor.classList.add('big'));
+            el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('big'));
+        });
+
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active state in side nav
+                if(this.parentElement.tagName === 'ASIDE') {
+                    document.querySelectorAll('aside a').forEach(a => {
+                        a.classList.remove('bg-primary', 'text-on-primary');
+                        a.classList.add('text-on-surface-variant');
+                    });
+                    this.classList.add('bg-primary', 'text-on-primary');
+                    this.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+    </script>
+</body></html>
