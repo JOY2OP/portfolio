@@ -111,6 +111,110 @@
         @media (max-width: 768px) {
             body { cursor: auto; }
             .cursor { display: none; }
+            #hero {
+                min-height: auto;
+                padding: 4.5rem 1.25rem 3rem;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+            #hero > .absolute {
+                display: none;
+            }
+            #hero .grid {
+                padding-top: 0;
+                gap: 2rem;
+            }
+            #hero .kinetic-text {
+                font-size: clamp(6rem, 32vw, 9rem) !important;
+                line-height: 0.78;
+                margin-bottom: 2rem;
+            }
+            #hero .flex.flex-col.md\:flex-row {
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+            #hero button {
+                width: 100%;
+                min-height: 4rem;
+                padding: 1.1rem 1.5rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            #hero .md\:col-span-4 {
+                width: 100%;
+                min-height: auto;
+                justify-content: flex-start;
+                margin-top: 0;
+            }
+            #hero .md\:col-span-4 > .absolute {
+                position: static;
+                text-align: left;
+            }
+            #hero .md\:col-span-4 .flex {
+                justify-content: flex-start;
+            }
+            #hero > .w-full.max-w-container-max {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                margin-top: 2.75rem;
+                padding: 2rem 0 0;
+            }
+            #work,
+            #tools,
+            #writing,
+            #contact {
+                padding: 4.5rem 1.25rem;
+            }
+            #work > .flex {
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            #work table {
+                min-width: 720px;
+            }
+            #work .overflow-x-auto {
+                margin-right: -1.25rem;
+                padding-right: 1.25rem;
+            }
+            #contact h2 {
+                font-size: clamp(3.75rem, 18vw, 5.5rem) !important;
+                margin-top: 2rem;
+                margin-bottom: 2.25rem;
+            }
+            #contact a {
+                max-width: none;
+                padding: 1.25rem;
+            }
+            #contact a span:nth-child(2) {
+                word-break: break-word;
+            }
+            footer > div {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 2rem 1.25rem;
+            }
+            footer nav {
+                flex-wrap: wrap;
+                gap: 1rem 1.5rem;
+            }
+        }
+        @media (max-width: 420px) {
+            #hero {
+                padding-top: 3.5rem;
+            }
+            #hero .kinetic-text {
+                font-size: clamp(5rem, 31vw, 7rem) !important;
+            }
+            #hero button {
+                font-size: 1rem;
+                letter-spacing: 0.08em;
+            }
+            #work table {
+                min-width: 660px;
+            }
         }
     </style></head><body class="font-body-md overflow-x-hidden">
 
