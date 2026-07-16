@@ -1,85 +1,101 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" href="./public/favicon.svg" type="image/svg+xml"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "tertiary-container": "#bc4800",
-                        "secondary": "#565e74",
-                        "error-container": "#ffdad6",
-                        "primary-container": "#2563eb",
-                        "inverse-primary": "#b4c5ff",
-                        "secondary-fixed": "#dae2fd",
-                        "inverse-surface": "#2d3133",
-                        "inverse-on-surface": "#eff1f3",
-                        "tertiary": "#943700",
-                        "on-surface-variant": "#434655",
-                        "tertiary-fixed": "#ffdbcd",
-                        "on-tertiary-fixed": "#360f00",
-                        "outline-variant": "#c3c6d7",
-                        "primary": "#004ac6",
-                        "on-error-container": "#93000a",
-                        "on-primary-fixed-variant": "#003ea8",
-                        "on-background": "#191c1e",
-                        "on-primary-fixed": "#00174b",
-                        "surface-bright": "#f7f9fb",
-                        "background": "#f7f9fb",
-                        "surface-container-high": "#e6e8ea",
-                        "surface-container-highest": "#e0e3e5",
-                        "secondary-container": "#dae2fd",
-                        "surface": "#f7f9fb",
-                        "surface-container": "#eceef0",
-                        "outline": "#737686",
-                        "on-secondary-fixed": "#131b2e",
-                        "tertiary-fixed-dim": "#ffb596",
-                        "on-primary": "#ffffff",
-                        "on-tertiary-container": "#ffede6",
-                        "surface-dim": "#d8dadc",
-                        "secondary-fixed-dim": "#bec6e0",
-                        "on-tertiary": "#ffffff",
-                        "on-secondary-fixed-variant": "#3f465c",
-                        "surface-tint": "#0053db",
-                        "on-error": "#ffffff",
-                        "primary-fixed": "#dbe1ff",
-                        "on-secondary-container": "#5c647a",
-                        "surface-container-low": "#f2f4f6",
-                        "primary-fixed-dim": "#b4c5ff",
-                        "surface-container-lowest": "#ffffff",
-                        "error": "#ba1a1a",
-                        "on-secondary": "#ffffff",
-                        "surface-variant": "#e0e3e5",
-                        "on-tertiary-fixed-variant": "#7d2d00",
-                        "on-primary-container": "#eeefff",
-                        "on-surface": "#191c1e"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "element-gap": "1.5rem",
-                        "stack-sm": "0.5rem",
-                        "section-gap": "8rem",
-                        "container-max": "1280px",
-                        "gutter": "2rem",
-                        "stack-md": "1rem"
-                    },
-                    "fontFamily": {
-                        "display": ["Anton"],
-                        "headline-lg": ["Anton"],
-                        "headline-md": ["Anton"],
-                        "label-sm": ["Hanken Grotesk"],
-                        "body-md": ["Hanken Grotesk"],
-                        "label-mono": ["JetBrains Mono"],
-                        "body-lg": ["Hanken Grotesk"]
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOY - Builds shtuff</title>
+    <link rel="icon" href="./public/favicon.svg" type="image/svg+xml">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "tertiary-container": "#bc4800",
+                            "secondary": "#565e74",
+                            "error-container": "#ffdad6",
+                            "primary-container": "#2563eb",
+                            "inverse-primary": "#b4c5ff",
+                            "secondary-fixed": "#dae2fd",
+                            "inverse-surface": "#2d3133",
+                            "inverse-on-surface": "#eff1f3",
+                            "tertiary": "#943700",
+                            "on-surface-variant": "#434655",
+                            "tertiary-fixed": "#ffdbcd",
+                            "on-tertiary-fixed": "#360f00",
+                            "outline-variant": "#c3c6d7",
+                            "primary": "#004ac6",
+                            "on-error-container": "#93000a",
+                            "on-primary-fixed-variant": "#003ea8",
+                            "on-background": "#191c1e",
+                            "on-primary-fixed": "#00174b",
+                            "surface-bright": "#f7f9fb",
+                            "background": "#f7f9fb",
+                            "surface-container-high": "#e6e8ea",
+                            "surface-container-highest": "#e0e3e5",
+                            "secondary-container": "#dae2fd",
+                            "surface": "#f7f9fb",
+                            "surface-container": "#eceef0",
+                            "outline": "#737686",
+                            "on-secondary-fixed": "#131b2e",
+                            "tertiary-fixed-dim": "#ffb596",
+                            "on-primary": "#ffffff",
+                            "on-tertiary-container": "#ffede6",
+                            "surface-dim": "#d8dadc",
+                            "secondary-fixed-dim": "#bec6e0",
+                            "on-tertiary": "#ffffff",
+                            "on-secondary-fixed-variant": "#3f465c",
+                            "surface-tint": "#0053db",
+                            "on-error": "#ffffff",
+                            "primary-fixed": "#dbe1ff",
+                            "on-secondary-container": "#5c647a",
+                            "surface-container-low": "#f2f4f6",
+                            "primary-fixed-dim": "#b4c5ff",
+                            "surface-container-lowest": "#ffffff",
+                            "error": "#ba1a1a",
+                            "on-secondary": "#ffffff",
+                            "surface-variant": "#e0e3e5",
+                            "on-tertiary-fixed-variant": "#7d2d00",
+                            "on-primary-container": "#eeefff",
+                            "on-surface": "#191c1e"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "element-gap": "1.5rem",
+                            "stack-sm": "0.5rem",
+                            "section-gap": "8rem",
+                            "container-max": "1280px",
+                            "gutter": "2rem",
+                            "stack-md": "1rem"
+                        },
+                        "fontFamily": {
+                            "display": ["Anton"],
+                            "headline-lg": ["Anton"],
+                            "headline-md": ["Anton"],
+                            "label-sm": ["Hanken Grotesk"],
+                            "body-md": ["Hanken Grotesk"],
+                            "label-mono": ["JetBrains Mono"],
+                            "body-lg": ["Hanken Grotesk"]
+                        }
                     }
                 }
             }
+        } catch (_e) { }</script>
+    <style>
+        body {
+            cursor: none;
         }
-    }catch(_e){}</script><style>
-        body { cursor: none; }
+
         .cursor {
             width: 12px;
             height: 12px;
@@ -92,6 +108,7 @@
             transition: width 0.1s, height 0.1s, background 0.1s, border-radius 0.1s, border-color 0.1s;
             mix-blend-mode: multiply;
         }
+
         .cursor.big {
             width: 48px;
             height: 48px;
@@ -99,15 +116,18 @@
             border: 1.5px solid #191c1e;
             border-radius: 50%;
         }
+
         .joy-tilt {
             display: inline-block;
             transform-origin: left bottom;
             transition: transform 0.16s ease;
         }
+
         .joy-tilt:hover,
         .joy-tilt:focus-visible {
             transform: skewX(-8deg);
         }
+
         .blog-takeover {
             display: none;
             position: fixed;
@@ -118,13 +138,23 @@
             padding: 6rem clamp(1.25rem, 6vw, 5rem) 4rem;
             animation: takeoverIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .blog-takeover.open {
             display: block;
         }
+
         @keyframes takeoverIn {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         .takeover-close {
             position: fixed;
             top: 1.5rem;
@@ -140,16 +170,19 @@
             text-transform: uppercase;
             transition: color 0.15s, border-color 0.15s;
         }
+
         .takeover-close:hover {
             border-color: #004ac6;
             color: #004ac6;
         }
+
         .takeover-header {
             max-width: 860px;
             padding-bottom: 2rem;
             margin-bottom: 2.5rem;
             border-bottom: 1px solid #c3c6d7;
         }
+
         .takeover-tag,
         .takeover-meta {
             font-family: "JetBrains Mono", monospace;
@@ -158,9 +191,11 @@
             text-transform: uppercase;
             color: #004ac6;
         }
+
         .takeover-meta {
             color: #565e74;
         }
+
         .takeover-title {
             max-width: 980px;
             margin: 1.25rem 0;
@@ -169,25 +204,30 @@
             line-height: 0.95;
             color: #191c1e;
         }
+
         .takeover-body {
             max-width: 700px;
             color: #434655;
             font-size: 1rem;
             line-height: 1.9;
         }
+
         .takeover-body p {
             margin-bottom: 1.4rem;
         }
+
         .takeover-body h3 {
             margin: 2.75rem 0 1rem;
             font-family: Anton, Impact, sans-serif;
             font-size: 2rem;
             color: #191c1e;
         }
+
         .takeover-body em {
             color: #191c1e;
             font-style: normal;
         }
+
         .takeover-body code {
             padding: 0.1em 0.35em;
             background: rgba(0, 74, 198, 0.1);
@@ -195,12 +235,17 @@
             font-family: "JetBrains Mono", monospace;
             font-size: 0.85em;
         }
+
         @media (max-width: 768px) {
             body {
                 cursor: auto;
                 padding-bottom: 5.25rem;
             }
-            .cursor { display: none; }
+
+            .cursor {
+                display: none;
+            }
+
             aside {
                 display: flex !important;
                 left: 50% !important;
@@ -216,33 +261,40 @@
                 transform: translateX(-50%) !important;
                 box-shadow: 0 18px 45px rgba(0, 74, 198, 0.14);
             }
+
             aside a {
                 width: 2.35rem !important;
                 height: 2.35rem !important;
                 flex-shrink: 0;
             }
+
             #hero {
                 min-height: auto;
                 padding: 4.5rem 1.25rem 3rem;
                 align-items: flex-start;
                 justify-content: flex-start;
             }
-            #hero > .absolute {
+
+            #hero>.absolute {
                 display: none;
             }
+
             #hero .grid {
                 padding-top: 0;
                 gap: 2rem;
             }
+
             #hero .kinetic-text {
                 font-size: clamp(6rem, 32vw, 9rem) !important;
                 line-height: 0.78;
                 margin-bottom: 2rem;
             }
+
             #hero .flex.flex-col.md\:flex-row {
                 gap: 1.5rem;
                 margin-top: 2rem;
             }
+
             #hero button {
                 width: 100%;
                 min-height: 4rem;
@@ -251,53 +303,64 @@
                 align-items: center;
                 justify-content: center;
             }
+
             #hero .md\:col-span-4 {
                 width: 100%;
                 min-height: auto;
                 justify-content: flex-start;
                 margin-top: 0;
             }
-            #hero .md\:col-span-4 > .absolute {
+
+            #hero .md\:col-span-4>.absolute {
                 position: static;
                 text-align: left;
             }
+
             #hero .md\:col-span-4 .flex {
                 justify-content: flex-start;
             }
-            #hero > .w-full.max-w-container-max {
+
+            #hero>.w-full.max-w-container-max {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.75rem;
                 margin-top: 2.75rem;
                 padding: 2rem 0 0;
             }
+
             #work,
             #tools,
             #writing,
             #contact {
                 padding: 4.5rem 1.25rem;
             }
-            #work > .flex {
+
+            #work>.flex {
                 align-items: flex-start;
                 gap: 0.75rem;
             }
+
             #work table {
                 display: block;
                 min-width: 0;
             }
+
             #work .overflow-x-auto {
                 overflow: visible;
                 margin-right: 0;
                 padding-right: 0;
             }
+
             #work thead {
                 display: none;
             }
+
             #work tbody {
                 display: flex;
                 flex-direction: column;
                 gap: 0.85rem;
             }
+
             #work tr {
                 display: grid;
                 grid-template-columns: 3.75rem minmax(0, 1fr);
@@ -309,83 +372,110 @@
                 padding: 1rem 0;
                 border-bottom: 1px solid rgba(195, 198, 215, 0.55);
             }
+
             #work td {
                 display: block;
                 padding: 0.2rem 0 !important;
                 max-width: none;
             }
-            #work td:nth-child(1) { grid-area: id; }
-            #work td:nth-child(2) { grid-area: project; }
+
+            #work td:nth-child(1) {
+                grid-area: id;
+            }
+
+            #work td:nth-child(2) {
+                grid-area: project;
+            }
+
             #work td:nth-child(3) {
                 grid-area: context;
                 padding-right: 0 !important;
             }
+
             #work td:nth-child(4) {
                 grid-area: status;
                 text-align: left;
                 margin-top: 0.35rem;
             }
+
             #work h3 {
                 font-size: 1.6rem;
                 line-height: 1;
             }
+
             #contact h2 {
                 font-size: clamp(3.75rem, 18vw, 5.5rem) !important;
                 margin-top: 2rem;
                 margin-bottom: 2.25rem;
             }
+
             #contact a {
                 max-width: none;
                 padding: 1.25rem;
             }
+
             #contact a span:nth-child(2) {
                 word-break: break-word;
             }
-            footer > div {
+
+            footer>div {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 1.5rem;
                 padding: 2rem 1.25rem;
             }
+
             footer nav {
                 flex-wrap: wrap;
                 gap: 1rem 1.5rem;
             }
+
             .blog-takeover {
                 padding: 5rem 1.25rem calc(4rem + 5.25rem);
             }
+
             .takeover-close {
                 top: 1rem;
                 right: 1.25rem;
             }
+
             .takeover-title {
                 font-size: clamp(2.5rem, 13vw, 4.5rem);
                 overflow-wrap: anywhere;
             }
+
             .takeover-body {
                 font-size: 0.95rem;
             }
         }
+
         @media (max-width: 420px) {
             #hero {
                 padding-top: 3.5rem;
             }
+
             #hero .kinetic-text {
                 font-size: clamp(5rem, 31vw, 7rem) !important;
             }
+
             #hero button {
                 font-size: 1rem;
                 letter-spacing: 0.08em;
             }
+
             #work table {
                 min-width: 0;
             }
+
             #work tr {
                 grid-template-columns: 3.25rem minmax(0, 1fr);
                 gap: 0.2rem 0.75rem;
             }
         }
-    </style></head><body class="font-body-md overflow-x-hidden">
+    </style>
+</head>
+
+<body class="font-body-md overflow-x-hidden">
 
     <div class="cursor" id="cursor"></div>
 
@@ -406,42 +496,57 @@
     </header> -->
 
     <!-- Side Navigation Indicators -->
-    <aside class="bg-surface-container-lowest/60 dark:bg-inverse-surface/60 text-primary dark:text-primary-fixed fixed left-8 top-1/2 -translate-y-1/2 rounded-full py-4 border border-outline-variant/20 backdrop-blur-md flat no shadows hidden md:flex flex-col gap-stack-sm items-center px-2 z-40">
-        <a href="#hero" class="bg-primary text-on-primary rounded-full w-8 h-8 flex items-center justify-center text-label-mono font-label-mono scale-90 transition-transform">01</a>
-        <a href="#work" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">02</a>
-        <a href="#tools" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">03</a>
-        <a href="#writing" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">04</a>
-        <a href="#contact" class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">05</a>
+    <aside
+        class="bg-surface-container-lowest/60 dark:bg-inverse-surface/60 text-primary dark:text-primary-fixed fixed left-8 top-1/2 -translate-y-1/2 rounded-full py-4 border border-outline-variant/20 backdrop-blur-md flat no shadows hidden md:flex flex-col gap-stack-sm items-center px-2 z-40">
+        <a href="#hero"
+            class="bg-primary text-on-primary rounded-full w-8 h-8 flex items-center justify-center text-label-mono font-label-mono scale-90 transition-transform">01</a>
+        <a href="#work"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">02</a>
+        <a href="#tools"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">03</a>
+        <a href="#writing"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">04</a>
+        <a href="#contact"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">05</a>
     </aside>
 
     <main>
         <!-- Hero Section -->
-        <section id="hero" class="relative min-h-[90vh] flex flex-col items-center justify-center px-gutter overflow-hidden">
+        <section id="hero"
+            class="relative min-h-[90vh] flex flex-col items-center justify-center px-gutter overflow-hidden">
             <!-- Background Decoration -->
-            <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -z-10"></div>
-            
+            <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -z-10">
+            </div>
+
             <div class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-12 gap-gutter items-center pt-24">
                 <div class="md:col-span-8 relative z-10">
-                    <span class="font-label-mono text-label-mono text-primary mb-4 block tracking-widest">[001] — PORTFOLIO</span>
-                    <h1 class="font-display text-[120px] md:text-[220px] leading-[0.8] kinetic-text joy-tilt text-on-surface mb-8 select-none">
+                    <span class="font-label-mono text-label-mono text-primary mb-4 block tracking-widest">[001] —
+                        INTRO</span>
+                    <h1
+                        class="font-display text-[120px] md:text-[220px] leading-[0.8] kinetic-text joy-tilt text-on-surface mb-8 select-none">
                         JOY<span class="text-primary">.</span>
                     </h1>
                     <div class="flex flex-col md:flex-row md:items-end gap-8 mt-12">
                         <div class="max-w-xs">
                             <p class="font-label-mono text-label-mono text-secondary mb-2">TAGLINE</p>
-                            <p class="font-headline-md text-headline-md leading-tight text-on-surface">SHIPPING PRODUCTS. WITH TASTE.</p>
+                            <p class="font-headline-md text-headline-md leading-tight text-on-surface">SHIPPING
+                                PRODUCTS. WITH TASTE.</p>
                         </div>
                         <div class="flex-1">
-                            <button class="bg-primary text-on-primary px-12 py-6 rounded-none text-headline-md font-headline-md transition-all hover:translate-x-2 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.1)] active:scale-95 group">
-                                VIEW WORK <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                            <button
+                                class="bg-primary text-on-primary px-12 py-6 rounded-none text-headline-md font-headline-md transition-all hover:translate-x-2 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.1)] active:scale-95 group">
+                                <a href="#work">
+                                VIEW WORK 
+                                <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </a>
                             </button>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- 3D Asset Injection -->
                 <div class="md:col-span-4 relative mt-12 md:mt-0 flex justify-center">
-                    
+
                     <div class="absolute -bottom-12 -right-8 text-right">
                         <p class="font-label-mono text-label-mono text-secondary">AVAILABILITY</p>
                         <div class="flex items-center gap-2 justify-end">
@@ -451,9 +556,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Global Stats -->
-            <div class="w-full max-w-container-max flex justify-between items-center py-12 mt-auto border-t border-outline-variant/30">
+            <div
+                class="w-full max-w-container-max flex justify-between items-center py-12 mt-auto border-t border-outline-variant/30">
                 <span class="font-label-mono text-label-mono text-secondary">28.6139° N, 77.2090° E</span>
                 <span class="font-label-mono text-label-mono text-secondary">FULL-STACK · AI · PRODUCT</span>
             </div>
@@ -487,11 +593,16 @@
                                 <h3 class="font-headline-md text-headline-md">FINESSE</h3>
                             </td>
                             <td class="py-8 pr-12 max-w-md">
-                                <span class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">SOLO FOUNDER · PLAY STORE</span>
-                                <p class="text-on-surface-variant">AI personal finance app for young Indian professionals, with SMS parsing, automatic categorisation, and Gemini-powered monthly coaching.</p>
+                                <span
+                                    class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">SOLO
+                                    FOUNDER · PLAY STORE</span>
+                                <p class="text-on-surface-variant">AI personal finance app for young Indian
+                                    professionals, with SMS parsing, automatic categorisation, and Gemini-powered
+                                    monthly coaching.</p>
                             </td>
                             <td class="py-8 text-right">
-                                <span class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
+                                <span
+                                    class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
                             </td>
                         </tr>
                         <!-- Project-->
@@ -501,11 +612,16 @@
                                 <h3 class="font-headline-md text-headline-md">SPLITS</h3>
                             </td>
                             <td class="py-8 pr-12 max-w-md">
-                                <span class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">GAME · ANDROID · 2.5D</span>
-                                <p class="text-on-surface-variant">A fast-reflex 2.5D Android game focused on short-session play, clean visual feedback, and mobile-first movement.</p>
+                                <span
+                                    class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">GAME
+                                    · ANDROID · 2.5D</span>
+                                <p class="text-on-surface-variant">A fast-reflex 2.5D Android game focused on
+                                    short-session play, clean visual feedback, and mobile-first movement.</p>
                             </td>
                             <td class="py-8 text-right">
-                                <span class="bg-secondary-container/30 text-secondary px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-outline-variant">IN BUILD</span>
+                                <span
+                                    class="bg-secondary-container/30 text-secondary px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-outline-variant">IN
+                                    BUILD</span>
                             </td>
                         </tr>
                         <!-- Project 3 -->
@@ -515,11 +631,15 @@
                                 <h3 class="font-headline-md text-headline-md">THERAPY COUNCIL</h3>
                             </td>
                             <td class="py-8 pr-12 max-w-md">
-                                <span class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">CO-FOUNDER · DEV LEAD</span>
-                                <p class="text-on-surface-variant">Online LMS for psychology-focused courses, covering architecture, course pipeline, and the user-facing learning experience.</p>
+                                <span
+                                    class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">CO-FOUNDER
+                                    · DEV LEAD</span>
+                                <p class="text-on-surface-variant">Online LMS for psychology-focused courses, covering
+                                    architecture, course pipeline, and the user-facing learning experience.</p>
                             </td>
                             <td class="py-8 text-right">
-                                <span class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
+                                <span
+                                    class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
                             </td>
                         </tr>
                     </tbody>
@@ -542,36 +662,61 @@
                     <div class="border-b border-outline-variant pb-8">
                         <span class="font-label-mono text-label-mono text-secondary mb-4 block">FRONTEND</span>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Next.js</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React Native</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Vue.js</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Sveltekit</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Tailwind</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">TypeScript</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Next.js</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React
+                                Native</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Vue.js</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Sveltekit</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Tailwind</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">TypeScript</span>
                         </div>
                     </div>
                     <!-- Tool Row: Backend -->
                     <div class="border-b border-outline-variant pb-8">
                         <span class="font-label-mono text-label-mono text-secondary mb-4 block">BACKEND</span>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Node.js</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Supabase</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">MongoDB</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">SQL</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">REST APIs</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Directus</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Node.js</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Supabase</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">MongoDB</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">SQL</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">REST
+                                APIs</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Directus</span>
                         </div>
                     </div>
                     <!-- Tool Row: AI / LLM -->
                     <div class="border-b border-outline-variant pb-8">
                         <span class="font-label-mono text-label-mono text-secondary mb-4 block">AI / LLM</span>
                         <div class="flex flex-wrap gap-2">
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Prompt Engineering</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Gemini API</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Groq / Llama</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">LLM Integration</span>
-                            <span class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Rapid MVP</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Prompt
+                                Engineering</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Gemini
+                                API</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Groq
+                                / Llama</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">LLM
+                                Integration</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Rapid
+                                MVP</span>
                         </div>
                     </div>
                 </div>
@@ -593,16 +738,23 @@
 
             <div class="space-y-16">
                 <!-- Article 1 -->
-                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0" onclick="openPost('p1')" onkeydown="openPostFromKey(event, 'p1')">
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0"
+                    onclick="openPost('p1')" onkeydown="openPostFromKey(event, 'p1')">
                     <div class="md:col-span-2">
-                        <span class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">01</span>
+                        <span
+                            class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">01</span>
                         <span class="font-label-mono text-label-mono text-secondary mt-2 block">JUN 2025</span>
                     </div>
                     <div class="md:col-span-10">
-                        <span class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">ENGINEERING · DEPLOYMENT</span>
-                        <h3 class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h3>
+                        <span
+                            class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">ENGINEERING
+                            · DEPLOYMENT</span>
+                        <h3
+                            class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">
+                            WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h3>
                         <p class="font-body-md text-on-surface-variant mt-4 max-w-2xl">
-                            The seductive trap of local development — and what building Finesse taught me about the real cost of deferred production testing.
+                            The seductive trap of local development — and what building Finesse taught me about the real
+                            cost of deferred production testing.
                         </p>
                     </div>
                 </article>
@@ -610,16 +762,23 @@
                 <div class="hairline-divider opacity-50"></div>
 
                 <!-- Article 2 -->
-                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0" onclick="openPost('p2')" onkeydown="openPostFromKey(event, 'p2')">
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0"
+                    onclick="openPost('p2')" onkeydown="openPostFromKey(event, 'p2')">
                     <div class="md:col-span-2">
-                        <span class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">02</span>
+                        <span
+                            class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">02</span>
                         <span class="font-label-mono text-label-mono text-secondary mt-2 block">APR 2025</span>
                     </div>
                     <div class="md:col-span-10">
-                        <span class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">PRODUCT · DISTRIBUTION</span>
-                        <h3 class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h3>
+                        <span
+                            class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">PRODUCT
+                            · DISTRIBUTION</span>
+                        <h3
+                            class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">
+                            THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h3>
                         <p class="font-body-md text-on-surface-variant mt-4 max-w-2xl">
-                            Awareness isn't the problem. Timing is. How trigger-based distribution changes the acquisition equation entirely.
+                            Awareness isn't the problem. Timing is. How trigger-based distribution changes the
+                            acquisition equation entirely.
                         </p>
                     </div>
                 </article>
@@ -634,24 +793,31 @@
                     <h2 class="font-headline-lg text-[80px] md:text-[140px] leading-[0.85] mt-8 mb-12">
                         BUILD<br>SOMETHING<br><span class="text-primary underline decoration-primary/20">REAL.</span>
                     </h2>
-                    
+
                     <div class="flex flex-col gap-4">
-                        <a href="mailto:joymasih43@gmail.com" class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                        <a href="mailto:joymasih43@gmail.com"
+                            class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
                             <span class="material-symbols-outlined text-secondary group-hover:text-primary">mail</span>
-                            <span class="font-label-mono text-label-mono text-secondary flex-1">EMAIL · joymasih43@gmail.com</span>
-                            <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
+                            <span class="font-label-mono text-label-mono text-secondary flex-1">EMAIL ·
+                                joymasih43@gmail.com</span>
+                            <span
+                                class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
                         </a>
-                        <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener" class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                        <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener"
+                            class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
                             <span class="material-symbols-outlined text-secondary group-hover:text-primary">link</span>
-                            <span class="font-label-mono text-label-mono text-secondary flex-1">LINKEDIN · joy-masih</span>
-                            <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
+                            <span class="font-label-mono text-label-mono text-secondary flex-1">LINKEDIN ·
+                                joy-masih</span>
+                            <span
+                                class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
                         </a>
                     </div>
                 </div>
-                
+
                 <div class="md:col-span-4 hidden md:block">
                     <!-- Stylized HI Background Text -->
-                    <div class="text-[280px] font-display text-outline-variant/10 leading-none select-none -mb-8 -mr-12">
+                    <div
+                        class="text-[280px] font-display text-outline-variant/10 leading-none select-none -mb-8 -mr-12">
                         HI.
                     </div>
                 </div>
@@ -660,21 +826,26 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-surface dark:bg-surface text-secondary dark:text-secondary-fixed-dim full-width bottom-0 border-t border-outline-variant flat no shadows">
+    <footer
+        class="bg-surface dark:bg-surface text-secondary dark:text-secondary-fixed-dim full-width bottom-0 border-t border-outline-variant flat no shadows">
         <div class="flex justify-between items-center w-full px-gutter py-12 max-w-container-max mx-auto">
             <div class="flex items-center gap-4">
                 <span class="text-body-lg font-headline-md text-on-surface">JOY</span>
                 <span class="text-label-mono font-label-mono">· 2026</span>
             </div>
-            
+
             <nav class="flex gap-8">
-                <a href="https://x.com/Crashing_It" target="_blank" rel="noopener" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">X</a>
-                <a href="https://github.com/JOY2OP/" target="_blank" rel="noopener" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">GitHub</a>
-                <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">LinkedIn</a>
+                <a href="https://x.com/Crashing_It" target="_blank" rel="noopener"
+                    class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">X</a>
+                <a href="https://github.com/JOY2OP/" target="_blank" rel="noopener"
+                    class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">GitHub</a>
+                <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener"
+                    class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">LinkedIn</a>
             </nav>
-            
+
             <div class="hidden md:block">
-                <span class="font-label-mono text-label-mono uppercase tracking-widest text-outline">Useful things, shipped clean</span>
+                <span class="font-label-mono text-label-mono uppercase tracking-widest text-outline">Useful things,
+                    shipped clean</span>
             </div>
         </div>
     </footer>
@@ -683,19 +854,40 @@
         <button class="takeover-close" onclick="closePost('p1')">[ CLOSE X ]</button>
         <div class="takeover-header">
             <div class="takeover-tag">Engineering / Deployment / June 2025 / 5 min</div>
-            <h1 class="takeover-title" id="post-p1-title">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h1>
+            <h1 class="takeover-title" id="post-p1-title">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER
+            </h1>
             <div class="takeover-meta">Joy Masih</div>
         </div>
         <div class="takeover-body">
-            <p>There's a comfortable lie every developer tells themselves early in a project: <em>"I'll sort out production once the feature is working locally."</em> I told it to myself for weeks while building Finesse.</p>
-            <p>Local development is warm. Everything works. Environment variables load cleanly, the API responds in 40ms, and the mock SMS parser catches every transaction perfectly. Then you push to production and a React Native APK quietly swallows your <code>.env</code> file and serves undefined to the Supabase client for three days before you notice.</p>
+            <p>There's a comfortable lie every developer tells themselves early in a project: <em>"I'll sort out
+                    production once the feature is working locally."</em> I told it to myself for weeks while building
+                Finesse.</p>
+            <p>Local development is warm. Everything works. Environment variables load cleanly, the API responds in
+                40ms, and the mock SMS parser catches every transaction perfectly. Then you push to production and a
+                React Native APK quietly swallows your <code>.env</code> file and serves undefined to the Supabase
+                client for three days before you notice.</p>
             <h3>THE REAL COST ISN'T BUGS - IT'S LAG</h3>
-            <p>Production failures found late aren't just bugs. They're architectural rethinks wearing bug costumes. When I finally shipped Finesse to closed testing on the Play Store, I discovered that the SMS BroadcastReceiver service behaved differently across Android OEMs. A Samsung device running One UI silently killed background services within 90 seconds of the app losing focus. Zero crashes. Zero errors. Just no data.</p>
-            <p>That's not a bug you catch locally. That's a production-only system behaviour - and finding it late meant rearchitecting the foreground service notification strategy, resubmitting the APK, waiting out Google's review cycle, and re-recruiting testers. Probably two weeks of drag for something a one-week earlier production push would have surfaced.</p>
+            <p>Production failures found late aren't just bugs. They're architectural rethinks wearing bug costumes.
+                When I finally shipped Finesse to closed testing on the Play Store, I discovered that the SMS
+                BroadcastReceiver service behaved differently across Android OEMs. A Samsung device running One UI
+                silently killed background services within 90 seconds of the app losing focus. Zero crashes. Zero
+                errors. Just no data.</p>
+            <p>That's not a bug you catch locally. That's a production-only system behaviour - and finding it late meant
+                rearchitecting the foreground service notification strategy, resubmitting the APK, waiting out Google's
+                review cycle, and re-recruiting testers. Probably two weeks of drag for something a one-week earlier
+                production push would have surfaced.</p>
             <h3>THE FIX</h3>
-            <p>The mental shift that helped most was treating the production environment as a parallel development lane rather than a final destination. Feature flag the incomplete pieces. Deploy to staging daily. Accept that you will see failures earlier - because earlier failures are dramatically cheaper than later ones.</p>
-            <p>For Finesse, this meant setting up Railway for the Node.js backend from day one, even when it was just a <code>hello world</code> endpoint. It meant pointing the app at real Supabase edge functions from the first week, even before the SMS parser was finished. Every week of production exposure before the feature was done saved a compounded week of debugging after.</p>
-            <p>The lesson isn't new. But the confidence to actually do it - to deliberately ship incomplete code to a real environment - that took building something from scratch, breaking it, and rebuilding it in public.</p>
+            <p>The mental shift that helped most was treating the production environment as a parallel development lane
+                rather than a final destination. Feature flag the incomplete pieces. Deploy to staging daily. Accept
+                that you will see failures earlier - because earlier failures are dramatically cheaper than later ones.
+            </p>
+            <p>For Finesse, this meant setting up Railway for the Node.js backend from day one, even when it was just a
+                <code>hello world</code> endpoint. It meant pointing the app at real Supabase edge functions from the
+                first week, even before the SMS parser was finished. Every week of production exposure before the
+                feature was done saved a compounded week of debugging after.</p>
+            <p>The lesson isn't new. But the confidence to actually do it - to deliberately ship incomplete code to a
+                real environment - that took building something from scratch, breaking it, and rebuilding it in public.
+            </p>
         </div>
     </div>
 
@@ -703,19 +895,40 @@
         <button class="takeover-close" onclick="closePost('p2')">[ CLOSE X ]</button>
         <div class="takeover-header">
             <div class="takeover-tag">Product / Distribution / April 2025 / 6 min</div>
-            <h1 class="takeover-title" id="post-p2-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h1>
+            <h1 class="takeover-title" id="post-p2-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE
+                THEY OPEN</h1>
             <div class="takeover-meta">Joy Masih</div>
         </div>
         <div class="takeover-body">
-            <p>If you ask a 24-year-old in Delhi whether they should track their spending, they'll say yes. If you ask them whether they do, they'll pause. That pause is the entire problem. It is not an awareness gap. It is an urgency gap.</p>
-            <p>Most fintech marketing assumes the problem is knowledge. Build a beautiful budgeting UI, explain the 50/30/20 rule, show a chart of someone else's savings trajectory, and the user will be motivated to change. They won't. Not because the information is wrong, but because <em>information without a trigger is just content</em> - and content without urgency sits unopened.</p>
+            <p>If you ask a 24-year-old in Delhi whether they should track their spending, they'll say yes. If you ask
+                them whether they do, they'll pause. That pause is the entire problem. It is not an awareness gap. It is
+                an urgency gap.</p>
+            <p>Most fintech marketing assumes the problem is knowledge. Build a beautiful budgeting UI, explain the
+                50/30/20 rule, show a chart of someone else's savings trajectory, and the user will be motivated to
+                change. They won't. Not because the information is wrong, but because <em>information without a trigger
+                    is just content</em> - and content without urgency sits unopened.</p>
             <h3>WHAT A TRIGGER LOOKS LIKE</h3>
-            <p>Young urban Indians have highly predictable financial trigger moments: the first salary credit, moving to a new city for a job, the first time rent takes more than 40% of income, getting married, taking a first loan. These are moments of genuine financial anxiety - and anxiety is the only reliable motivator for financial behaviour change.</p>
-            <p>The implication for distribution is straightforward but underutilised. A fintech app that shows up in someone's feed as a generic ad gets ignored. The same app that appears in a thread titled <em>"I just got my first Bangalore salary and have no idea what to do with it"</em> - that gets installed. Not because the app is different, but because the moment is different.</p>
+            <p>Young urban Indians have highly predictable financial trigger moments: the first salary credit, moving to
+                a new city for a job, the first time rent takes more than 40% of income, getting married, taking a first
+                loan. These are moments of genuine financial anxiety - and anxiety is the only reliable motivator for
+                financial behaviour change.</p>
+            <p>The implication for distribution is straightforward but underutilised. A fintech app that shows up in
+                someone's feed as a generic ad gets ignored. The same app that appears in a thread titled <em>"I just
+                    got my first Bangalore salary and have no idea what to do with it"</em> - that gets installed. Not
+                because the app is different, but because the moment is different.</p>
             <h3>TRIGGER-BASED ACQUISITION, PRACTICALLY</h3>
-            <p>Concretely, this looks like monitoring Reddit threads on r/india and r/personalfinanceindia for life-event signals. It looks like partnering with HR onboarding flows at companies hiring freshers at scale. It looks like writing content that ranks for "what to do with first salary India" rather than "best budgeting app India" - because the first query is triggered by a life event, the second is abstract comparison-shopping.</p>
-            <p>The hardest part of this strategy isn't identifying the triggers. It's accepting that you are not building a product for the 10% of people already tracking their finances. You are building for the 90% who aren't - and you have to meet them at the exact moment they realise they should be. Miss that window and they do nothing. Hit it and you get a user who is genuinely motivated to change. That's the only user worth having.</p>
-            <p>Finesse was built for that second user. Whether it reaches them at the right moment is, honestly, still a work in progress.</p>
+            <p>Concretely, this looks like monitoring Reddit threads on r/india and r/personalfinanceindia for
+                life-event signals. It looks like partnering with HR onboarding flows at companies hiring freshers at
+                scale. It looks like writing content that ranks for "what to do with first salary India" rather than
+                "best budgeting app India" - because the first query is triggered by a life event, the second is
+                abstract comparison-shopping.</p>
+            <p>The hardest part of this strategy isn't identifying the triggers. It's accepting that you are not
+                building a product for the 10% of people already tracking their finances. You are building for the 90%
+                who aren't - and you have to meet them at the exact moment they realise they should be. Miss that window
+                and they do nothing. Hit it and you get a user who is genuinely motivated to change. That's the only
+                user worth having.</p>
+            <p>Finesse was built for that second user. Whether it reaches them at the right moment is, honestly, still a
+                work in progress.</p>
         </div>
     </div>
 
@@ -785,9 +998,9 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
-                
+
                 // Update active state in side nav
-                if(this.parentElement.tagName === 'ASIDE') {
+                if (this.parentElement.tagName === 'ASIDE') {
                     document.querySelectorAll('aside a').forEach(a => {
                         a.classList.remove('bg-primary', 'text-on-primary');
                         a.classList.add('text-on-surface-variant');
@@ -798,4 +1011,6 @@
             });
         });
     </script>
-</body></html>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 :root {
-  --paper: #f7f3eb;
-  --paper-soft: #fffaf1;
+  --paper: #ffffff;
+  --paper-soft: #ffffff;
   --ink: #151515;
   --muted: #615f58;
   --line: #d7d0c2;
@@ -62,7 +62,7 @@ h3 {
   min-height: 72px;
   padding: 18px clamp(20px, 5vw, 72px);
   border-bottom: 1px solid rgba(21, 21, 21, 0.12);
-  background: rgba(247, 243, 235, 0.88);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(18px);
 }
 
@@ -136,7 +136,7 @@ h3 {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(247, 243, 235, 0.96) 0%, rgba(247, 243, 235, 0.88) 36%, rgba(247, 243, 235, 0.35) 72%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.88) 36%, rgba(255, 255, 255, 0.35) 72%),
     linear-gradient(0deg, rgba(21, 21, 21, 0.22), transparent 28%);
 }
 
@@ -179,7 +179,7 @@ h1 {
 .lede {
   max-width: 570px;
   margin-top: 28px;
-  color: #34322d;
+  color: #333333;
   font-size: clamp(1.05rem, 2vw, 1.35rem);
 }
 
@@ -481,7 +481,7 @@ h1 {
 
   .hero::after {
     background:
-      linear-gradient(180deg, rgba(247, 243, 235, 0.94) 0%, rgba(247, 243, 235, 0.88) 58%, rgba(247, 243, 235, 0.35) 100%);
+      linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.88) 58%, rgba(255, 255, 255, 0.35) 100%);
   }
 
   .hero-image {

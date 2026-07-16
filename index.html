@@ -1,1355 +1,1016 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JOY - builds shtuff</title>
-<link rel="icon" href="./public/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-:root {
-  --black: #f8fbff;
-  --white: #071a3d;
-  --acid: #1167ff;
-  --red: #00b8ff;
-  --grey: #c9dcff;
-  --mid: #6c7fa6;
-  --soft: #28477f;
-  --wash: rgba(17, 103, 255, 0.08);
-  --panel: rgba(255, 255, 255, 0.74);
-  --nav: #ffffff;
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: #ffffff;
-  color: var(--white);
-  font-family: 'Space Mono', 'Courier New', monospace;
-  cursor: none;
-  overflow-x: hidden;
-  padding-left: 5.25rem;
-}
-
-img, svg, video, canvas { max-width: 100%; }
-
-::selection { background: var(--acid); color: #ffffff; }
-
-/* ── CURSOR ── */
-.cursor {
-  width: 12px; height: 12px;
-  background: var(--acid);
-  border-radius: 0;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.1s, height 0.1s, background 0.1s, border-radius 0.1s;
-  mix-blend-mode: multiply;
-}
-.cursor.big {
-  width: 48px; height: 48px;
-  background: transparent;
-  border: 1.5px solid var(--white);
-  border-radius: 50%;
-}
-
-/* ── LOADER ── */
-#loader {
-  position: fixed; inset: 0;
-  background: #ffffff;
-  z-index: 9000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 0;
-  overflow: hidden;
-}
-#loader-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(60px, 15vw, 140px);
-  letter-spacing: -0.02em;
-  line-height: 0.85;
-  color: var(--white);
-  overflow: hidden;
-}
-#loader-line {
-  width: 0%;
-  height: 2px;
-  background: var(--acid);
-  margin-top: 2rem;
-  transition: width 0.8s cubic-bezier(0.16,1,0.3,1);
-}
-#loader.done { animation: loaderOut 0.5s ease 0.2s forwards; }
-@keyframes loaderOut {
-  to { opacity: 0; pointer-events: none; }
-}
-
-/* ── LEFT NAV ── */
-.side-nav {
-  position: fixed;
-  left: 1rem;
-  top: 50%;
-  z-index: 700;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  width: 3.25rem;
-  padding: 0.65rem;
-  border: 1px solid rgba(17, 103, 255, 0.18);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow: 0 18px 45px rgba(17, 103, 255, 0.14);
-  transform: translateY(-50%);
-  backdrop-filter: blur(18px);
-}
-
-.side-nav a {
-  position: relative;
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid transparent;
-  border-radius: 50%;
-  color: var(--mid);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  transition: background 0.16s, border-color 0.16s, color 0.16s, transform 0.16s;
-}
-
-.side-nav a::after {
-  content: attr(aria-label);
-  position: absolute;
-  left: calc(100% + 0.8rem);
-  top: 50%;
-  padding: 0.35rem 0.55rem;
-  border: 1px solid rgba(17, 103, 255, 0.16);
-  border-radius: 999px;
-  background: var(--nav);
-  box-shadow: 0 12px 30px rgba(17, 103, 255, 0.12);
-  color: var(--white);
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  opacity: 0;
-  pointer-events: none;
-  text-transform: uppercase;
-  transform: translate(-8px, -50%);
-  transition: opacity 0.16s, transform 0.16s;
-  white-space: nowrap;
-}
-
-.side-nav a:hover, .side-nav a:focus-visible {
-  background: var(--acid);
-  border-color: var(--acid);
-  color: #ffffff;
-  outline: none;
-  transform: translateX(2px);
-}
-
-.side-nav a:hover::after, .side-nav a:focus-visible::after {
-  opacity: 1;
-  transform: translate(0, -50%);
-}
-
-.chapter {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  color: var(--mid);
-  text-transform: uppercase;
-}
-
-/* ══════════════════════════════
-   SECTION 01 — HERO (STRIPPED)
-══════════════════════════════ */
-#s-hero {
-  height: 100svh;
-  min-height: 560px;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto;
-  column-gap: 8vw;
-  align-content: center;
-  border-bottom: 1px solid var(--grey);
-  padding: 0 6vw;
-  position: relative;
-  overflow: hidden;
-}
-
-/* ── coords top-right ── */
-.hero-coords {
-  grid-column: 2;
-  grid-row: 1;
-  align-self: center;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  color: var(--mid);
-  text-align: left;
-  line-height: 1.35;
-  text-transform: uppercase;
-}
-
-/* ── index top-left ── */
-.hero-index {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: start;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--acid);
-  text-transform: uppercase;
-  margin-bottom: 0;
-  transform: translateY(0.4rem);
-  position: relative;
-  z-index: 0;
-}
-
-/* ── giant name — dead center, nearly full width ── */
-.hero-name-wrap {
-  grid-column: 1;
-  grid-row: 1;
-  display: flex;
-  align-items: flex-end;
-  gap: 0.85rem;
-  margin-top: 1.1rem;
-  pointer-events: auto;
-  position: relative;
-  z-index: 1;
-}
-
-.hero-name {
-  font-family: 'Anton', Impact, 'Arial Black', sans-serif;
-  font-size: clamp(150px, 18.8vw, 280px);
-  font-weight: 900;
-  line-height: 0.76;
-  letter-spacing: -0.075em;
-  color: #111820;
-  display: block;
-  pointer-events: auto;
-  user-select: none;
-  transform-origin: left bottom;
-  transition: transform 0.16s ease;
-  -webkit-text-stroke: 1.6px #111820;
-  text-shadow:
-    1.6px 0 0 #111820,
-    -1.6px 0 0 #111820,
-    0 1.6px 0 #111820;
-}
-
-.hero-name:hover,
-.hero-name:focus-visible {
-  transform: skewX(-8deg);
-}
-
-.hero-dot {
-  width: clamp(30px, 4vw, 52px);
-  aspect-ratio: 1;
-  background: var(--acid);
-  margin-bottom: 0.08em;
-}
-
-/* one-word role sits on same baseline, right-aligned, tiny */
-.hero-name-role {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 0.6rem;
-}
-
-.hero-name-role span {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--mid);
-}
-
-/* ── bottom bar ── */
-.hero-foot {
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 2rem;
-  margin-top: 1.8rem;
-}
-
-.hero-foot-left {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  color: var(--soft);
-  line-height: 1.65;
-  text-transform: uppercase;
-  max-width: 220px;
-}
-
-.hero-foot-left strong { color: var(--white); font-weight: 700; }
-
-.hero-foot-right {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 0.65rem;
-}
-
-.cta-btn {
-  font-family: 'Anton', Impact, 'Arial Black', sans-serif;
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
-  color: #ffffff;
-  background: var(--acid);
-  min-width: 174px;
-  padding: 1rem 2.1rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid transparent;
-  transition: background 0.15s;
-}
-.cta-btn:hover { background: #0050e0; }
-
-.cta-link {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--mid);
-  text-decoration: none;
-  border-bottom: 1px solid var(--grey);
-  padding-bottom: 2px;
-  transition: color 0.15s, border-color 0.15s;
-}
-.cta-link:hover { color: var(--acid); border-color: var(--acid); }
-
-/* live dot */
-.hero-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--white);
-}
-.hero-live::before {
-  content: '';
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #1edb8f;
-  animation: ldot 2s ease infinite;
-}
-@keyframes ldot {
-  0%,100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-/* ══════════════════════════════
-   SECTION 02 — WORK (COMPACT)
-══════════════════════════════ */
-#s-work {
-  padding: 3rem 6vw 2.5rem;
-  border-bottom: 1px solid var(--grey);
-}
-
-.work-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid var(--grey);
-  padding-bottom: 0.75rem;
-}
-
-.work-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  line-height: 1;
-  letter-spacing: 0.12em;
-}
-
-.work-count {
-  font-size: 9px;
-  color: var(--mid);
-  letter-spacing: 0.2em;
-}
-
-/* compact table: num | name | context | status */
-.work-table-head {
-  display: grid;
-  grid-template-columns: 3.5rem minmax(150px, 0.42fr) minmax(320px, 1fr) 5.8rem;
-  gap: 1.25rem;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--grey);
-  color: var(--mid);
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-}
-
-.work-item {
-  display: grid;
-  grid-template-columns: 3.5rem minmax(150px, 0.42fr) minmax(320px, 1fr) 5.8rem;
-  gap: 1.25rem;
-  align-items: start;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--grey);
-  position: relative;
-  cursor: default;
-}
-
-.work-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--wash);
-  opacity: 0;
-  z-index: 0;
-  margin: 0 -6vw;
-  transition: opacity 0.12s;
-}
-
-.work-item:hover::before { opacity: 1; }
-.work-item > * { position: relative; z-index: 1; }
-
-.work-num {
-  font-family: 'Space Mono', monospace;
-  font-size: 9px;
-  color: var(--mid);
-  letter-spacing: 0.16em;
-}
-
-.work-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.35rem;
-  line-height: 1;
-  letter-spacing: 0.06em;
-}
-
-.work-context {
-  min-width: 0;
-}
-
-.work-label {
-  display: block;
-  font-size: 9px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--mid);
-  line-height: 1.6;
-}
-
-.work-desc {
-  margin-top: 0.35rem;
-  font-size: 11px;
-  line-height: 1.65;
-  color: var(--soft);
-}
-
-.work-status {
-  font-size: 9px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid rgba(17, 103, 255, 0.24);
-  background: rgba(17, 103, 255, 0.08);
-  color: var(--acid);
-  font-weight: 700;
-  justify-self: start;
-  white-space: nowrap;
-}
-
-.work-version { display: none; }
-
-/* ══════════════════════════════
-   SECTION 03 — SKILLS
-══════════════════════════════ */
-#s-skills {
-  padding: 6vw;
-  border-bottom: 1px solid var(--grey);
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 6vw;
-  align-items: start;
-}
-
-.skills-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 6vw, 80px);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  margin-top: 1rem;
-}
-
-.skills-title .outline {
-  color: transparent;
-  -webkit-text-stroke: 1px var(--white);
-  display: block;
-}
-
-.skills-note {
-  font-size: 10px;
-  color: var(--mid);
-  line-height: 1.9;
-  margin-top: 2rem;
-  letter-spacing: 0.05em;
-  max-width: 200px;
-}
-
-.skills-right { display: flex; flex-direction: column; gap: 0; }
-
-.skill-row {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--grey);
-}
-.skill-row:first-child { border-top: 1px solid var(--grey); }
-
-.skill-row-label {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--mid);
-  min-width: 90px;
-}
-
-.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-
-.tag {
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.05em;
-  padding: 0.2rem 0.6rem;
-  border: 1px solid rgba(17, 103, 255, 0.22);
-  color: var(--soft);
-  background: rgba(255, 255, 255, 0.48);
-  transition: border-color 0.15s, color 0.15s, background 0.15s;
-  cursor: default;
-  border-radius: 2px;
-}
-
-.tag:hover {
-  border-color: var(--acid);
-  color: var(--acid);
-  background: rgba(17, 103, 255, 0.08);
-}
-
-/* ══════════════════════════════
-   SECTION 04 — WRITING
-══════════════════════════════ */
-#s-writing {
-  padding: 6vw;
-  border-bottom: 1px solid var(--grey);
-}
-
-.writing-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  margin-bottom: 5vw;
-  gap: 2rem;
-}
-
-.writing-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 8vw, 100px);
-  line-height: 1;
-  letter-spacing: 0.02em;
-}
-
-.writing-note {
-  font-size: 10px;
-  color: var(--mid);
-  letter-spacing: 0.1em;
-  text-align: right;
-  line-height: 2;
-  padding-bottom: 0.5rem;
-}
-
-.post-item {
-  display: grid;
-  grid-template-columns: 100px 1fr;
-  gap: 3rem;
-  padding: 3rem 0;
-  border-top: 1px solid var(--grey);
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-.post-item:last-child { border-bottom: 1px solid var(--grey); }
-
-.post-item::after {
-  content: 'READ →';
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%) translateX(120%);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.2em;
-  color: var(--acid);
-  transition: transform 0.25s cubic-bezier(0.16,1,0.3,1);
-}
-
-.post-item:hover::after { transform: translateY(-50%) translateX(0); }
-
-.post-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem;
-  color: var(--grey);
-  line-height: 1;
-  transition: color 0.2s;
-}
-
-.post-item:hover .post-num { color: var(--acid); }
-
-.post-date {
-  font-size: 9px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-top: 0.5rem;
-}
-
-.post-tag {
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--acid);
-  margin-bottom: 0.6rem;
-}
-
-.post-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(26px, 3.5vw, 44px);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-  margin-bottom: 1rem;
-  transition: color 0.2s;
-}
-
-.post-item:hover .post-title { color: var(--acid); }
-
-.post-excerpt {
-  font-size: 11px;
-  color: var(--mid);
-  line-height: 1.9;
-  max-width: 500px;
-}
-
-/* ══════════════════════════════
-   SECTION 05 — CONTACT (PILLS)
-══════════════════════════════ */
-#s-contact {
-  padding: 6vw;
-  position: relative;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: minmax(320px, 560px) minmax(280px, 1fr);
-  gap: 4vw;
-  align-items: end;
-}
-
-.contact-bg-text {
-  position: relative;
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  align-self: end;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(120px, 21vw, 360px);
-  line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--grey);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.02em;
-}
-
-.contact-inner {
-  grid-column: 1;
-  grid-row: 1;
-  position: relative;
-  z-index: 1;
-  min-width: 0;
-}
-
-.contact-label {
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--mid);
-  margin-bottom: 2rem;
-}
-
-.contact-headline {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(56px, 10vw, 130px);
-  line-height: 0.9;
-  letter-spacing: -0.01em;
-  margin-bottom: 4vw;
-}
-
-.contact-headline .hl { color: var(--acid); }
-
-/* PILL LINKS */
-.contact-pills {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.contact-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.85rem;
-  padding: 0.9rem 1.4rem;
-  border: 1px solid rgba(17, 103, 255, 0.22);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--white);
-  text-decoration: none;
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  backdrop-filter: blur(12px);
-  transition: background 0.18s, border-color 0.18s, color 0.18s, transform 0.18s;
-  align-self: flex-start;
-  min-width: 260px;
-}
-
-.contact-pill:hover {
-  background: var(--acid);
-  border-color: var(--acid);
-  color: #ffffff;
-  transform: translateX(6px);
-}
-
-.contact-pill:hover .pill-icon { color: #ffffff; }
-.contact-pill:hover .pill-arrow { transform: translate(3px, -3px); }
-
-.pill-icon {
-  font-size: 1.1rem;
-  color: var(--acid);
-  transition: color 0.18s;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.pill-label {
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--mid);
-  min-width: 46px;
-  transition: color 0.18s;
-}
-
-.contact-pill:hover .pill-label { color: rgba(255,255,255,0.7); }
-
-.pill-divider {
-  width: 1px;
-  height: 14px;
-  background: var(--grey);
-  flex-shrink: 0;
-  transition: background 0.18s;
-}
-
-.contact-pill:hover .pill-divider { background: rgba(255,255,255,0.3); }
-
-.pill-value {
-  flex: 1;
-  font-size: 11px;
-  letter-spacing: 0.04em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.pill-arrow {
-  font-size: 1rem;
-  color: var(--mid);
-  transition: transform 0.18s, color 0.18s;
-  flex-shrink: 0;
-}
-
-.contact-pill:hover .pill-arrow { color: #ffffff; }
-
-/* ══════════════════════════════
-   FOOTER
-══════════════════════════════ */
-footer {
-  border-top: 1px solid var(--grey);
-  padding: 1.5rem 6vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-footer p {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--mid);
-}
-
-/* ══════════════════════════════
-   BLOG TAKEOVER
-══════════════════════════════ */
-.blog-takeover {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: #ffffff;
-  z-index: 800;
-  overflow-y: auto;
-  padding: 6vw;
-  animation: takeoverIn 0.4s cubic-bezier(0.16,1,0.3,1);
-}
-
-.blog-takeover.open { display: block; }
-
-@keyframes takeoverIn {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.takeover-close {
-  position: fixed;
-  top: 2rem;
-  right: 6vw;
-  font-family: 'Space Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--mid);
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 801;
-  transition: color 0.15s;
-  text-transform: uppercase;
-}
-
-.takeover-close:hover { color: var(--acid); }
-
-.takeover-header {
-  border-bottom: 1px solid var(--grey);
-  padding-bottom: 3vw;
-  margin-bottom: 4vw;
-  max-width: 800px;
-}
-
-.takeover-tag {
-  font-size: 9px;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--acid);
-  margin-bottom: 1.5rem;
-}
-
-.takeover-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(42px, 7vw, 90px);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  margin-bottom: 1.5rem;
-}
-
-.takeover-meta {
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  color: var(--mid);
-  text-transform: uppercase;
-}
-
-.takeover-body {
-  max-width: 660px;
-  font-size: 13px;
-  line-height: 2;
-  color: var(--soft);
-}
-
-.takeover-body p { margin-bottom: 1.5rem; }
-.takeover-body p:last-child { margin-bottom: 0; }
-
-.takeover-body h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.05em;
-  color: var(--white);
-  margin: 3rem 0 1rem;
-}
-
-.takeover-body em { color: var(--white); font-style: normal; }
-
-.takeover-body code {
-  font-family: 'Space Mono', monospace;
-  font-size: 11px;
-  color: var(--acid);
-  background: rgba(17, 103, 255, 0.1);
-  padding: 0.1em 0.4em;
-  border-radius: 2px;
-}
-
-/* ── GLITCH ── */
-@media (max-width: 900px) {
-  .hero-name { font-size: clamp(22vw, 28vw, 200px); }
-}
-
-@media (max-width: 768px) {
-  body { padding-left: 0; padding-bottom: 4.6rem; cursor: auto; }
-  .cursor { display: none; }
-
-  .side-nav {
-    left: 50%; right: auto; top: auto; bottom: 0.85rem;
-    width: min(calc(100vw - 1.5rem), 25rem);
-    flex-direction: row; justify-content: space-between;
-    padding: 0.45rem; transform: translateX(-50%); border-radius: 999px;
-  }
-  .side-nav a { width: 2.35rem; height: 2.35rem; }
-  .side-nav a::after { display: none; }
-  .side-nav a:hover, .side-nav a:focus-visible { transform: none; }
-
-  #s-hero {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto 1fr;
-    gap: 0;
-    padding: 4rem 5vw 7rem;
-    min-height: 100svh;
-  }
-
-  .hero-coords {
-    grid-column: 1;
-    grid-row: 4;
-    align-self: start;
-    margin-top: 3rem;
-  }
-
-  .hero-name { font-size: clamp(26vw, 34vw, 160px); }
-
-  .hero-name-wrap {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .hero-dot { width: clamp(18px, 7vw, 28px); }
-
-  .hero-foot {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .hero-foot { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
-  .hero-foot-left { max-width: 100%; font-size: 10px; }
-  .hero-foot-right { align-items: flex-start; }
-  .cta-btn { width: auto; text-align: center; }
-
-  #s-work { padding: 2rem 5vw; }
-
-  .work-table-head { display: none; }
-
-  .work-item {
-    grid-template-columns: 3rem minmax(0, 1fr);
-    gap: 0.5rem 1rem;
-    padding: 0.85rem 0;
-    grid-template-areas:
-      "num name"
-      ". context"
-      ". status";
-  }
-
-  .work-num { grid-area: num; padding-top: 2px; }
-  .work-body { grid-area: name; }
-  .work-context { grid-area: context; }
-  .work-status {
-    grid-area: status;
-    margin-top: 0.15rem;
-  }
-
-  .work-name { font-size: 1.1rem; }
-  .work-desc { font-size: 10.5px; }
-
-  #s-skills { grid-template-columns: 1fr; padding: 4.5rem 5vw; gap: 2rem; }
-  .skill-row { display: block; padding: 1.25rem 0; }
-  .skill-row-label { display: block; margin-bottom: 0.75rem; }
-
-  .post-item { grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; padding: 2rem 0; }
-  .post-item::after { display: none; }
-
-  #s-contact { padding: 4.5rem 5vw 8rem; display: block; }
-  .contact-bg-text { position: absolute; right: 0; bottom: 0.5rem; font-size: clamp(92px, 31vw, 170px); opacity: 0.7; }
-  .contact-headline { font-size: clamp(64px, 19vw, 110px); margin-bottom: 3rem; }
-  .contact-pill { min-width: 0; width: 100%; }
-
-  footer { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 1.5rem 5vw calc(1.5rem + 4.6rem); }
-
-  .blog-takeover { padding: 5rem 5vw 4rem; }
-  .takeover-close { top: 1rem; right: 5vw; }
-  .takeover-title { font-size: clamp(36px, 13vw, 66px); overflow-wrap: anywhere; }
-
-  .writing-header { display: block; margin-bottom: 2rem; }
-  .writing-title { font-size: clamp(52px, 18vw, 92px); }
-  .writing-note { margin-top: 0.75rem; text-align: left; }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOY - Builds shtuff</title>
+    <link rel="icon" href="./public/favicon.svg" type="image/svg+xml">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">try {
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        "colors": {
+                            "tertiary-container": "#bc4800",
+                            "secondary": "#565e74",
+                            "error-container": "#ffdad6",
+                            "primary-container": "#2563eb",
+                            "inverse-primary": "#b4c5ff",
+                            "secondary-fixed": "#dae2fd",
+                            "inverse-surface": "#2d3133",
+                            "inverse-on-surface": "#eff1f3",
+                            "tertiary": "#943700",
+                            "on-surface-variant": "#434655",
+                            "tertiary-fixed": "#ffdbcd",
+                            "on-tertiary-fixed": "#360f00",
+                            "outline-variant": "#c3c6d7",
+                            "primary": "#004ac6",
+                            "on-error-container": "#93000a",
+                            "on-primary-fixed-variant": "#003ea8",
+                            "on-background": "#191c1e",
+                            "on-primary-fixed": "#00174b",
+                            "surface-bright": "#f7f9fb",
+                            "background": "#f7f9fb",
+                            "surface-container-high": "#e6e8ea",
+                            "surface-container-highest": "#e0e3e5",
+                            "secondary-container": "#dae2fd",
+                            "surface": "#f7f9fb",
+                            "surface-container": "#eceef0",
+                            "outline": "#737686",
+                            "on-secondary-fixed": "#131b2e",
+                            "tertiary-fixed-dim": "#ffb596",
+                            "on-primary": "#ffffff",
+                            "on-tertiary-container": "#ffede6",
+                            "surface-dim": "#d8dadc",
+                            "secondary-fixed-dim": "#bec6e0",
+                            "on-tertiary": "#ffffff",
+                            "on-secondary-fixed-variant": "#3f465c",
+                            "surface-tint": "#0053db",
+                            "on-error": "#ffffff",
+                            "primary-fixed": "#dbe1ff",
+                            "on-secondary-container": "#5c647a",
+                            "surface-container-low": "#f2f4f6",
+                            "primary-fixed-dim": "#b4c5ff",
+                            "surface-container-lowest": "#ffffff",
+                            "error": "#ba1a1a",
+                            "on-secondary": "#ffffff",
+                            "surface-variant": "#e0e3e5",
+                            "on-tertiary-fixed-variant": "#7d2d00",
+                            "on-primary-container": "#eeefff",
+                            "on-surface": "#191c1e"
+                        },
+                        "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                        },
+                        "spacing": {
+                            "element-gap": "1.5rem",
+                            "stack-sm": "0.5rem",
+                            "section-gap": "8rem",
+                            "container-max": "1280px",
+                            "gutter": "2rem",
+                            "stack-md": "1rem"
+                        },
+                        "fontFamily": {
+                            "display": ["Anton"],
+                            "headline-lg": ["Anton"],
+                            "headline-md": ["Anton"],
+                            "label-sm": ["Hanken Grotesk"],
+                            "body-md": ["Hanken Grotesk"],
+                            "label-mono": ["JetBrains Mono"],
+                            "body-lg": ["Hanken Grotesk"]
+                        }
+                    }
+                }
+            }
+        } catch (_e) { }</script>
+    <style>
+        body {
+            cursor: none;
+        }
+
+        .cursor {
+            width: 12px;
+            height: 12px;
+            background: #004ac6;
+            border-radius: 0;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.1s, height 0.1s, background 0.1s, border-radius 0.1s, border-color 0.1s;
+            mix-blend-mode: multiply;
+        }
+
+        .cursor.big {
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 1.5px solid #191c1e;
+            border-radius: 50%;
+        }
+
+        .joy-tilt {
+            display: inline-block;
+            transform-origin: left bottom;
+            transition: transform 0.16s ease;
+        }
+
+        .joy-tilt:hover,
+        .joy-tilt:focus-visible {
+            transform: skewX(-8deg);
+        }
+
+        .blog-takeover {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            overflow-y: auto;
+            background: #ffffff;
+            padding: 6rem clamp(1.25rem, 6vw, 5rem) 4rem;
+            animation: takeoverIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .blog-takeover.open {
+            display: block;
+        }
+
+        @keyframes takeoverIn {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .takeover-close {
+            position: fixed;
+            top: 1.5rem;
+            right: clamp(1.25rem, 6vw, 5rem);
+            z-index: 81;
+            border: 1px solid #c3c6d7;
+            background: #ffffff;
+            color: #565e74;
+            padding: 0.75rem 1rem;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .takeover-close:hover {
+            border-color: #004ac6;
+            color: #004ac6;
+        }
+
+        .takeover-header {
+            max-width: 860px;
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #c3c6d7;
+        }
+
+        .takeover-tag,
+        .takeover-meta {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #004ac6;
+        }
+
+        .takeover-meta {
+            color: #565e74;
+        }
+
+        .takeover-title {
+            max-width: 980px;
+            margin: 1.25rem 0;
+            font-family: Anton, Impact, sans-serif;
+            font-size: clamp(3.25rem, 8vw, 6rem);
+            line-height: 0.95;
+            color: #191c1e;
+        }
+
+        .takeover-body {
+            max-width: 700px;
+            color: #434655;
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .takeover-body p {
+            margin-bottom: 1.4rem;
+        }
+
+        .takeover-body h3 {
+            margin: 2.75rem 0 1rem;
+            font-family: Anton, Impact, sans-serif;
+            font-size: 2rem;
+            color: #191c1e;
+        }
+
+        .takeover-body em {
+            color: #191c1e;
+            font-style: normal;
+        }
+
+        .takeover-body code {
+            padding: 0.1em 0.35em;
+            background: rgba(0, 74, 198, 0.1);
+            color: #004ac6;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+                padding-bottom: 5.25rem;
+            }
+
+            .cursor {
+                display: none;
+            }
+
+            aside {
+                display: flex !important;
+                left: 50% !important;
+                right: auto !important;
+                top: auto !important;
+                bottom: 0.85rem !important;
+                width: min(calc(100vw - 1.5rem), 25rem);
+                flex-direction: row !important;
+                justify-content: space-between;
+                gap: 0.35rem !important;
+                padding: 0.45rem !important;
+                border-radius: 999px !important;
+                transform: translateX(-50%) !important;
+                box-shadow: 0 18px 45px rgba(0, 74, 198, 0.14);
+            }
+
+            aside a {
+                width: 2.35rem !important;
+                height: 2.35rem !important;
+                flex-shrink: 0;
+            }
+
+            #hero {
+                min-height: auto;
+                padding: 4.5rem 1.25rem 3rem;
+                align-items: flex-start;
+                justify-content: flex-start;
+            }
+
+            #hero>.absolute {
+                display: none;
+            }
+
+            #hero .grid {
+                padding-top: 0;
+                gap: 2rem;
+            }
+
+            #hero .kinetic-text {
+                font-size: clamp(6rem, 32vw, 9rem) !important;
+                line-height: 0.78;
+                margin-bottom: 2rem;
+            }
+
+            #hero .flex.flex-col.md\:flex-row {
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            #hero button {
+                width: 100%;
+                min-height: 4rem;
+                padding: 1.1rem 1.5rem;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #hero .md\:col-span-4 {
+                width: 100%;
+                min-height: auto;
+                justify-content: flex-start;
+                margin-top: 0;
+            }
+
+            #hero .md\:col-span-4>.absolute {
+                position: static;
+                text-align: left;
+            }
+
+            #hero .md\:col-span-4 .flex {
+                justify-content: flex-start;
+            }
+
+            #hero>.w-full.max-w-container-max {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+                margin-top: 2.75rem;
+                padding: 2rem 0 0;
+            }
+
+            #work,
+            #tools,
+            #writing,
+            #contact {
+                padding: 4.5rem 1.25rem;
+            }
+
+            #work>.flex {
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            #work table {
+                display: block;
+                min-width: 0;
+            }
+
+            #work .overflow-x-auto {
+                overflow: visible;
+                margin-right: 0;
+                padding-right: 0;
+            }
+
+            #work thead {
+                display: none;
+            }
+
+            #work tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 0.85rem;
+            }
+
+            #work tr {
+                display: grid;
+                grid-template-columns: 3.75rem minmax(0, 1fr);
+                grid-template-areas:
+                    "id project"
+                    ". context"
+                    ". status";
+                gap: 0.25rem 1rem;
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(195, 198, 215, 0.55);
+            }
+
+            #work td {
+                display: block;
+                padding: 0.2rem 0 !important;
+                max-width: none;
+            }
+
+            #work td:nth-child(1) {
+                grid-area: id;
+            }
+
+            #work td:nth-child(2) {
+                grid-area: project;
+            }
+
+            #work td:nth-child(3) {
+                grid-area: context;
+                padding-right: 0 !important;
+            }
+
+            #work td:nth-child(4) {
+                grid-area: status;
+                text-align: left;
+                margin-top: 0.35rem;
+            }
+
+            #work h3 {
+                font-size: 1.6rem;
+                line-height: 1;
+            }
+
+            #contact h2 {
+                font-size: clamp(3.75rem, 18vw, 5.5rem) !important;
+                margin-top: 2rem;
+                margin-bottom: 2.25rem;
+            }
+
+            #contact a {
+                max-width: none;
+                padding: 1.25rem;
+            }
+
+            #contact a span:nth-child(2) {
+                word-break: break-word;
+            }
+
+            footer>div {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 2rem 1.25rem;
+            }
+
+            footer nav {
+                flex-wrap: wrap;
+                gap: 1rem 1.5rem;
+            }
+
+            .blog-takeover {
+                padding: 5rem 1.25rem calc(4rem + 5.25rem);
+            }
+
+            .takeover-close {
+                top: 1rem;
+                right: 1.25rem;
+            }
+
+            .takeover-title {
+                font-size: clamp(2.5rem, 13vw, 4.5rem);
+                overflow-wrap: anywhere;
+            }
+
+            .takeover-body {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            #hero {
+                padding-top: 3.5rem;
+            }
+
+            #hero .kinetic-text {
+                font-size: clamp(5rem, 31vw, 7rem) !important;
+            }
+
+            #hero button {
+                font-size: 1rem;
+                letter-spacing: 0.08em;
+            }
+
+            #work table {
+                min-width: 0;
+            }
+
+            #work tr {
+                grid-template-columns: 3.25rem minmax(0, 1fr);
+                gap: 0.2rem 0.75rem;
+            }
+        }
+    </style>
 </head>
-<body>
 
-<div class="cursor" id="cursor"></div>
+<body class="font-body-md overflow-x-hidden">
 
-<div id="loader">
-  <div id="loader-text">JOY</div>
-  <div id="loader-line"></div>
-</div>
+    <div class="cursor" id="cursor"></div>
 
-<nav class="side-nav" aria-label="Section navigation">
-  <a href="#s-hero" aria-label="Home">01</a>
-  <a href="#s-work" aria-label="Work">02</a>
-  <a href="#s-skills" aria-label="Skills">03</a>
-  <a href="#s-writing" aria-label="Blog">04</a>
-  <a href="#s-contact" aria-label="Contact">05</a>
-</nav>
+    <!-- Global Top Bar -->
+    <!-- <header class="bg-transparent dark:bg-transparent text-primary dark:text-primary-fixed full-width top-0 sticky z-50 border-b border-outline-variant/30 backdrop-blur-xl flat no shadows">
+        <div class="flex justify-between items-center w-full px-gutter py-stack-md max-w-container-max mx-auto">
+            <a href="#" class="text-headline-md font-headline-md text-on-surface dark:text-on-surface">JOY</a>
+            <nav class="hidden md:flex gap-8 items-center">
+                <a href="#work" class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary transition-colors duration-200">Work</a>
+                <a href="#tools" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200">Tools</a>
+                <a href="#writing" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200">Writing</a>
+                <a href="#contact" class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200">Contact</a>
+            </nav>
+            <button class="bg-primary text-on-primary px-6 py-2 rounded-full font-label-mono text-label-mono transition-transform hover:scale-105 active:opacity-80">
+                Get In Touch
+            </button>
+        </div>
+    </header> -->
 
-<!-- ══ SECTION 01 · HERO ══ -->
-<section id="s-hero">
+    <!-- Side Navigation Indicators -->
+    <aside
+        class="bg-surface-container-lowest/60 dark:bg-inverse-surface/60 text-primary dark:text-primary-fixed fixed left-8 top-1/2 -translate-y-1/2 rounded-full py-4 border border-outline-variant/20 backdrop-blur-md flat no shadows hidden md:flex flex-col gap-stack-sm items-center px-2 z-40">
+        <a href="#hero"
+            class="bg-primary text-on-primary rounded-full w-8 h-8 flex items-center justify-center text-label-mono font-label-mono scale-90 transition-transform">01</a>
+        <a href="#work"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">02</a>
+        <a href="#tools"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">03</a>
+        <a href="#writing"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">04</a>
+        <a href="#contact"
+            class="text-on-surface-variant w-8 h-8 flex items-center justify-center text-label-mono font-label-mono hover:bg-surface-variant dark:hover:bg-on-surface-variant/20 rounded-full transition-all">05</a>
+    </aside>
 
-  <div class="hero-index chapter">[001] - PORTFOLIO</div>
+    <main>
+        <!-- Hero Section -->
+        <section id="hero"
+            class="relative min-h-[90vh] flex flex-col items-center justify-center px-gutter overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute top-1/4 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full -z-10">
+            </div>
 
-  <div class="hero-coords">
-    <span>Availability</span><br>
-    <span class="hero-live">Available for projects</span>
-  </div>
+            <div class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-12 gap-gutter items-center pt-24">
+                <div class="md:col-span-8 relative z-10">
+                    <span class="font-label-mono text-label-mono text-primary mb-4 block tracking-widest">[001] —
+                        INTRO</span>
+                    <h1
+                        class="font-display text-[120px] md:text-[220px] leading-[0.8] kinetic-text joy-tilt text-on-surface mb-8 select-none">
+                        JOYYY<span class="text-primary">.</span>
+                    </h1>
+                    <div class="flex flex-col md:flex-row md:items-end gap-8 mt-12">
+                        <div class="max-w-xs">
+                            <p class="font-label-mono text-label-mono text-secondary mb-2">TAGLINE</p>
+                            <p class="font-headline-md text-headline-md leading-tight text-on-surface">SHIPPING
+                                PRODUCTS. WITH TASTE.</p>
+                        </div>
+                        <div class="flex-1">
+                            <button
+                                class="bg-primary text-on-primary px-12 py-6 rounded-none text-headline-md font-headline-md transition-all hover:translate-x-2 hover:shadow-[8px_8px_0px_rgba(0,0,0,0.1)] active:scale-95 group">
+                                <a href="#work">
+                                VIEW WORK 
+                                <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-  <div class="hero-name-wrap" aria-label="Joy Masih">
-    <span class="hero-name">JOY</span>
-    <span class="hero-dot" aria-hidden="true"></span>
-  </div>
+                <!-- 3D Asset Injection -->
+                <div class="md:col-span-4 relative mt-12 md:mt-0 flex justify-center">
 
-  <div class="hero-foot">
-    <p class="hero-foot-left">
-      Tagline<br>
-      <strong>Shipping products. With taste.</strong>
-    </p>
-    <div class="hero-foot-right">
-      <a href="#s-work" class="cta-btn">VIEW WORK -></a>
+                    <div class="absolute -bottom-12 -right-8 text-right">
+                        <p class="font-label-mono text-label-mono text-secondary">BUILDING</p>
+                        <div class="flex items-center gap-2 justify-end">
+                            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                            <span class="font-label-mono text-label-mono text-on-surface">TRUE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Stats -->
+            <div
+                class="w-full max-w-container-max flex justify-between items-center py-12 mt-auto border-t border-outline-variant/30">
+                <span class="font-label-mono text-label-mono text-secondary">28.6139° N, 77.2090° E</span>
+                <span class="font-label-mono text-label-mono text-secondary">FULL-STACK · AI · PRODUCT</span>
+            </div>
+        </section>
+
+        <!-- Selected Work Section -->
+        <section id="work" class="py-section-gap px-gutter max-w-container-max mx-auto">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="font-label-mono text-label-mono text-primary">[002]</span>
+                    <h2 class="font-headline-lg text-headline-lg mt-2">SELECTED WORK</h2>
+                </div>
+                <span class="font-label-mono text-label-mono text-secondary">— 05 PROJECTS</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="text-left border-b border-outline-variant">
+                            <th class="py-6 font-label-mono text-label-mono text-secondary">ID</th>
+                            <th class="py-6 font-label-mono text-label-mono text-secondary">PROJECT</th>
+                            <th class="py-6 font-label-mono text-label-mono text-secondary">CONTEXT</th>
+                            <th class="py-6 font-label-mono text-label-mono text-secondary text-right">STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-body-md text-on-surface">
+                        <!-- Project 1 -->
+                        <tr class="group hover:bg-white transition-colors border-b border-outline-variant/30">
+                            <td class="py-8 font-label-mono text-label-mono text-secondary">L_001</td>
+                            <td class="py-8">
+                                <h3 class="font-headline-md text-headline-md">FINESSE</h3>
+                            </td>
+                            <td class="py-8 pr-12 max-w-md">
+                                <span
+                                    class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">SOLO
+                                    FOUNDER · PLAY STORE</span>
+                                <p class="text-on-surface-variant">AI personal finance app for young Indian
+                                    professionals, with SMS parsing, automatic categorisation, and Gemini-powered
+                                    monthly coaching.</p>
+                            </td>
+                            <td class="py-8 text-right">
+                                <span
+                                    class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
+                            </td>
+                        </tr>
+                        <!-- Project-->
+                        <tr class="group hover:bg-white transition-colors border-b border-outline-variant/30">
+                            <td class="py-8 font-label-mono text-label-mono text-secondary">L_002</td>
+                            <td class="py-8">
+                                <h3 class="font-headline-md text-headline-md">SPLITS</h3>
+                            </td>
+                            <td class="py-8 pr-12 max-w-md">
+                                <span
+                                    class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">GAME
+                                    · ANDROID · 2.5D</span>
+                                <p class="text-on-surface-variant">A fast-reflex 2.5D Android game focused on
+                                    short-session play, clean visual feedback, and mobile-first movement.</p>
+                            </td>
+                            <td class="py-8 text-right">
+                                <span
+                                    class="bg-secondary-container/30 text-secondary px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-outline-variant">IN
+                                    BUILD</span>
+                            </td>
+                        </tr>
+                        <!-- Project 3 -->
+                        <tr class="group hover:bg-white transition-colors border-b border-outline-variant/30">
+                            <td class="py-8 font-label-mono text-label-mono text-secondary">L_003</td>
+                            <td class="py-8">
+                                <h3 class="font-headline-md text-headline-md">THERAPY COUNCIL</h3>
+                            </td>
+                            <td class="py-8 pr-12 max-w-md">
+                                <span
+                                    class="font-label-mono text-[10px] text-secondary uppercase tracking-tighter mb-1 block">CO-FOUNDER
+                                    · DEV LEAD</span>
+                                <p class="text-on-surface-variant">Online LMS for psychology-focused courses, covering
+                                    architecture, course pipeline, and the user-facing learning experience.</p>
+                            </td>
+                            <td class="py-8 text-right">
+                                <span
+                                    class="bg-primary-container/10 text-primary-container px-3 py-1 text-[10px] font-label-mono uppercase rounded-sm border border-primary-container/20">ACTIVE</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Craft & Tools Section -->
+        <section id="tools" class="py-section-gap bg-surface-container-low px-gutter overflow-hidden">
+            <div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                <div class="md:col-span-5">
+                    <span class="font-label-mono text-label-mono text-primary">[003]</span>
+                    <h2 class="font-headline-lg text-[80px] leading-[0.9] mt-2 mb-4">CRAFT<br>&amp; TOOLS</h2>
+                    <p class="max-w-xs font-body-md text-on-surface-variant mt-8">
+                        Two years. Many stacks. One rule — ship working software.
+                    </p>
+                </div>
+                <div class="md:col-span-7 flex flex-col gap-10">
+                    <!-- Tool Row: Frontend -->
+                    <div class="border-b border-outline-variant pb-8">
+                        <span class="font-label-mono text-label-mono text-secondary mb-4 block">FRONTEND</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Next.js</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">React
+                                Native</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Vue.js</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Sveltekit</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Tailwind</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">TypeScript</span>
+                        </div>
+                    </div>
+                    <!-- Tool Row: Backend -->
+                    <div class="border-b border-outline-variant pb-8">
+                        <span class="font-label-mono text-label-mono text-secondary mb-4 block">BACKEND</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Node.js</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Supabase</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">MongoDB</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">SQL</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">REST
+                                APIs</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Directus</span>
+                        </div>
+                    </div>
+                    <!-- Tool Row: AI / LLM -->
+                    <div class="border-b border-outline-variant pb-8">
+                        <span class="font-label-mono text-label-mono text-secondary mb-4 block">AI / LLM</span>
+                        <div class="flex flex-wrap gap-2">
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Prompt
+                                Engineering</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Gemini
+                                API</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Groq
+                                / Llama</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">LLM
+                                Integration</span>
+                            <span
+                                class="px-3 py-1.5 border border-outline font-label-mono text-label-mono rounded hover:bg-primary hover:text-white transition-colors cursor-default">Rapid
+                                MVP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Writing Section -->
+        <section id="writing" class="py-section-gap px-gutter max-w-container-max mx-auto">
+            <div class="flex justify-between items-start mb-24">
+                <div>
+                    <span class="font-label-mono text-label-mono text-primary">[004]</span>
+                    <h2 class="font-headline-lg text-headline-lg mt-2">WRITING</h2>
+                </div>
+                <div class="text-right">
+                    <span class="font-label-mono text-label-mono text-secondary block">02 POSTS</span>
+                    <span class="font-label-mono text-label-mono text-secondary">thoughts on code &amp; product</span>
+                </div>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Article 1 -->
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0"
+                    onclick="openPost('p1')" onkeydown="openPostFromKey(event, 'p1')">
+                    <div class="md:col-span-2">
+                        <span
+                            class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">01</span>
+                        <span class="font-label-mono text-label-mono text-secondary mt-2 block">JUN 2025</span>
+                    </div>
+                    <div class="md:col-span-10">
+                        <span
+                            class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">ENGINEERING
+                            · DEPLOYMENT</span>
+                        <h3
+                            class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">
+                            WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h3>
+                        <p class="font-body-md text-on-surface-variant mt-4 max-w-2xl">
+                            The seductive trap of local development — and what building Finesse taught me about the real
+                            cost of deferred production testing.
+                        </p>
+                    </div>
+                </article>
+
+                <div class="hairline-divider opacity-50"></div>
+
+                <!-- Article 2 -->
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0"
+                    onclick="openPost('p2')" onkeydown="openPostFromKey(event, 'p2')">
+                    <div class="md:col-span-2">
+                        <span
+                            class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">02</span>
+                        <span class="font-label-mono text-label-mono text-secondary mt-2 block">APR 2025</span>
+                    </div>
+                    <div class="md:col-span-10">
+                        <span
+                            class="font-label-mono text-[10px] text-primary uppercase tracking-widest mb-2 block">PRODUCT
+                            · DISTRIBUTION</span>
+                        <h3
+                            class="font-headline-md text-headline-md leading-tight group-hover:underline underline-offset-8 transition-all">
+                            THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h3>
+                        <p class="font-body-md text-on-surface-variant mt-4 max-w-2xl">
+                            Awareness isn't the problem. Timing is. How trigger-based distribution changes the
+                            acquisition equation entirely.
+                        </p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="contact" class="py-section-gap px-gutter max-w-container-max mx-auto relative overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-12 items-end">
+                <div class="md:col-span-8">
+                    <span class="font-label-mono text-label-mono text-primary">[005] — LET'S TALK</span>
+                    <h2 class="font-headline-lg text-[80px] md:text-[140px] leading-[0.85] mt-8 mb-12">
+                        BUILD<br>SOMETHING<br><span class="text-primary underline decoration-primary/20">REAL.</span>
+                    </h2>
+
+                    <div class="flex flex-col gap-4">
+                        <a href="mailto:joymasih43@gmail.com"
+                            class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                            <span class="material-symbols-outlined text-secondary group-hover:text-primary">mail</span>
+                            <span class="font-label-mono text-label-mono text-secondary flex-1">EMAIL ·
+                                joymasih43@gmail.com</span>
+                            <span
+                                class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener"
+                            class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                            <span class="material-symbols-outlined text-secondary group-hover:text-primary">link</span>
+                            <span class="font-label-mono text-label-mono text-secondary flex-1">LINKEDIN ·
+                                joy-masih</span>
+                            <span
+                                class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-4 hidden md:block">
+                    <!-- Stylized HI Background Text -->
+                    <div
+                        class="text-[280px] font-display text-outline-variant/10 leading-none select-none -mb-8 -mr-12">
+                        HI.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+        class="bg-surface dark:bg-surface text-secondary dark:text-secondary-fixed-dim full-width bottom-0 border-t border-outline-variant flat no shadows">
+        <div class="flex justify-between items-center w-full px-gutter py-12 max-w-container-max mx-auto">
+            <div class="flex items-center gap-4">
+                <span class="text-body-lg font-headline-md text-on-surface">JOY</span>
+                <span class="text-label-mono font-label-mono">· 2026</span>
+            </div>
+
+            <nav class="flex gap-8">
+                <a href="https://x.com/Crashing_It" target="_blank" rel="noopener"
+                    class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">X</a>
+                <a href="https://github.com/JOY2OP/" target="_blank" rel="noopener"
+                    class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">GitHub</a>
+                <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener"
+                    class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">LinkedIn</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <span class="font-label-mono text-label-mono uppercase tracking-widest text-outline">Useful things,
+                    shipped clean</span>
+            </div>
+        </div>
+    </footer>
+
+    <div class="blog-takeover" id="post-p1" aria-modal="true" role="dialog" aria-labelledby="post-p1-title">
+        <button class="takeover-close" onclick="closePost('p1')">[ CLOSE X ]</button>
+        <div class="takeover-header">
+            <div class="takeover-tag">Engineering / Deployment / June 2025 / 5 min</div>
+            <h1 class="takeover-title" id="post-p1-title">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER
+            </h1>
+            <div class="takeover-meta">Joy Masih</div>
+        </div>
+        <div class="takeover-body">
+            <p>There's a comfortable lie every developer tells themselves early in a project: <em>"I'll sort out
+                    production once the feature is working locally."</em> I told it to myself for weeks while building
+                Finesse.</p>
+            <p>Local development is warm. Everything works. Environment variables load cleanly, the API responds in
+                40ms, and the mock SMS parser catches every transaction perfectly. Then you push to production and a
+                React Native APK quietly swallows your <code>.env</code> file and serves undefined to the Supabase
+                client for three days before you notice.</p>
+            <h3>THE REAL COST ISN'T BUGS - IT'S LAG</h3>
+            <p>Production failures found late aren't just bugs. They're architectural rethinks wearing bug costumes.
+                When I finally shipped Finesse to closed testing on the Play Store, I discovered that the SMS
+                BroadcastReceiver service behaved differently across Android OEMs. A Samsung device running One UI
+                silently killed background services within 90 seconds of the app losing focus. Zero crashes. Zero
+                errors. Just no data.</p>
+            <p>That's not a bug you catch locally. That's a production-only system behaviour - and finding it late meant
+                rearchitecting the foreground service notification strategy, resubmitting the APK, waiting out Google's
+                review cycle, and re-recruiting testers. Probably two weeks of drag for something a one-week earlier
+                production push would have surfaced.</p>
+            <h3>THE FIX</h3>
+            <p>The mental shift that helped most was treating the production environment as a parallel development lane
+                rather than a final destination. Feature flag the incomplete pieces. Deploy to staging daily. Accept
+                that you will see failures earlier - because earlier failures are dramatically cheaper than later ones.
+            </p>
+            <p>For Finesse, this meant setting up Railway for the Node.js backend from day one, even when it was just a
+                <code>hello world</code> endpoint. It meant pointing the app at real Supabase edge functions from the
+                first week, even before the SMS parser was finished. Every week of production exposure before the
+                feature was done saved a compounded week of debugging after.</p>
+            <p>The lesson isn't new. But the confidence to actually do it - to deliberately ship incomplete code to a
+                real environment - that took building something from scratch, breaking it, and rebuilding it in public.
+            </p>
+        </div>
     </div>
-  </div>
 
-</section>
-
-<!-- ══ SECTION 02 · WORK ══ -->
-<section id="s-work">
-  <div class="work-header">
-    <h2 class="work-title">SELECTED WORK</h2>
-    <span class="work-count chapter">[002] — 05 PROJECTS</span>
-  </div>
-
-  <div class="work-table-head" aria-hidden="true">
-    <span>ID</span>
-    <span>Project</span>
-    <span>Context</span>
-    <span>Status</span>
-  </div>
-
-  <div class="work-item">
-    <span class="work-num">L_001</span>
-    <div class="work-body">
-      <div class="work-name">FINESSE</div>
+    <div class="blog-takeover" id="post-p2" aria-modal="true" role="dialog" aria-labelledby="post-p2-title">
+        <button class="takeover-close" onclick="closePost('p2')">[ CLOSE X ]</button>
+        <div class="takeover-header">
+            <div class="takeover-tag">Product / Distribution / April 2025 / 6 min</div>
+            <h1 class="takeover-title" id="post-p2-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE
+                THEY OPEN</h1>
+            <div class="takeover-meta">Joy Masih</div>
+        </div>
+        <div class="takeover-body">
+            <p>If you ask a 24-year-old in Delhi whether they should track their spending, they'll say yes. If you ask
+                them whether they do, they'll pause. That pause is the entire problem. It is not an awareness gap. It is
+                an urgency gap.</p>
+            <p>Most fintech marketing assumes the problem is knowledge. Build a beautiful budgeting UI, explain the
+                50/30/20 rule, show a chart of someone else's savings trajectory, and the user will be motivated to
+                change. They won't. Not because the information is wrong, but because <em>information without a trigger
+                    is just content</em> - and content without urgency sits unopened.</p>
+            <h3>WHAT A TRIGGER LOOKS LIKE</h3>
+            <p>Young urban Indians have highly predictable financial trigger moments: the first salary credit, moving to
+                a new city for a job, the first time rent takes more than 40% of income, getting married, taking a first
+                loan. These are moments of genuine financial anxiety - and anxiety is the only reliable motivator for
+                financial behaviour change.</p>
+            <p>The implication for distribution is straightforward but underutilised. A fintech app that shows up in
+                someone's feed as a generic ad gets ignored. The same app that appears in a thread titled <em>"I just
+                    got my first Bangalore salary and have no idea what to do with it"</em> - that gets installed. Not
+                because the app is different, but because the moment is different.</p>
+            <h3>TRIGGER-BASED ACQUISITION, PRACTICALLY</h3>
+            <p>Concretely, this looks like monitoring Reddit threads on r/india and r/personalfinanceindia for
+                life-event signals. It looks like partnering with HR onboarding flows at companies hiring freshers at
+                scale. It looks like writing content that ranks for "what to do with first salary India" rather than
+                "best budgeting app India" - because the first query is triggered by a life event, the second is
+                abstract comparison-shopping.</p>
+            <p>The hardest part of this strategy isn't identifying the triggers. It's accepting that you are not
+                building a product for the 10% of people already tracking their finances. You are building for the 90%
+                who aren't - and you have to meet them at the exact moment they realise they should be. Miss that window
+                and they do nothing. Hit it and you get a user who is genuinely motivated to change. That's the only
+                user worth having.</p>
+            <p>Finesse was built for that second user. Whether it reaches them at the right moment is, honestly, still a
+                work in progress.</p>
+        </div>
     </div>
-    <div class="work-context">
-      <span class="work-label">Solo Founder · Play Store</span>
-      <p class="work-desc">AI personal finance app for young Indian professionals, with SMS parsing, automatic categorisation, and Gemini-powered monthly coaching.</p>
-    </div>
-    <span class="work-status">Active</span>
-  </div>
 
-  <div class="work-item">
-    <span class="work-num">L_002</span>
-    <div class="work-body">
-      <div class="work-name">SPLITS</div>
-    </div>
-    <div class="work-context">
-      <span class="work-label">Game · Android · 2.5D</span>
-      <p class="work-desc">A fast-reflex 2.5D Android game focused on short-session play, clean visual feedback, and mobile-first movement.</p>
-    </div>
-    <span class="work-status">In Build</span>
-  </div>
+    <script>
+        // Custom cursor + gentle pointer tracking
+        const cursor = document.getElementById('cursor');
+        let mx = 0, my = 0, cx = 0, cy = 0;
 
-  <div class="work-item">
-    <span class="work-num">L_003</span>
-    <div class="work-body">
-      <div class="work-name">THERAPY COUNCIL</div>
-    </div>
-    <div class="work-context">
-      <span class="work-label">Co-Founder · Dev Lead</span>
-      <p class="work-desc">Online LMS for psychology-focused courses, covering architecture, course pipeline, and the user-facing learning experience.</p>
-    </div>
-    <span class="work-status">Active</span>
-  </div>
+        document.addEventListener('mousemove', (e) => {
+            mx = e.clientX;
+            my = e.clientY;
 
-  <!-- <div class="work-item">
-    <span class="work-num">L_004</span>
-    <div class="work-body">
-      <div class="work-name">UNIVERSITY NETWORK</div>
-    </div>
-    <div class="work-context">
-      <span class="work-label">Edvanta · 20+ Sites · 100K/mo</span>
-      <p class="work-desc">Maintained and scaled university websites including USC, King's College London, and GWU, plus Shopify integrations.</p>
-    </div>
-    <span class="work-status">Stable</span>
-  </div>
+            const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+            const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+            const floatingAsset = document.querySelector('.animate-float');
 
-  <div class="work-item">
-    <span class="work-num">L_005</span>
-    <div class="work-body">
-      <div class="work-name">LXP + AI ENGINE</div>
-    </div>
-    <div class="work-context">
-      <span class="work-label">Edvanta · AI Engineering</span>
-      <p class="work-desc">Multi-tenant LXP dashboard and recommendation engine that ranks course suggestions from multi-step learner inputs.</p>
-    </div>
-    <span class="work-status">Shipped</span>
-  </div> -->
-</section>
+            if (floatingAsset) {
+                floatingAsset.style.transform = `translate(${moveX * 2}px, ${moveY * 2}px)`;
+            }
+        });
 
-<!-- ══ SECTION 03 · SKILLS ══ -->
-<section id="s-skills">
-  <div class="skills-left">
-    <div class="chapter">[003]</div>
-    <h2 class="skills-title">
-      CRAFT<br>
-      <span class="outline">&amp;</span><br>
-      TOOLS
-    </h2>
-    <p class="skills-note">Two years. Many stacks. One rule — ship working software.</p>
-  </div>
+        (function tick() {
+            if (cursor) {
+                cx += (mx - cx) * 0.22;
+                cy += (my - cy) * 0.22;
+                cursor.style.left = cx + 'px';
+                cursor.style.top = cy + 'px';
+            }
+            requestAnimationFrame(tick);
+        })();
 
-  <div class="skills-right">
-    <div class="skill-row">
-      <span class="skill-row-label">Frontend</span>
-      <div class="skill-tags">
-        <span class="tag">Next.js</span>
-        <span class="tag">React</span>
-        <span class="tag">React Native</span>
-        <span class="tag">Vue.js</span>
-        <span class="tag">Sveltekit</span>
-        <span class="tag">Tailwind</span>
-        <span class="tag">TypeScript</span>
-      </div>
-    </div>
-    <div class="skill-row">
-      <span class="skill-row-label">Backend</span>
-      <div class="skill-tags">
-        <span class="tag">Node.js</span>
-        <span class="tag">Supabase</span>
-        <span class="tag">MongoDB</span>
-        <span class="tag">SQL</span>
-        <span class="tag">REST APIs</span>
-        <span class="tag">Directus</span>
-      </div>
-    </div>
-    <div class="skill-row">
-      <span class="skill-row-label">AI / LLM</span>
-      <div class="skill-tags">
-        <span class="tag">Prompt Engineering</span>
-        <span class="tag">Gemini API</span>
-        <span class="tag">Groq / Llama</span>
-        <span class="tag">LLM Integration</span>
-        <span class="tag">Rapid MVP</span>
-      </div>
-    </div>
-    <div class="skill-row">
-      <span class="skill-row-label">Tools</span>
-      <div class="skill-tags">
-        <span class="tag">Git</span>
-        <span class="tag">GitHub</span>
-        <span class="tag">Postman</span>
-        <span class="tag">Jira</span>
-        <span class="tag">Figma</span>
-        <span class="tag">Photoshop</span>
-        <span class="tag">Illustrator</span>
-      </div>
-    </div>
-  </div>
-</section>
+        document.querySelectorAll('a, button, tr, article, .joy-tilt, .cursor-default').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor && cursor.classList.add('big'));
+            el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('big'));
+        });
 
-<!-- ══ SECTION 04 · WRITING ══ -->
-<section id="s-writing">
-  <div class="writing-header">
-    <h2 class="writing-title">WRITING</h2>
-    <div class="writing-note">
-      <div class="chapter">[004]</div>
-      02 posts<br>thoughts on<br>code &amp; product
-    </div>
-  </div>
+        function openPost(id) {
+            const post = document.getElementById('post-' + id);
+            if (!post) return;
+            post.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
-  <div class="post-item" onclick="openPost('p1')">
-    <div class="post-num-col">
-      <div class="post-num">01</div>
-      <div class="post-date">Jun 2025</div>
-    </div>
-    <div class="post-body">
-      <div class="post-tag">Engineering · Deployment</div>
-      <h3 class="post-title">WHY I STOPPED MOCKING APIs AND STARTED SHIPPING TO PROD SOONER</h3>
-      <p class="post-excerpt">The seductive trap of local development — and what building Finesse taught me about the real cost of deferred production testing.</p>
-    </div>
-  </div>
+        function closePost(id) {
+            const post = document.getElementById('post-' + id);
+            if (!post) return;
+            post.classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
-  <div class="post-item" onclick="openPost('p2')">
-    <div class="post-num-col">
-      <div class="post-num">02</div>
-      <div class="post-date">Apr 2025</div>
-    </div>
-    <div class="post-body">
-      <div class="post-tag">Product · Distribution</div>
-      <h3 class="post-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h3>
-      <p class="post-excerpt">Awareness isn't the problem. Timing is. How trigger-based distribution changes the acquisition equation entirely.</p>
-    </div>
-  </div>
-</section>
+        function openPostFromKey(event, id) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            openPost(id);
+        }
 
-<!-- ══ SECTION 05 · CONTACT ══ -->
-<section id="s-contact">
-  <div class="contact-bg-text" aria-hidden="true">HI.</div>
-  <div class="contact-inner">
-    <div class="contact-label chapter">[005] — LET'S TALK</div>
-    <h2 class="contact-headline">
-      BUILD<br>
-      SOMETHING<br>
-      <span class="hl">REAL.</span>
-    </h2>
-    <div class="contact-pills">
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            document.querySelectorAll('.blog-takeover.open').forEach(post => post.classList.remove('open'));
+            document.body.style.overflow = '';
+        });
 
-      <a class="contact-pill" href="mailto:joymasih43@gmail.com">
-        <svg class="pill-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        <span class="pill-label">Email</span>
-        <span class="pill-divider"></span>
-        <span class="pill-value">joymasih43@gmail.com</span>
-        <span class="pill-arrow">↗</span>
-      </a>
+        // Smooth scroll implementation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
 
-      <a class="contact-pill" href="https://linkedin.com/in/joy-masih/" target="_blank" rel="noopener">
-        <svg class="pill-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-        <span class="pill-label">LinkedIn</span>
-        <span class="pill-divider"></span>
-        <span class="pill-value">joy-masih</span>
-        <span class="pill-arrow">↗</span>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>Joy · 2026</p>
-  <p>Useful things, shipped clean</p>
-</footer>
-
-<!-- ══ BLOG TAKEOVERS ══ -->
-<div class="blog-takeover" id="post-p1">
-  <button class="takeover-close" onclick="closePost('p1')">[ CLOSE ✕ ]</button>
-  <div class="takeover-header">
-    <div class="takeover-tag">Engineering · Deployment · June 2025 · 5 min</div>
-    <h1 class="takeover-title">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h1>
-    <div class="takeover-meta">Joy Masih</div>
-  </div>
-  <div class="takeover-body">
-    <p>There's a comfortable lie every developer tells themselves early in a project: <em>"I'll sort out production once the feature is working locally."</em> I told it to myself for weeks while building Finesse.</p>
-    <p>Local development is warm. Everything works. Environment variables load cleanly, the API responds in 40ms, and the mock SMS parser catches every transaction perfectly. Then you push to production and a React Native APK quietly swallows your <code>.env</code> file and serves undefined to the Supabase client for three days before you notice.</p>
-    <h3>THE REAL COST ISN'T BUGS — IT'S LAG</h3>
-    <p>Production failures found late aren't just bugs. They're architectural rethinks wearing bug costumes. When I finally shipped Finesse to closed testing on the Play Store, I discovered that the SMS BroadcastReceiver service behaved differently across Android OEMs. A Samsung device running One UI silently killed background services within 90 seconds of the app losing focus. Zero crashes. Zero errors. Just no data.</p>
-    <p>That's not a bug you catch locally. That's a production-only system behaviour — and finding it late meant rearchitecting the foreground service notification strategy, resubmitting the APK, waiting out Google's review cycle, and re-recruiting testers. Probably two weeks of drag for something a one-week earlier production push would have surfaced.</p>
-    <h3>THE FIX</h3>
-    <p>The mental shift that helped most was treating the production environment as a parallel development lane rather than a final destination. Feature flag the incomplete pieces. Deploy to staging daily. Accept that you will see failures earlier — because earlier failures are dramatically cheaper than later ones.</p>
-    <p>For Finesse, this meant setting up Railway for the Node.js backend from day one, even when it was just a <code>hello world</code> endpoint. It meant pointing the app at real Supabase edge functions from the first week, even before the SMS parser was finished. Every week of production exposure before the feature was done saved a compounded week of debugging after.</p>
-    <p>The lesson isn't new. But the confidence to actually do it — to deliberately ship incomplete code to a real environment — that took building something from scratch, breaking it, and rebuilding it in public.</p>
-  </div>
-</div>
-
-<div class="blog-takeover" id="post-p2">
-  <button class="takeover-close" onclick="closePost('p2')">[ CLOSE ✕ ]</button>
-  <div class="takeover-header">
-    <div class="takeover-tag">Product · Distribution · April 2025 · 6 min</div>
-    <h1 class="takeover-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h1>
-    <div class="takeover-meta">Joy Masih</div>
-  </div>
-  <div class="takeover-body">
-    <p>If you ask a 24-year-old in Delhi whether they should track their spending, they'll say yes. If you ask them whether they do, they'll pause. That pause is the entire problem. It is not an awareness gap. It is an urgency gap.</p>
-    <p>Most fintech marketing assumes the problem is knowledge. Build a beautiful budgeting UI, explain the 50/30/20 rule, show a chart of someone else's savings trajectory, and the user will be motivated to change. They won't. Not because the information is wrong, but because <em>information without a trigger is just content</em> — and content without urgency sits unopened.</p>
-    <h3>WHAT A TRIGGER LOOKS LIKE</h3>
-    <p>Young urban Indians have highly predictable financial trigger moments: the first salary credit, moving to a new city for a job, the first time rent takes more than 40% of income, getting married, taking a first loan. These are moments of genuine financial anxiety — and anxiety is the only reliable motivator for financial behaviour change.</p>
-    <p>The implication for distribution is straightforward but underutilised. A fintech app that shows up in someone's feed as a generic ad gets ignored. The same app that appears in a thread titled <em>"I just got my first Bangalore salary and have no idea what to do with it"</em> — that gets installed. Not because the app is different, but because the moment is different.</p>
-    <h3>TRIGGER-BASED ACQUISITION, PRACTICALLY</h3>
-    <p>Concretely, this looks like monitoring Reddit threads on r/india and r/personalfinanceindia for life-event signals. It looks like partnering with HR onboarding flows at companies hiring freshers at scale. It looks like writing content that ranks for "what to do with first salary India" rather than "best budgeting app India" — because the first query is triggered by a life event, the second is abstract comparison-shopping.</p>
-    <p>The hardest part of this strategy isn't identifying the triggers. It's accepting that you are not building a product for the 10% of people already tracking their finances. You are building for the 90% who aren't — and you have to meet them at the exact moment they realise they should be. Miss that window and they do nothing. Hit it and you get a user who is genuinely motivated to change. That's the only user worth having.</p>
-    <p>Finesse was built for that second user. Whether it reaches them at the right moment is, honestly, still a work in progress.</p>
-  </div>
-</div>
-
-<script>
-// ── LOADER ──
-window.addEventListener('load', () => {
-  const line = document.getElementById('loader-line');
-  const loader = document.getElementById('loader');
-  requestAnimationFrame(() => {
-    line.style.width = '100%';
-    setTimeout(() => {
-      loader.classList.add('done');
-      setTimeout(() => loader.style.display = 'none', 700);
-    }, 900);
-  });
-});
-
-
-// ── CURSOR ──
-const cursor = document.getElementById('cursor');
-let mx = 0, my = 0, cx = 0, cy = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function tick() {
-  cx += (mx - cx) * 0.22;
-  cy += (my - cy) * 0.22;
-  cursor.style.left = cx + 'px';
-  cursor.style.top = cy + 'px';
-  requestAnimationFrame(tick);
-})();
-
-document.querySelectorAll('a, button, .post-item, .work-item, .tag, .contact-pill, .hero-name').forEach(el => {
-  el.addEventListener('mouseenter', () => cursor.classList.add('big'));
-  el.addEventListener('mouseleave', () => cursor.classList.remove('big'));
-});
-
-// ── BLOG TAKEOVERS ──
-function openPost(id) {
-  document.getElementById('post-' + id).classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closePost(id) {
-  document.getElementById('post-' + id).classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.blog-takeover.open').forEach(el => el.classList.remove('open'));
-    document.body.style.overflow = '';
-  }
-});
-
-</script>
+                // Update active state in side nav
+                if (this.parentElement.tagName === 'ASIDE') {
+                    document.querySelectorAll('aside a').forEach(a => {
+                        a.classList.remove('bg-primary', 'text-on-primary');
+                        a.classList.add('text-on-surface-variant');
+                    });
+                    this.classList.add('bg-primary', 'text-on-primary');
+                    this.classList.remove('text-on-surface-variant');
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
