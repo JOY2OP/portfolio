@@ -173,63 +173,75 @@ img, svg, video, canvas { max-width: 100%; }
 #s-hero {
   height: 100vh;
   min-height: 560px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto 1fr;
+  column-gap: 8vw;
   border-bottom: 1px solid var(--grey);
-  padding: 2.5rem 6vw 2rem;
+  padding: 10vh 6vw 2rem;
   position: relative;
   overflow: hidden;
 }
 
 /* ── coords top-right ── */
 .hero-coords {
-  position: absolute;
-  top: 2.5rem;
-  right: 6vw;
+  grid-column: 2;
+  grid-row: 2;
+  align-self: center;
   font-family: 'Space Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.22em;
   color: var(--mid);
-  text-align: right;
-  line-height: 1.8;
+  text-align: left;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
 /* ── index top-left ── */
 .hero-index {
+  grid-column: 1;
+  grid-row: 1;
   font-family: 'Space Mono', monospace;
   font-size: 9px;
   letter-spacing: 0.3em;
-  color: var(--mid);
+  color: var(--acid);
   text-transform: uppercase;
+  margin-bottom: 0.25rem;
 }
 
 /* ── giant name — dead center, nearly full width ── */
 .hero-name-wrap {
-  position: absolute;
-  left: 0; right: 0;
-  top: 50%;
-  transform: translateY(-54%);
-  padding: 0 6vw;
-  pointer-events: none;
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  pointer-events: auto;
 }
 
 .hero-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(18vw, 21vw, 280px);
-  line-height: 0.82;
+  font-size: clamp(118px, 17vw, 220px);
+  line-height: 0.7;
   letter-spacing: -0.02em;
-  color: var(--white);
+  color: #111820;
   display: block;
   pointer-events: auto;
   user-select: none;
-  transition: font-style 0.12s ease, transform 0.12s ease;
+  transform-origin: left bottom;
+  transition: transform 0.16s ease;
 }
 
 .hero-name:hover,
 .hero-name:focus-visible {
-  font-style: italic;
+  transform: skewX(-8deg);
+}
+
+.hero-dot {
+  width: clamp(20px, 3vw, 34px);
+  aspect-ratio: 1;
+  background: var(--acid);
+  margin-bottom: 0.04em;
 }
 
 /* one-word role sits on same baseline, right-aligned, tiny */
@@ -249,9 +261,13 @@ img, svg, video, canvas { max-width: 100%; }
 
 /* ── bottom bar ── */
 .hero-foot {
+  grid-column: 1;
+  grid-row: 3;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2.25rem;
 }
 
 .hero-foot-left {
@@ -259,17 +275,17 @@ img, svg, video, canvas { max-width: 100%; }
   font-size: 10px;
   letter-spacing: 0.18em;
   color: var(--soft);
-  line-height: 1.9;
+  line-height: 1.65;
   text-transform: uppercase;
-  max-width: 340px;
+  max-width: 220px;
 }
 
 .hero-foot-left strong { color: var(--white); font-weight: 700; }
 
 .hero-foot-right {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  flex-direction: row;
+  align-items: flex-start;
   gap: 0.65rem;
 }
 
@@ -304,12 +320,12 @@ img, svg, video, canvas { max-width: 100%; }
 .hero-live {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   font-family: 'Space Mono', monospace;
   font-size: 9px;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--mid);
+  color: var(--white);
 }
 .hero-live::before {
   content: '';
@@ -893,16 +909,34 @@ footer p {
   .side-nav a::after { display: none; }
   .side-nav a:hover, .side-nav a:focus-visible { transform: none; }
 
-  #s-hero { padding: 1.75rem 5vw 1.5rem; min-height: 100svh; }
+  #s-hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto 1fr;
+    gap: 0;
+    padding: 4rem 5vw 7rem;
+    min-height: 100svh;
+  }
 
-  .hero-coords { top: 1.75rem; right: 5vw; }
+  .hero-coords {
+    grid-column: 1;
+    grid-row: 4;
+    align-self: start;
+    margin-top: 3rem;
+  }
 
   .hero-name { font-size: clamp(26vw, 34vw, 160px); }
 
-  .hero-foot { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+  .hero-name-wrap {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .hero-dot { width: clamp(18px, 7vw, 28px); }
+
+  .hero-foot { flex-direction: row; align-items: flex-start; gap: 1.25rem; }
   .hero-foot-left { max-width: 100%; font-size: 10px; }
   .hero-foot-right { align-items: flex-start; }
-  .cta-btn { width: 100%; text-align: center; }
+  .cta-btn { width: auto; text-align: center; }
 
   #s-work { padding: 2rem 5vw; }
 
@@ -973,28 +1007,25 @@ footer p {
 <!-- ══ SECTION 01 · HERO ══ -->
 <section id="s-hero">
 
-  <div class="hero-index chapter">[001]</div>
+  <div class="hero-index chapter">[001] - PORTFOLIO</div>
 
   <div class="hero-coords">
-    <br>
-    28.6139° N, 77.2090° E<br>
-    <span class="hero-live">Available</span>
+    <span>Availability</span><br>
+    <span class="hero-live">Available for projects</span>
   </div>
 
   <div class="hero-name-wrap" aria-label="Joy Masih">
     <span class="hero-name">JOY</span>
-    <div class="hero-name-role">
-      <span>Full-stack · AI · Product</span>
-    </div>
+    <span class="hero-dot" aria-hidden="true"></span>
   </div>
 
   <div class="hero-foot">
     <p class="hero-foot-left">
-      <strong>Shipping products. With taste.</strong> 
+      Tagline<br>
+      <strong>Shipping products. With taste.</strong>
     </p>
     <div class="hero-foot-right">
-      <a href="#s-work" class="cta-btn">VIEW WORK</a>
-      <a href="#s-contact" class="cta-link">get in touch →</a>
+      <a href="#s-work" class="cta-btn">VIEW WORK -></a>
     </div>
   </div>
 
