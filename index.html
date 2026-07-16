@@ -171,14 +171,15 @@ img, svg, video, canvas { max-width: 100%; }
    SECTION 01 — HERO (STRIPPED)
 ══════════════════════════════ */
 #s-hero {
-  height: 100vh;
+  height: 100svh;
   min-height: 560px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto;
   column-gap: 8vw;
+  align-content: center;
   border-bottom: 1px solid var(--grey);
-  padding: 10vh 6vw 2rem;
+  padding: 0 6vw;
   position: relative;
   overflow: hidden;
 }
@@ -221,8 +222,8 @@ img, svg, video, canvas { max-width: 100%; }
 
 .hero-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(118px, 17vw, 220px);
-  line-height: 0.7;
+  font-size: clamp(150px, 19vw, 270px);
+  line-height: 0.68;
   letter-spacing: -0.02em;
   color: #111820;
   display: block;
@@ -230,6 +231,10 @@ img, svg, video, canvas { max-width: 100%; }
   user-select: none;
   transform-origin: left bottom;
   transition: transform 0.16s ease;
+  -webkit-text-stroke: 1px #111820;
+  text-shadow:
+    1px 0 0 #111820,
+    -1px 0 0 #111820;
 }
 
 .hero-name:hover,
