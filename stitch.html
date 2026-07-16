@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+<!DOCTYPE html><html lang="en" class="scroll-smooth"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="icon" href="./public/favicon.svg" type="image/svg+xml"><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;600&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -108,9 +108,119 @@
         .joy-tilt:focus-visible {
             transform: skewX(-8deg);
         }
+        .blog-takeover {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            overflow-y: auto;
+            background: #ffffff;
+            padding: 6rem clamp(1.25rem, 6vw, 5rem) 4rem;
+            animation: takeoverIn 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .blog-takeover.open {
+            display: block;
+        }
+        @keyframes takeoverIn {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .takeover-close {
+            position: fixed;
+            top: 1.5rem;
+            right: clamp(1.25rem, 6vw, 5rem);
+            z-index: 81;
+            border: 1px solid #c3c6d7;
+            background: #ffffff;
+            color: #565e74;
+            padding: 0.75rem 1rem;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            transition: color 0.15s, border-color 0.15s;
+        }
+        .takeover-close:hover {
+            border-color: #004ac6;
+            color: #004ac6;
+        }
+        .takeover-header {
+            max-width: 860px;
+            padding-bottom: 2rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #c3c6d7;
+        }
+        .takeover-tag,
+        .takeover-meta {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #004ac6;
+        }
+        .takeover-meta {
+            color: #565e74;
+        }
+        .takeover-title {
+            max-width: 980px;
+            margin: 1.25rem 0;
+            font-family: Anton, Impact, sans-serif;
+            font-size: clamp(3.25rem, 8vw, 6rem);
+            line-height: 0.95;
+            color: #191c1e;
+        }
+        .takeover-body {
+            max-width: 700px;
+            color: #434655;
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+        .takeover-body p {
+            margin-bottom: 1.4rem;
+        }
+        .takeover-body h3 {
+            margin: 2.75rem 0 1rem;
+            font-family: Anton, Impact, sans-serif;
+            font-size: 2rem;
+            color: #191c1e;
+        }
+        .takeover-body em {
+            color: #191c1e;
+            font-style: normal;
+        }
+        .takeover-body code {
+            padding: 0.1em 0.35em;
+            background: rgba(0, 74, 198, 0.1);
+            color: #004ac6;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.85em;
+        }
         @media (max-width: 768px) {
-            body { cursor: auto; }
+            body {
+                cursor: auto;
+                padding-bottom: 5.25rem;
+            }
             .cursor { display: none; }
+            aside {
+                display: flex !important;
+                left: 50% !important;
+                right: auto !important;
+                top: auto !important;
+                bottom: 0.85rem !important;
+                width: min(calc(100vw - 1.5rem), 25rem);
+                flex-direction: row !important;
+                justify-content: space-between;
+                gap: 0.35rem !important;
+                padding: 0.45rem !important;
+                border-radius: 999px !important;
+                transform: translateX(-50%) !important;
+                box-shadow: 0 18px 45px rgba(0, 74, 198, 0.14);
+            }
+            aside a {
+                width: 2.35rem !important;
+                height: 2.35rem !important;
+                flex-shrink: 0;
+            }
             #hero {
                 min-height: auto;
                 padding: 4.5rem 1.25rem 3rem;
@@ -172,11 +282,52 @@
                 gap: 0.75rem;
             }
             #work table {
-                min-width: 720px;
+                display: block;
+                min-width: 0;
             }
             #work .overflow-x-auto {
-                margin-right: -1.25rem;
-                padding-right: 1.25rem;
+                overflow: visible;
+                margin-right: 0;
+                padding-right: 0;
+            }
+            #work thead {
+                display: none;
+            }
+            #work tbody {
+                display: flex;
+                flex-direction: column;
+                gap: 0.85rem;
+            }
+            #work tr {
+                display: grid;
+                grid-template-columns: 3.75rem minmax(0, 1fr);
+                grid-template-areas:
+                    "id project"
+                    ". context"
+                    ". status";
+                gap: 0.25rem 1rem;
+                padding: 1rem 0;
+                border-bottom: 1px solid rgba(195, 198, 215, 0.55);
+            }
+            #work td {
+                display: block;
+                padding: 0.2rem 0 !important;
+                max-width: none;
+            }
+            #work td:nth-child(1) { grid-area: id; }
+            #work td:nth-child(2) { grid-area: project; }
+            #work td:nth-child(3) {
+                grid-area: context;
+                padding-right: 0 !important;
+            }
+            #work td:nth-child(4) {
+                grid-area: status;
+                text-align: left;
+                margin-top: 0.35rem;
+            }
+            #work h3 {
+                font-size: 1.6rem;
+                line-height: 1;
             }
             #contact h2 {
                 font-size: clamp(3.75rem, 18vw, 5.5rem) !important;
@@ -200,6 +351,20 @@
                 flex-wrap: wrap;
                 gap: 1rem 1.5rem;
             }
+            .blog-takeover {
+                padding: 5rem 1.25rem calc(4rem + 5.25rem);
+            }
+            .takeover-close {
+                top: 1rem;
+                right: 1.25rem;
+            }
+            .takeover-title {
+                font-size: clamp(2.5rem, 13vw, 4.5rem);
+                overflow-wrap: anywhere;
+            }
+            .takeover-body {
+                font-size: 0.95rem;
+            }
         }
         @media (max-width: 420px) {
             #hero {
@@ -213,7 +378,11 @@
                 letter-spacing: 0.08em;
             }
             #work table {
-                min-width: 660px;
+                min-width: 0;
+            }
+            #work tr {
+                grid-template-columns: 3.25rem minmax(0, 1fr);
+                gap: 0.2rem 0.75rem;
             }
         }
     </style></head><body class="font-body-md overflow-x-hidden">
@@ -424,7 +593,7 @@
 
             <div class="space-y-16">
                 <!-- Article 1 -->
-                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer">
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0" onclick="openPost('p1')" onkeydown="openPostFromKey(event, 'p1')">
                     <div class="md:col-span-2">
                         <span class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">01</span>
                         <span class="font-label-mono text-label-mono text-secondary mt-2 block">JUN 2025</span>
@@ -441,7 +610,7 @@
                 <div class="hairline-divider opacity-50"></div>
 
                 <!-- Article 2 -->
-                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer">
+                <article class="grid grid-cols-1 md:grid-cols-12 gap-8 group cursor-pointer" role="button" tabindex="0" onclick="openPost('p2')" onkeydown="openPostFromKey(event, 'p2')">
                     <div class="md:col-span-2">
                         <span class="font-headline-lg text-headline-lg text-outline-variant/30 group-hover:text-primary transition-colors block leading-none">02</span>
                         <span class="font-label-mono text-label-mono text-secondary mt-2 block">APR 2025</span>
@@ -472,7 +641,7 @@
                             <span class="font-label-mono text-label-mono text-secondary flex-1">EMAIL · joymasih43@gmail.com</span>
                             <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
                         </a>
-                        <a href="#" class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
+                        <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener" class="flex items-center gap-4 p-6 border border-outline-variant hover:border-primary group transition-colors max-w-md bg-white">
                             <span class="material-symbols-outlined text-secondary group-hover:text-primary">link</span>
                             <span class="font-label-mono text-label-mono text-secondary flex-1">LINKEDIN · joy-masih</span>
                             <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">north_east</span>
@@ -499,9 +668,9 @@
             </div>
             
             <nav class="flex gap-8">
-                <a href="#" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">Twitter</a>
-                <a href="#" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">GitHub</a>
-                <a href="#" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">LinkedIn</a>
+                <a href="https://x.com/Crashing_It" target="_blank" rel="noopener" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">X</a>
+                <a href="https://github.com/JOY2OP/" target="_blank" rel="noopener" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">GitHub</a>
+                <a href="https://www.linkedin.com/in/joy-masih/" target="_blank" rel="noopener" class="text-secondary dark:text-secondary-fixed-dim hover:text-on-surface dark:hover:text-on-surface-variant hover:underline transition-colors font-label-mono text-label-mono">LinkedIn</a>
             </nav>
             
             <div class="hidden md:block">
@@ -509,6 +678,46 @@
             </div>
         </div>
     </footer>
+
+    <div class="blog-takeover" id="post-p1" aria-modal="true" role="dialog" aria-labelledby="post-p1-title">
+        <button class="takeover-close" onclick="closePost('p1')">[ CLOSE X ]</button>
+        <div class="takeover-header">
+            <div class="takeover-tag">Engineering / Deployment / June 2025 / 5 min</div>
+            <h1 class="takeover-title" id="post-p1-title">WHY I STOPPED MOCKING APIS AND STARTED SHIPPING TO PROD SOONER</h1>
+            <div class="takeover-meta">Joy Masih</div>
+        </div>
+        <div class="takeover-body">
+            <p>There's a comfortable lie every developer tells themselves early in a project: <em>"I'll sort out production once the feature is working locally."</em> I told it to myself for weeks while building Finesse.</p>
+            <p>Local development is warm. Everything works. Environment variables load cleanly, the API responds in 40ms, and the mock SMS parser catches every transaction perfectly. Then you push to production and a React Native APK quietly swallows your <code>.env</code> file and serves undefined to the Supabase client for three days before you notice.</p>
+            <h3>THE REAL COST ISN'T BUGS - IT'S LAG</h3>
+            <p>Production failures found late aren't just bugs. They're architectural rethinks wearing bug costumes. When I finally shipped Finesse to closed testing on the Play Store, I discovered that the SMS BroadcastReceiver service behaved differently across Android OEMs. A Samsung device running One UI silently killed background services within 90 seconds of the app losing focus. Zero crashes. Zero errors. Just no data.</p>
+            <p>That's not a bug you catch locally. That's a production-only system behaviour - and finding it late meant rearchitecting the foreground service notification strategy, resubmitting the APK, waiting out Google's review cycle, and re-recruiting testers. Probably two weeks of drag for something a one-week earlier production push would have surfaced.</p>
+            <h3>THE FIX</h3>
+            <p>The mental shift that helped most was treating the production environment as a parallel development lane rather than a final destination. Feature flag the incomplete pieces. Deploy to staging daily. Accept that you will see failures earlier - because earlier failures are dramatically cheaper than later ones.</p>
+            <p>For Finesse, this meant setting up Railway for the Node.js backend from day one, even when it was just a <code>hello world</code> endpoint. It meant pointing the app at real Supabase edge functions from the first week, even before the SMS parser was finished. Every week of production exposure before the feature was done saved a compounded week of debugging after.</p>
+            <p>The lesson isn't new. But the confidence to actually do it - to deliberately ship incomplete code to a real environment - that took building something from scratch, breaking it, and rebuilding it in public.</p>
+        </div>
+    </div>
+
+    <div class="blog-takeover" id="post-p2" aria-modal="true" role="dialog" aria-labelledby="post-p2-title">
+        <button class="takeover-close" onclick="closePost('p2')">[ CLOSE X ]</button>
+        <div class="takeover-header">
+            <div class="takeover-tag">Product / Distribution / April 2025 / 6 min</div>
+            <h1 class="takeover-title" id="post-p2-title">THE URGENCY GAP: WHY FINTECH APPS FAIL YOUNG INDIANS BEFORE THEY OPEN</h1>
+            <div class="takeover-meta">Joy Masih</div>
+        </div>
+        <div class="takeover-body">
+            <p>If you ask a 24-year-old in Delhi whether they should track their spending, they'll say yes. If you ask them whether they do, they'll pause. That pause is the entire problem. It is not an awareness gap. It is an urgency gap.</p>
+            <p>Most fintech marketing assumes the problem is knowledge. Build a beautiful budgeting UI, explain the 50/30/20 rule, show a chart of someone else's savings trajectory, and the user will be motivated to change. They won't. Not because the information is wrong, but because <em>information without a trigger is just content</em> - and content without urgency sits unopened.</p>
+            <h3>WHAT A TRIGGER LOOKS LIKE</h3>
+            <p>Young urban Indians have highly predictable financial trigger moments: the first salary credit, moving to a new city for a job, the first time rent takes more than 40% of income, getting married, taking a first loan. These are moments of genuine financial anxiety - and anxiety is the only reliable motivator for financial behaviour change.</p>
+            <p>The implication for distribution is straightforward but underutilised. A fintech app that shows up in someone's feed as a generic ad gets ignored. The same app that appears in a thread titled <em>"I just got my first Bangalore salary and have no idea what to do with it"</em> - that gets installed. Not because the app is different, but because the moment is different.</p>
+            <h3>TRIGGER-BASED ACQUISITION, PRACTICALLY</h3>
+            <p>Concretely, this looks like monitoring Reddit threads on r/india and r/personalfinanceindia for life-event signals. It looks like partnering with HR onboarding flows at companies hiring freshers at scale. It looks like writing content that ranks for "what to do with first salary India" rather than "best budgeting app India" - because the first query is triggered by a life event, the second is abstract comparison-shopping.</p>
+            <p>The hardest part of this strategy isn't identifying the triggers. It's accepting that you are not building a product for the 10% of people already tracking their finances. You are building for the 90% who aren't - and you have to meet them at the exact moment they realise they should be. Miss that window and they do nothing. Hit it and you get a user who is genuinely motivated to change. That's the only user worth having.</p>
+            <p>Finesse was built for that second user. Whether it reaches them at the right moment is, honestly, still a work in progress.</p>
+        </div>
+    </div>
 
     <script>
         // Custom cursor + gentle pointer tracking
@@ -541,6 +750,32 @@
         document.querySelectorAll('a, button, tr, article, .joy-tilt, .cursor-default').forEach(el => {
             el.addEventListener('mouseenter', () => cursor && cursor.classList.add('big'));
             el.addEventListener('mouseleave', () => cursor && cursor.classList.remove('big'));
+        });
+
+        function openPost(id) {
+            const post = document.getElementById('post-' + id);
+            if (!post) return;
+            post.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePost(id) {
+            const post = document.getElementById('post-' + id);
+            if (!post) return;
+            post.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function openPostFromKey(event, id) {
+            if (event.key !== 'Enter' && event.key !== ' ') return;
+            event.preventDefault();
+            openPost(id);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key !== 'Escape') return;
+            document.querySelectorAll('.blog-takeover.open').forEach(post => post.classList.remove('open'));
+            document.body.style.overflow = '';
         });
 
         // Smooth scroll implementation
